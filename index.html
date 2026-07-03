@@ -455,6 +455,12 @@ table.data-table tr:nth-child(even) td{background:var(--paper-1);}
 .access-choice.active{background:var(--navy-900); border-color:var(--navy-900); color:#fff;}
 .access-result{margin-top:22px;}
 
+/* ============ FACTUAL VS ADVICE (tab 13) ============ */
+.advice-badge{display:inline-block; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.05em; padding:5px 12px; border-radius:14px; margin-bottom:12px;}
+.advice-badge.factual{background:var(--paper-1); color:var(--navy-800); border:1px solid var(--navy-800);}
+.advice-badge.redirect{background:var(--maroon-700); color:#fff;}
+.tier-table td.tier-name{font-weight:700; color:var(--navy-900);}
+
 /* responsive */
 @media (max-width:880px){
   .spine{width:74px; min-width:74px; padding-left:8px;}
@@ -489,6 +495,9 @@ table.data-table tr:nth-child(even) td{background:var(--paper-1);}
     <button class="tab-btn" data-tab="contents" onclick="showTab('contents')">
       <span class="num">—</span><span>Contents</span>
     </button>
+    <button class="tab-btn" data-tab="factual-vs-advice" onclick="showTab('factual-vs-advice')">
+      <span class="num">—</span><span>Factual vs General / Personal Advice</span>
+    </button>
 
     <div class="tab-group-label" style="margin-top:14px;">Client topics</div>
     <button class="tab-btn" data-tab="basics" onclick="showTab('basics')">
@@ -515,17 +524,23 @@ table.data-table tr:nth-child(even) td{background:var(--paper-1);}
     <button class="tab-btn" data-tab="insurance-depth" onclick="showTab('insurance-depth')">
       <span class="num">08</span><span>Insurance in depth</span>
     </button>
-    <button class="tab-btn" data-tab="tax" onclick="showTab('tax')">
-      <span class="num">09</span><span>Tax on super</span>
-    </button>
     <button class="tab-btn" data-tab="insurance-roles" onclick="showTab('insurance-roles')">
-      <span class="num">10</span><span>Insurance — job roles</span>
+      <span class="num">09</span><span>Insurance — job roles</span>
+    </button>
+    <button class="tab-btn" data-tab="tax" onclick="showTab('tax')">
+      <span class="num">10</span><span>Tax on super</span>
+    </button>
+    <button class="tab-btn" data-tab="smsf" onclick="showTab('smsf')">
+      <span class="num">11</span><span>SMSF</span>
     </button>
     <button class="tab-btn" data-tab="medication-questions" onclick="showTab('medication-questions')">
-      <span class="num">11</span><span>Medication questions</span>
+      <span class="num">12</span><span>Medication questions</span>
     </button>
     <button class="tab-btn" data-tab="complex-clients" onclick="showTab('complex-clients')">
-      <span class="num">12</span><span>Complex clients</span>
+      <span class="num">13</span><span>Complex clients</span>
+    </button>
+    <button class="tab-btn" data-tab="factual-vs-advice" onclick="showTab('factual-vs-advice')">
+      <span class="num">14</span><span>Factual info vs advice</span>
     </button>
 
     <div class="spine-search">
@@ -648,17 +663,8 @@ table.data-table tr:nth-child(even) td{background:var(--paper-1);}
             </div>
             <div class="toc-arrow">→</div>
           </li>
-          <li class="toc-item" onclick="showTab('tax')">
-            <div class="toc-num">09</div>
-            <div class="toc-body">
-              <p class="toc-title">Tax on super</p>
-              <p class="toc-desc">How super is taxed while it's growing, from age 60, and once fully retired.</p>
-              <p class="toc-sub">Covers: contributions tax · earnings tax · tax-free access from 60 · retirement phase</p>
-            </div>
-            <div class="toc-arrow">→</div>
-          </li>
           <li class="toc-item" onclick="showTab('insurance-roles')">
-            <div class="toc-num">10</div>
+            <div class="toc-num">09</div>
             <div class="toc-body">
               <p class="toc-title">Insurance — job roles</p>
               <p class="toc-desc">Pick an occupation, get the underwriting questions worth asking.</p>
@@ -666,8 +672,26 @@ table.data-table tr:nth-child(even) td{background:var(--paper-1);}
             </div>
             <div class="toc-arrow">→</div>
           </li>
-          <li class="toc-item" onclick="showTab('medication-questions')">
+          <li class="toc-item" onclick="showTab('tax')">
+            <div class="toc-num">10</div>
+            <div class="toc-body">
+              <p class="toc-title">Tax on super</p>
+              <p class="toc-desc">How super is taxed while it's growing, from age 60, and once fully retired.</p>
+              <p class="toc-sub">Covers: contributions tax · earnings tax · tax-free access from 60 · retirement phase</p>
+            </div>
+            <div class="toc-arrow">→</div>
+          </li>
+          <li class="toc-item" onclick="showTab('smsf')">
             <div class="toc-num">11</div>
+            <div class="toc-body">
+              <p class="toc-title">SMSF</p>
+              <p class="toc-desc">Everything self-managed super in one place — what trustees can and can't do, and the newest law changes.</p>
+              <p class="toc-sub">Covers: trustee duties · property and borrowing rules · in-house asset rule · Division 296 · SMSF vs APRA fund</p>
+            </div>
+            <div class="toc-arrow">→</div>
+          </li>
+          <li class="toc-item" onclick="showTab('medication-questions')">
+            <div class="toc-num">12</div>
             <div class="toc-body">
               <p class="toc-title">Medication questions</p>
               <p class="toc-desc">Pick a health condition, get the follow-up questions worth asking.</p>
@@ -676,11 +700,20 @@ table.data-table tr:nth-child(even) td{background:var(--paper-1);}
             <div class="toc-arrow">→</div>
           </li>
           <li class="toc-item" onclick="showTab('complex-clients')">
-            <div class="toc-num">12</div>
+            <div class="toc-num">13</div>
             <div class="toc-body">
               <p class="toc-title">Complex clients</p>
               <p class="toc-desc">The situations that don't fit the standard playbook — pick a scenario, see what's different.</p>
               <p class="toc-sub">Covers: 14 scenarios — cross-border, SMSF, defined benefit, family law, business owners, and more</p>
+            </div>
+            <div class="toc-arrow">→</div>
+          </li>
+          <li class="toc-item" onclick="showTab('factual-vs-advice')">
+            <div class="toc-num">14</div>
+            <div class="toc-body">
+              <p class="toc-title">Factual info vs advice</p>
+              <p class="toc-desc">The line every call needs to stay on the right side of — type a client phrase, see whether it's safe to answer.</p>
+              <p class="toc-sub">Covers: factual vs general vs personal advice · red-flag phrases · 20 real client questions · redirect scripts</p>
             </div>
             <div class="toc-arrow">→</div>
           </li>
@@ -986,7 +1019,7 @@ table.data-table tr:nth-child(even) td{background:var(--paper-1);}
 
         <div class="section-block">
           <h2>SMSF and property</h2>
-          <p>Two separate but related changes for clients considering property inside an SMSF.</p>
+          <p>Two separate but related changes for clients considering property inside an SMSF. For everything else SMSF-related — trustee duties, what's allowed and what isn't — see Tab 11.</p>
           <table class="data-table">
             <tr><th>Change</th><th>Detail</th></tr>
             <tr><td>Residential property borrowing (LRBA) banned</td><td>New limited recourse borrowing arrangements for residential property are banned from commencement (Royal Assent was 26 June 2026; the ban takes effect roughly 45 days later). Existing residential LRBAs are grandfathered — no forced unwinding.</td></tr>
@@ -1054,7 +1087,7 @@ table.data-table tr:nth-child(even) td{background:var(--paper-1);}
 
         <div class="section-block">
           <h2>Tax when withdrawing</h2>
-          <p>How much access matters, but so does how much tax comes off it. This is the short version — see Tab 09 for the full breakdown of contributions and earnings tax.</p>
+          <p>How much access matters, but so does how much tax comes off it. This is the short version — see Tab 10 for the full breakdown of contributions and earnings tax.</p>
           <table class="data-table">
             <tr><th>Access scenario</th><th>Tax treatment</th></tr>
             <tr><td>From age 60, any condition of release</td><td>Tax-free — lump sum or income stream, from a taxed super fund</td></tr>
@@ -1304,9 +1337,9 @@ table.data-table tr:nth-child(even) td{background:var(--paper-1);}
         </div>
       </section>
 
-      <!-- ========== 09 TAX ON SUPER ========== -->
+      <!-- ========== 10 TAX ON SUPER ========== -->
       <section class="panel" id="panel-tax">
-        <h1 class="page-title">09 — Tax on super</h1>
+        <h1 class="page-title">10 — Tax on super</h1>
         <p class="page-sub">Super is taxed differently at three points: while money goes in and grows, once a client can start withdrawing from age 60, and once they're fully in retirement phase. This is the sequence to walk a client through.</p>
 
         <div class="section-block">
@@ -1367,9 +1400,101 @@ table.data-table tr:nth-child(even) td{background:var(--paper-1);}
         </div>
       </section>
 
-      <!-- ========== 10 INSURANCE — JOB ROLES ========== -->
+      <!-- ========== 11 SMSF ========== -->
+      <section class="panel" id="panel-smsf">
+        <h1 class="page-title">11 — SMSF</h1>
+        <p class="page-sub">Everything self-managed super in one place — what a trustee can and can't do, the compliance basics, and the law changes that just landed.</p>
+
+        <div class="section-block">
+          <h2>What an SMSF actually is</h2>
+          <p>A self-managed super fund is a super fund a client runs themselves, as trustee, instead of an APRA-regulated fund running it for them. That single fact — the client is the trustee — is the source of almost everything else on this page. Every decision, and every compliance failure, sits with them (or with the corporate trustee they control), not with a fund manager in the background.</p>
+        </div>
+
+        <div class="section-block">
+          <h2>Trustee duties — the compliance essentials</h2>
+          <div class="card-row">
+            <div class="info-card">
+              <div class="ic-label">Sole purpose test</div>
+              <p>The fund must be run for the sole purpose of providing retirement benefits — not for any current-day personal benefit to a member or their relatives. This single test underpins most of the "can't do" list below.</p>
+            </div>
+            <div class="info-card">
+              <div class="ic-label">Investment strategy</div>
+              <p>Trustees must prepare and maintain a written investment strategy, covering diversification, liquidity, risk, and insurance for members — and actually invest in line with it.</p>
+            </div>
+            <div class="info-card">
+              <div class="ic-label">Annual audit and return</div>
+              <p>Every SMSF needs an independent approved auditor each year, and must lodge an SMSF annual return with the ATO — this covers both super regulatory compliance and the fund's income tax.</p>
+            </div>
+            <div class="info-card">
+              <div class="ic-label">Pension calculations</div>
+              <p>If the fund is paying a pension, the trustee is responsible for correctly calculating and paying the minimum (and, for a TTR, the maximum) each year — see Tab 05 for the current percentages.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-block">
+          <h2>What a trustee can do</h2>
+          <table class="data-table">
+            <tr><th>Activity</th><th>Detail</th></tr>
+            <tr><td>Buy commercial / business real property</td><td>Including the client's own business premises, at market value — a common and well-established SMSF strategy</td></tr>
+            <tr><td>Borrow to buy commercial property</td><td>Limited recourse borrowing (LRBA) for commercial and business real property remains available</td></tr>
+            <tr><td>Buy residential property outright</td><td>Still allowed with no borrowing, subject to it being a genuine investment, not for personal or related-party use</td></tr>
+            <tr><td>Choose investments directly</td><td>Shares, term deposits, property, and other assets, rather than being limited to a fund's pre-set investment options</td></tr>
+            <tr><td>Run a retirement phase pension</td><td>Pay an account-based pension directly from the fund once a member meets a condition of release</td></tr>
+            <tr><td>Arrange member insurance</td><td>Life, TPD and income protection can be held inside the fund — but unlike an APRA fund, there's no automatic default cover; it has to be actively arranged</td></tr>
+          </table>
+        </div>
+
+        <div class="section-block">
+          <h2>What a trustee can't do</h2>
+          <table class="data-table">
+            <tr><th>Restriction</th><th>Detail</th></tr>
+            <tr><td>In-house asset rule</td><td>Loans to, investments in, or leases with a member or their related parties are capped at 5% of the fund's total assets</td></tr>
+            <tr><td>No personal use of fund assets</td><td>A member can't live in a residential property owned by their own SMSF, even if they pay rent — this breaches the sole purpose test</td></tr>
+            <tr><td>No loans to members or relatives</td><td>The fund can't lend money to a member or their relatives under any circumstances</td></tr>
+            <tr><td>No acquiring assets from related parties</td><td>With narrow exceptions — business real property at market value, and listed shares/securities at market value — the fund generally can't buy assets from a member or their relatives</td></tr>
+            <tr><td>New residential property borrowing</td><td>Now banned — see "What just changed" below</td></tr>
+          </table>
+          <div class="callout strong">
+            The single most common SMSF mistake to watch for: a client wanting to buy a residential property through their SMSF with the idea of living in it, renting it to a family member, or moving in eventually. All of these breach the sole purpose test, regardless of how the arrangement is structured.
+          </div>
+        </div>
+
+        <div class="section-block">
+          <h2>What just changed</h2>
+          <table class="data-table">
+            <tr><th>Change</th><th>Detail</th></tr>
+            <tr><td>Residential LRBA ban</td><td>New limited recourse borrowing arrangements for residential property are banned, effective roughly 45 days after Royal Assent on 26 June 2026. Existing residential LRBAs are grandfathered — no forced unwinding.</td></tr>
+            <tr><td>Division 296</td><td>The new tax on total super balances above $3 million applies to SMSF members exactly as it does to APRA fund members — see Tab 10 for the full detail. SMSFs can elect to reset the cost base of assets to market value as at 30 June 2026, so only gains accruing after that date count toward a member's Division 296 earnings.</td></tr>
+            <tr><td>CGT treatment unchanged</td><td>SMSFs are explicitly excluded from the personal CGT discount overhaul landing 1 July 2027 — the fund's existing effective 10% rate on gains in accumulation phase (0% in pension phase) is unaffected</td></tr>
+          </table>
+        </div>
+
+        <div class="section-block">
+          <h2>SMSF vs an APRA-regulated fund</h2>
+          <table class="data-table">
+            <tr><th></th><th>SMSF</th><th>APRA-regulated fund</th></tr>
+            <tr><td>Who's responsible for compliance</td><td>The member, as trustee</td><td>The fund's licensed trustee</td></tr>
+            <tr><td>Investment control</td><td>Full control over specific assets</td><td>Choice limited to the fund's investment menu</td></tr>
+            <tr><td>Insurance</td><td>Must be actively arranged — no default cover</td><td>Often includes automatic default cover</td></tr>
+            <tr><td>Ongoing admin</td><td>Annual audit, annual return, trustee obligations</td><td>Handled by the fund</td></tr>
+            <tr><td>Typically suits</td><td>Larger balances, clients wanting direct property or share control, business owners wanting to hold business premises in super</td><td>Most members — lower admin burden, no minimum balance to make it cost-effective</td></tr>
+          </table>
+        </div>
+
+        <div class="talk-track">
+          <div class="tt-label">How we say it to a client</div>
+          <p>"An SMSF gives you the wheel, but it also makes you responsible for the compliance that a regular fund normally handles in the background. It tends to make sense once the balance and the reason for wanting that control — usually property or direct shares — are both there. Below that, the admin cost and effort often outweigh the benefit."</p>
+        </div>
+
+        <div class="compliance-flag">
+          This is general information on SMSF rules, not SMSF establishment or ongoing compliance advice. SMSF administration and audit should sit with the client's SMSF accountant/administrator alongside financial advice — and the residential LRBA ban commencement date should be confirmed against current ATO guidance before telling a client they've missed, or still have, a window to act.
+        </div>
+      </section>
+
+      <!-- ========== 09 INSURANCE — JOB ROLES ========== -->
       <section class="panel" id="panel-insurance-roles">
-        <h1 class="page-title">10 — Insurance: job roles</h1>
+        <h1 class="page-title">09 — Insurance: job roles</h1>
         <p class="page-sub">Occupation is one of the biggest drivers of life, TPD and income protection pricing. Select a client's role to see the questions worth asking before referring to underwriting.</p>
 
         <div class="lookup-box">
@@ -1387,9 +1512,9 @@ table.data-table tr:nth-child(even) td{background:var(--paper-1);}
         </div>
       </section>
 
-      <!-- ========== 11 MEDICATION QUESTIONS ========== -->
+      <!-- ========== 12 MEDICATION QUESTIONS ========== -->
       <section class="panel" id="panel-medication-questions">
-        <h1 class="page-title">11 — Medication questions</h1>
+        <h1 class="page-title">12 — Medication questions</h1>
         <p class="page-sub">Select a common health condition to see the follow-up questions worth asking before referring to underwriting — how well controlled something is usually matters more than the diagnosis itself.</p>
 
         <div class="lookup-box">
@@ -1407,9 +1532,9 @@ table.data-table tr:nth-child(even) td{background:var(--paper-1);}
         </div>
       </section>
 
-      <!-- ========== 12 COMPLEX CLIENTS ========== -->
+      <!-- ========== 13 COMPLEX CLIENTS ========== -->
       <section class="panel" id="panel-complex-clients">
-        <h1 class="page-title">12 — Complex clients</h1>
+        <h1 class="page-title">13 — Complex clients</h1>
         <p class="page-sub">Everything else in this handbook assumes a straightforward client — one job, one fund, a clean path to retirement in Australia. Select a scenario below to see what's actually different when that's not the case.</p>
 
         <div class="lookup-box">
@@ -1424,6 +1549,72 @@ table.data-table tr:nth-child(even) td{background:var(--paper-1);}
 
         <div class="compliance-flag">
           These are starting briefings to flag what's different and who else may need to be involved — not a complete technical guide to any of these areas. Several of these scenarios (cross-border pensions, family law, bankruptcy, defined benefit funds) genuinely need a specialist alongside general advice.
+        </div>
+      </section>
+
+      <!-- ========== 14 FACTUAL INFO VS ADVICE ========== -->
+      <section class="panel" id="panel-factual-vs-advice">
+        <h1 class="page-title">14 — Factual info vs advice</h1>
+        <p class="page-sub">The most important line on any call. Read this before you rely on anything else in this handbook out loud to a client.</p>
+
+        <div class="section-block">
+          <h2>Three tiers, one safe zone</h2>
+          <p>Australian financial services law recognises three tiers of information. Only one of them is safe for this team to give without a licensed adviser involved.</p>
+          <table class="data-table tier-table">
+            <tr><th>Tier</th><th>What it is</th><th>Can this team give it?</th></tr>
+            <tr><td class="tier-name">Factual information</td><td>Objective, verifiable facts — rates, rules, definitions, how something works mechanically. No opinion, no recommendation, nothing tailored to the person.</td><td><b>Yes</b> — this is the safe zone</td></tr>
+            <tr><td class="tier-name">General advice</td><td>A recommendation or opinion about a product or strategy that doesn't take personal circumstances into account — even generic, non-tailored suggestions. Legally still "advice," and still requires an AFSL authorisation to give.</td><td><b>No</b> — requires a licence this team doesn't hold</td></tr>
+            <tr><td class="tier-name">Personal advice</td><td>Advice that considers, or could reasonably be seen to consider, the client's own objectives, financial situation or needs. Requires the full advice process — fact find, best interests duty, Statement of Advice.</td><td><b>No</b> — requires a licensed adviser and the full advice process</td></tr>
+          </table>
+          <div class="callout strong">
+            The team on these calls is not authorised to give general advice, only personal advice authorised advisers can — which means the usual "just don't get personal, stick to general advice" rule of thumb doesn't apply here. The safe zone is narrower: <b>factual information only.</b> Even a generic, non-personalised suggestion or opinion ("that type of cover tends to suit people in that situation") is general advice, and it's outside what this team can say.
+          </div>
+        </div>
+
+        <div class="section-block">
+          <h2>The test to run in your head</h2>
+          <p>Before answering, ask: <b>am I about to state a fact, or am I about to suggest, recommend, or give an opinion on what they should do?</b></p>
+          <div class="card-row">
+            <div class="info-card">
+              <div class="ic-label">Safe — stating a fact</div>
+              <p>"The concessional cap this year is $32,500." "Super is generally tax-free to withdraw from age 60." "TPD stands for total and permanent disability cover." These are true regardless of who's asking.</p>
+            </div>
+            <div class="info-card">
+              <div class="ic-label">Not safe — advice</div>
+              <p>"You should salary sacrifice more." "I'd increase your income protection." "It makes sense for you to combine your accounts." Anything that answers "what should I do" has crossed into advice.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-block">
+          <h2>Red-flag phrases</h2>
+          <p>If a client says any of these, they're asking for advice, not information — regardless of how the rest of the sentence is worded.</p>
+          <div class="callout">
+            "What should I do…" · "Is it worth it for me…" · "What would you do…" · "Should I switch / combine / increase / take out…" · "Is my situation okay…" · "Am I on track…" · "Is X enough for me…"
+          </div>
+          <p>The safe response to any of these is the same shape every time: answer the factual part if there is one, then redirect the "what should I do" part to a licensed adviser.</p>
+          <div class="talk-track">
+            <div class="tt-label">Redirect script</div>
+            <p>"I can absolutely explain how that works — [give the factual answer]. Whether that's the right move for you specifically is exactly the kind of thing our licensed advisers work through with clients, so let's get that booked in rather than me guessing at it now."</p>
+          </div>
+        </div>
+
+        <div class="section-block">
+          <h2>Check a real client question</h2>
+          <p>Select a phrase similar to what the client just asked to see whether it's safe to answer, and how.</p>
+          <div class="lookup-box">
+            <label class="lookup-label" for="advice-select">Client question or phrase</label>
+            <select class="lookup-select" id="advice-select" onchange="renderAdviceCheck()">
+              <option value="">Choose a question…</option>
+            </select>
+            <div class="lookup-result" id="advice-result">
+              <p class="lookup-empty">Select a question above to see whether it's safe to answer.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="compliance-flag">
+          This tab explains the general legal framework, not Brightday's specific internal policy — your compliance team may set narrower rules than the legal minimum described here, and their guidance always takes precedence. If in doubt on a live call, the safe default is always to redirect rather than answer.
         </div>
       </section>
 
@@ -1443,18 +1634,20 @@ const crumbMap = {
   "retirement-guide": "Contents  ›  06 Retirement income guide",
   "insurance-basics": "Contents  ›  07 Insurance basics",
   "insurance-depth": "Contents  ›  08 Insurance in depth",
-  tax: "Contents  ›  09 Tax on super",
-  "insurance-roles": "Contents  ›  10 Insurance — job roles",
-  "medication-questions": "Contents  ›  11 Medication questions",
-  "complex-clients": "Contents  ›  12 Complex clients"
+  "insurance-roles": "Contents  ›  09 Insurance — job roles",
+  tax: "Contents  ›  10 Tax on super",
+  smsf: "Contents  ›  11 SMSF",
+  "medication-questions": "Contents  ›  12 Medication questions",
+  "complex-clients": "Contents  ›  13 Complex clients",
+  "factual-vs-advice": "Contents  ›  14 Factual info vs advice"
 };
 
 function showTab(id){
   document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   document.getElementById('panel-' + id).classList.add('active');
-  const btn = document.querySelector('.tab-btn[data-tab="' + id + '"]');
-  if(btn) btn.classList.add('active');
+  const btns = document.querySelectorAll('.tab-btn[data-tab="' + id + '"]');
+  btns.forEach(b => b.classList.add('active'));
   document.getElementById('crumb-text').textContent = crumbMap[id] || id;
   document.querySelector('.page-inner').scrollIntoView({behavior:'instant', block:'start'});
   window.scrollTo(0,0);
@@ -1658,12 +1851,12 @@ const complexClientData = {
   expat_nonresident:{category:"Cross-border", label:"Non-resident / expat client", whatsDifferent:"A client who's moved overseas, or is no longer an Australian tax resident, faces different rules around contributions, access, and how their super is taxed.", watchFor:["Non-residents can generally still hold Australian super, but eligibility to contribute may be affected depending on residency and visa status","A departing Australia superannuation payment (DASP) may apply for eligible temporary residents who've left permanently, taxed at different rates to a normal withdrawal","Confirm current tax residency status carefully — it affects far more than just super"], involve:"Cross-border tax residency questions usually need the client's accountant involved alongside advice."},
   existing_ttr:{category:"Already in a strategy", label:"Already on a TTR pension", whatsDifferent:"A client already drawing a transition to retirement income stream has an existing 4%–10% drawdown arrangement in place. The job here is reviewing whether it's still the right structure, not setting one up from scratch.", watchFor:["Check whether they've since met a full condition of release (retired, or turned 65) — if so, the TTR should have converted to a retirement phase pension with no maximum, and it's worth confirming this actually happened","Review whether the salary sacrifice plus TTR combination is still tax-effective given their current income","Confirm the current drawdown sits between the minimum and maximum for their age and account type — see Tab 05"], involve:null},
   workers_comp:{category:"Already in a strategy", label:"Client on workers compensation", whatsDifferent:"Workers compensation payments can interact with, and potentially reduce, income protection benefits and TPD claims — most income protection policies won't pay in full on top of workers compensation for the same period.", watchFor:["Check the exact offset clause in the income protection policy — some reduce dollar-for-dollar, others use a different formula","Confirm whether super contributions are still being made while on workers compensation — this can lapse depending on the employer arrangement","If a TPD claim is being considered, workers compensation payments or any lump sum settlement may affect eligibility or the amount payable"], involve:"Loop in the insurer directly for the exact offset calculation before setting client expectations."},
-  smsf_member:{category:"Fund structure", label:"Self-managed super fund (SMSF) member", whatsDifferent:"An SMSF member is also a trustee, with direct legal responsibility for compliance, investment decisions and administration — the usual assumptions about a default or retail fund handling things in the background don't apply.", watchFor:["Confirm the SMSF's trust deed actually allows the strategy being discussed — e.g. TTR pensions, some contribution types","Pension minimums and maximums are the trustee's own responsibility to calculate and pay correctly by 30 June each year","Insurance inside an SMSF must be actively arranged — there's no automatic default cover"], involve:"SMSF administration and compliance should sit with the client's SMSF accountant/administrator, alongside advice."},
-  defined_benefit:{category:"Fund structure", label:"Defined benefit fund member", whatsDifferent:"Defined benefit funds pay based on a formula — salary and years of service — not an accumulated balance. The balance-based logic used throughout the rest of this handbook doesn't directly apply, and many are untaxed funds with different tax rules.", watchFor:["Untaxed defined benefit funds don't follow the standard 15% contributions tax or the tax-free-from-60 rule covered in Tab 09 — confirm the fund's specific tax treatment","The defined benefit income cap ($131,250 for 2026–27) can affect how much of a pension gets concessional tax treatment above that level","Contribution caps can work differently for defined benefit accruals — check with the fund directly"], involve:"Defined benefit funds are specialised — confirm details directly with the fund, since generic rules often don't apply."},
+  smsf_member:{category:"Fund structure", label:"Self-managed super fund (SMSF) member", whatsDifferent:"An SMSF member is also a trustee, with direct legal responsibility for compliance, investment decisions and administration — the usual assumptions about a default or retail fund handling things in the background don't apply. See Tab 11 for the full picture.", watchFor:["Confirm the SMSF's trust deed actually allows the strategy being discussed — e.g. TTR pensions, some contribution types","Pension minimums and maximums are the trustee's own responsibility to calculate and pay correctly by 30 June each year","Insurance inside an SMSF must be actively arranged — there's no automatic default cover"], involve:"SMSF administration and compliance should sit with the client's SMSF accountant/administrator, alongside advice."},
+  defined_benefit:{category:"Fund structure", label:"Defined benefit fund member", whatsDifferent:"Defined benefit funds pay based on a formula — salary and years of service — not an accumulated balance. The balance-based logic used throughout the rest of this handbook doesn't directly apply, and many are untaxed funds with different tax rules.", watchFor:["Untaxed defined benefit funds don't follow the standard 15% contributions tax or the tax-free-from-60 rule covered in Tab 10 — confirm the fund's specific tax treatment","The defined benefit income cap ($131,250 for 2026–27) can affect how much of a pension gets concessional tax treatment above that level","Contribution caps can work differently for defined benefit accruals — check with the fund directly"], involve:"Defined benefit funds are specialised — confirm details directly with the fund, since generic rules often don't apply."},
   multiple_accounts:{category:"Fund structure", label:"Multiple super accounts", whatsDifferent:"A client with several super accounts is likely paying multiple sets of fees and, potentially, multiple insurance premiums — but consolidating isn't automatically the right call.", watchFor:["Check what insurance cover exists on each account before closing any of them — cover can be lost permanently and may not be replaceable on the same terms","Confirm there's no exit cost from moving investments, particularly out of an SMSF or a fund holding illiquid assets","Use ATO online services via myGov to identify all accounts, including any lost or unclaimed super"], involve:null},
   family_law_split:{category:"Life events", label:"Divorce / relationship separation", whatsDifferent:"Super can be split between separating partners under family law, similar to other property — it doesn't happen automatically and generally needs a formal agreement or court order.", watchFor:["A KiwiSaver transfer balance generally can't be split this way — see the NZ saver scenario above","Splitting can be structured as a payment split or a percentage allocation of the benefit — confirm which approach the agreement specifies","The receiving partner's split amount usually retains its preserved status and original tax components"], involve:"Family law super splitting needs a family lawyer to draft the agreement or order — advice here is complementary, not a substitute."},
   estate_death_benefit:{category:"Life events", label:"Death benefit / estate planning", whatsDifferent:"Super isn't automatically covered by a client's will — it's paid according to a binding (or non-binding) death benefit nomination, or at trustee discretion if there isn't one.", watchFor:["Check whether a binding nomination exists and when it expires — most lapse after three years unless it's a non-lapsing type the fund offers","Confirm the nominated person is actually an eligible dependant under super law — not everyone a client wants to nominate qualifies","Tax on a death benefit depends heavily on who receives it — a dependant for tax purposes generally receives it tax-free, a non-dependant may not"], involve:null},
-  bankruptcy:{category:"Life events", label:"Client facing bankruptcy", whatsDifferent:"Super is generally protected from creditors in bankruptcy, which makes it different from most other assets — but that protection has real limits.", watchFor:["Contributions made specifically to defeat creditors can be clawed back by a bankruptcy trustee — timing and intent both matter","Once benefits are withdrawn from super, that protection disappears — cash sitting in a bank account isn't protected the same way","This is a specialist area — general reassurance that 'super is protected' isn't enough without checking the specific circumstances"], involve:"Recommend the client speaks with a lawyer or registered bankruptcy trustee before making any super-related decisions."},
+  bankruptcy:{category:"Life events", label:"Client facing bankruptcy", whatsDifferent:"Super is generally protected from creditors in bankruptcy, which makes it different from most other assets — but that protection has real limits, and it doesn't extend to everything that touches super.", watchFor:["<b>Super — generally protected.</b> The accumulated balance sitting inside a regulated super fund is generally out of reach of a bankruptcy trustee, for as long as it stays inside the fund.","<b>Insurance proceeds — generally not protected.</b> A life, TPD or trauma payout is a different story: once it's paid out — whether from a policy held inside or outside super — it becomes an asset the bankruptcy trustee can generally pursue, just like any other lump sum. Held inside super, it's only protected while it stays inside the fund; the moment it's withdrawn, that protection ends.","Contributions made specifically to defeat creditors can be clawed back by a bankruptcy trustee — timing and intent both matter","Once any super benefit is withdrawn, that protection disappears — cash sitting in a bank account isn't protected the same way","This is a specialist area — general reassurance that 'super is protected' isn't enough without checking the specific circumstances, and it definitely doesn't extend to insurance proceeds by default"], involve:"Recommend the client speaks with a lawyer or registered bankruptcy trustee before making any super or insurance-related decisions — especially before withdrawing anything or lodging an insurance claim."},
   business_owner:{category:"Contributions & business", label:"Small business owner / self-employed", whatsDifferent:"A business owner doesn't have an employer making Super Guarantee contributions on their behalf — building super is entirely down to their own personal contributions, and there are business-specific concessions worth checking.", watchFor:["Personal deductible contributions count toward the concessional cap just like salary sacrifice — timing around business income matters","Small business CGT concessions can allow eligible business sale proceeds to be contributed to super outside the normal caps, subject to a lifetime limit — this needs specialist advice","Cash flow discipline matters more here — without payroll-driven contributions, it's easy for a business owner's own super to fall behind"], involve:null},
   downsizer:{category:"Contributions & business", label:"Downsizer contribution", whatsDifferent:"Clients aged 55 and over selling a home they've owned for at least 10 years may be able to contribute up to $300,000 each ($600,000 per couple) from the sale proceeds into super, outside the normal contribution caps.", watchFor:["The home must have been owned for at least 10 years, and the contribution generally needs to be made within 90 days of settlement","There's no work test and no upper age limit — this is one of the few contribution types available to older clients regardless of work status","It still counts toward the client's transfer balance cap and total super balance, which can affect other caps and Age Pension assessment"], involve:null},
   excess_contributions:{category:"Contributions & business", label:"Excess contributions", whatsDifferent:"A client who's gone over their concessional or non-concessional cap faces automatic ATO consequences, not a discretionary choice — this needs to be handled promptly once identified.", watchFor:["Excess concessional contributions are included in assessable income and taxed at the client's marginal rate, less a 15% offset for tax already paid in the fund","Excess non-concessional contributions can be withdrawn along with associated earnings to avoid a higher penalty tax, but there's a specific ATO process and timeframe for this","The ATO issues a determination automatically — it's not something that can be quietly ignored or self-corrected outside that formal process"], involve:"Time-sensitive — refer to a registered tax agent as soon as excess contributions are identified."}
@@ -1701,9 +1894,11 @@ const searchIndex = {
   "insurance-basics":["insurance basics","life cover","death cover","tpd","total and permanent disability","income protection","waiting period","benefit period"],
   "insurance-depth":["default cover","tailored cover","in super","outside super","income protection tax","own occupation","any occupation","insurance in depth"],
   tax:["tax on super","contributions tax","earnings tax","tax free 60","tax free sixty","retirement phase tax","division 293","div 293"],
+  smsf:["smsf","self managed super","trustee","sole purpose test","in-house asset","lrba","limited recourse borrowing","business real property","smsf property","smsf vs apra"],
   "insurance-roles":["job roles","occupation","occupations","plumber","electrician","miner","truck driver","pilot","police","nurse","doctor","underwriting questions","job role"],
   "medication-questions":["medication","medications","diabetes","asthma","depression","anxiety","cancer","health condition","health conditions","underwriting","condition"],
-  "complex-clients":["complex clients","nz saver","kiwisaver","uk pension","workers compensation","workcover","smsf member","defined benefit","family law","divorce","bankruptcy","downsizer","excess contributions","expat","non-resident","complex"]
+  "complex-clients":["complex clients","nz saver","kiwisaver","uk pension","workers compensation","workcover","smsf member","defined benefit","family law","divorce","bankruptcy","downsizer","excess contributions","expat","non-resident","complex"],
+  "factual-vs-advice":["factual","advice","general advice","personal advice","factual information","what should i do","redirect","compliance","licensed adviser","red flag phrases"]
 };
 
 function runSiteSearch(){
@@ -1728,6 +1923,53 @@ function runSiteSearch(){
     msg.textContent = 'No match — try a different word.';
   }
 }
+
+const adviceCheckData = {
+  q1:{category:"Contributions", label:"What's the contribution cap this year?", type:"factual", answer:"The concessional cap for 2026–27 is $32,500, and the non-concessional cap is $130,000 — see Tab 04 for the full breakdown."},
+  q2:{category:"Contributions", label:"Should I salary sacrifice more?", type:"redirect", answer:"You can explain what salary sacrifice is and generally how the tax treatment works.", redirect:"Whether it's the right move for you depends on your income and goals — that's one for a licensed adviser to work through with you."},
+  q3:{category:"Contributions", label:"Am I eligible for the government co-contribution?", type:"redirect", answer:"You can state the general income thresholds and eligibility criteria.", redirect:"Confirming whether you personally qualify, and whether to act on it, needs to go through an adviser."},
+  q4:{category:"Insurance", label:"What's the difference between TPD and income protection?", type:"factual", answer:"TPD pays a lump sum if someone can't work again due to illness or injury; income protection pays ongoing income while they can't work — see Tab 07."},
+  q5:{category:"Insurance", label:"Should I take out income protection outside my super?", type:"redirect", answer:"You can explain the general in-super vs outside-super differences, including the tax deductibility point covered in Tab 08.", redirect:"Recommending which structure suits you is advice — that needs a licensed adviser."},
+  q6:{category:"Insurance", label:"Is my current level of cover enough?", type:"redirect", answer:null, redirect:"Assessing whether cover is adequate for someone's situation is advice, not information — this needs to go to an adviser."},
+  q7:{category:"Accessing & drawdown", label:"When can I access my super?", type:"factual", answer:"Preservation age is 60 for everyone now, and access also depends on their situation — working or retired. See Tab 05 for the full breakdown."},
+  q8:{category:"Accessing & drawdown", label:"How much can I draw down each year?", type:"factual", answer:"You can state the legislated minimum and maximum percentages by age and account type from Tab 05 — that's a fixed rule, not advice."},
+  q9:{category:"Accessing & drawdown", label:"How much should I actually draw down each year?", type:"redirect", answer:"You can mention the 4% rule as a general concept, covered in Tab 05.", redirect:"Recommending a specific drawdown amount for their situation is advice — refer to an adviser."},
+  q10:{category:"Accessing & drawdown", label:"What's a TTR pension?", type:"factual", answer:"A transition to retirement income stream — lets someone at preservation age draw a limited income while still working. See Tab 05 and Tab 13."},
+  q11:{category:"Accessing & drawdown", label:"Should I start a TTR strategy?", type:"redirect", answer:"You can explain what a TTR is and how it generally works.", redirect:"Whether it suits their situation is advice — refer to an adviser."},
+  q12:{category:"Retirement adequacy", label:"How much do I need to retire comfortably?", type:"factual", answer:"You can share the published ASFA benchmark figures from Tab 06 — those are general published figures, not a personal assessment."},
+  q13:{category:"Retirement adequacy", label:"Is $500,000 enough for me to retire on?", type:"redirect", answer:"You can share the general ASFA benchmark figures for context.", redirect:"Assessing whether it's enough for their specific situation is advice — refer to an adviser."},
+  q14:{category:"Funds & consolidation", label:"I've got a few super accounts — should I combine them?", type:"redirect", answer:"You can explain what's generally worth checking before consolidating — insurance cover, exit costs — covered in Tab 13.", redirect:"Recommending they actually combine accounts is advice — refer to an adviser."},
+  q15:{category:"Funds & consolidation", label:"Is my super fund any good?", type:"redirect", answer:null, redirect:"Comparing or rating a specific fund is advice about a financial product — this always needs to go to a licensed adviser."},
+  q16:{category:"Tax", label:"How does super get taxed?", type:"factual", answer:"You can walk through the three phases — contributions, earnings, withdrawal — from Tab 10. That's how the system works for everyone, not personal advice."},
+  q17:{category:"Tax", label:"Does the new $3 million super tax affect me?", type:"redirect", answer:"You can explain what Division 296 is and the thresholds in general terms, from Tab 04.", redirect:"Whether it applies to their personal balance, and what to do about it, is advice — refer to an adviser."},
+  q18:{category:"Estate & death benefits", label:"What happens to my super when I die?", type:"factual", answer:"You can explain that it's paid via a death benefit nomination rather than a will, and the general dependant tax rules — see Tab 13."},
+  q19:{category:"Estate & death benefits", label:"Who should I nominate as my beneficiary?", type:"redirect", answer:null, redirect:"Recommending who to nominate is advice — refer to an adviser, and possibly a lawyer for anything estate-related."},
+  q20:{category:"SMSF & property", label:"Can I buy property through my SMSF?", type:"redirect", answer:"You can explain the general LRBA rules and the recent residential borrowing ban, from Tab 04.", redirect:"Recommending they actually set one up is advice — refer to an adviser."}
+};
+
+function renderAdviceCheck(){
+  const key = document.getElementById('advice-select').value;
+  const container = document.getElementById('advice-result');
+  if(!key){
+    container.innerHTML = '<p class="lookup-empty">Select a question above to see whether it\'s safe to answer.</p>';
+    return;
+  }
+  const item = adviceCheckData[key];
+  let html = '';
+  if(item.type === 'factual'){
+    html += '<div class="advice-badge factual">Factual — safe to answer</div>';
+    html += '<div class="lookup-primary"><div class="lp-q">What you can say</div><p style="font-size:13.5px; color:var(--navy-800); margin:0; line-height:1.6;">' + item.answer + '</p></div>';
+  } else {
+    html += '<div class="advice-badge redirect">Advice — redirect</div>';
+    if(item.answer){
+      html += '<div class="lookup-primary"><div class="lp-q">The factual part you can give</div><p style="font-size:13.5px; color:var(--navy-800); margin:0; line-height:1.6;">' + item.answer + '</p></div>';
+    }
+    html += '<div class="lookup-extra"><div class="le-title">Redirect</div><ul><li>' + item.redirect + '</li></ul></div>';
+  }
+  container.innerHTML = html;
+}
+
+populateLookupSelect('advice-select', adviceCheckData);
 
 const startTab = window.location.hash ? window.location.hash.substring(1) : 'home';
 showTab(crumbMap[startTab] ? startTab : 'home');

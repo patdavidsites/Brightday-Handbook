@@ -1,0 +1,1738 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Super Handbook — Client Reference Binder</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+
+:root{
+  --navy-900:#13355A;
+  --navy-800:#1B4570;
+  --navy-700:#235284;
+  --navy-600:#2C6299;
+  --pink-500:#F50D73;
+  --pink-400:#F5488F;
+  --pink-100:#FCE1EC;
+  --pink-050:#FDF0F5;
+  --maroon-700:#9A0A4F;
+  --paper-0:#FFFFFF;
+  --paper-1:#F4F6F8;
+  --paper-line:#E2E6EB;
+  --ink-900:#1E2733;
+  --ink-700:#374453;
+  --ink-500:#647084;
+  --ink-400:#8996A6;
+  --shadow-soft: 0 10px 30px rgba(19,53,90,0.14);
+  --radius-card:10px;
+}
+
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  font-family:'Public Sans', -apple-system, sans-serif;
+  background:var(--navy-900);
+  color:var(--ink-900);
+  min-height:100vh;
+}
+
+.frame{
+  display:flex;
+  min-height:100vh;
+  max-width:1440px;
+  margin:0 auto;
+}
+
+/* ============ SPINE / TAB RAIL ============ */
+.spine{
+  width:250px;
+  min-width:250px;
+  background:linear-gradient(180deg, var(--navy-900) 0%, var(--navy-800) 100%);
+  display:flex;
+  flex-direction:column;
+  padding:28px 0 28px 22px;
+  position:relative;
+  z-index:2;
+}
+.spine::after{
+  content:"";
+  position:absolute;
+  right:0; top:0; bottom:0;
+  width:6px;
+  background:repeating-linear-gradient(180deg, rgba(255,255,255,0.06) 0 2px, transparent 2px 14px);
+}
+.brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:2px 18px 22px 4px;
+  border-bottom:1px solid rgba(255,255,255,0.12);
+  margin-bottom:18px;
+}
+.brand-mark{
+  width:34px; height:34px;
+  flex-shrink:0;
+  display:flex; align-items:center; justify-content:center;
+}
+.brand-mark img{width:100%; height:100%; object-fit:contain;}
+.brand-text{color:#fff;}
+.brand-text .firm{font-size:10.5px; letter-spacing:.09em; text-transform:uppercase; color:var(--pink-400); font-weight:600;}
+.brand-text .title{font-family:'Source Serif 4', serif; font-size:16px; font-weight:600; line-height:1.2; margin-top:2px; display:flex; align-items:baseline; gap:7px;}
+.brand-text .version{font-family:'Public Sans', sans-serif; font-size:10.5px; font-weight:600; color:rgba(255,255,255,0.4);}
+.brand-text .internal-note{font-size:10px; color:rgba(255,255,255,0.4); margin-top:3px; line-height:1.3;}
+
+.tab-group-label{
+  font-size:10.5px;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:rgba(255,255,255,0.38);
+  padding:4px 18px 8px 4px;
+  font-weight:600;
+}
+
+.tab-btn{
+  display:flex;
+  align-items:center;
+  gap:11px;
+  text-align:left;
+  border:none;
+  background:transparent;
+  color:rgba(255,255,255,0.72);
+  font-family:'Public Sans', sans-serif;
+  font-size:14.5px;
+  font-weight:500;
+  padding:12px 16px 12px 4px;
+  margin:2px 0 2px 0;
+  cursor:pointer;
+  border-radius:8px 0 0 8px;
+  position:relative;
+  transition:all .16s ease;
+}
+.tab-btn .num{
+  font-family:'Source Serif 4', serif;
+  font-size:12px;
+  color:rgba(255,255,255,0.4);
+  min-width:16px;
+}
+.tab-btn:hover{background:rgba(255,255,255,0.07); color:#fff;}
+.tab-btn.active{
+  background:var(--paper-0);
+  color:var(--navy-900);
+  margin-right:-1px;
+  box-shadow:0 4px 14px rgba(0,0,0,0.18);
+}
+.tab-btn.active .num{color:var(--pink-500);}
+.tab-btn .flag{display:none;}
+
+.spine-foot{
+  margin-top:auto;
+  padding:16px 18px 4px 4px;
+  border-top:1px solid rgba(255,255,255,0.12);
+  color:rgba(255,255,255,0.4);
+  font-size:11.5px;
+  line-height:1.5;
+}
+
+.spine-search{
+  margin-top:auto;
+  padding:16px 18px 0 4px;
+  border-top:1px solid rgba(255,255,255,0.12);
+}
+.spine-search-label{font-size:10.5px; letter-spacing:.09em; text-transform:uppercase; color:rgba(255,255,255,0.4); font-weight:600; margin-bottom:8px;}
+.spine-search-row{display:flex; gap:6px;}
+.spine-search input{
+  flex:1; min-width:0;
+  background:rgba(255,255,255,0.08);
+  border:1px solid rgba(255,255,255,0.16);
+  border-radius:8px;
+  color:#fff;
+  font-size:13px;
+  font-family:'Public Sans', sans-serif;
+  padding:9px 11px;
+}
+.spine-search input::placeholder{color:rgba(255,255,255,0.4);}
+.spine-search input:focus{outline:none; border-color:var(--pink-500);}
+.spine-search button{
+  background:var(--pink-500);
+  border:none;
+  border-radius:8px;
+  color:#fff;
+  width:36px;
+  flex-shrink:0;
+  cursor:pointer;
+  font-size:14px;
+}
+.spine-search button:hover{background:var(--pink-400);}
+.spine-search-msg{font-size:11.5px; color:rgba(255,255,255,0.55); margin:8px 0 0 0; min-height:14px;}
+
+/* ============ PAGE / CONTENT AREA ============ */
+.page-wrap{
+  flex:1;
+  background:var(--paper-0);
+  position:relative;
+  box-shadow:var(--shadow-soft);
+  min-width:0;
+}
+.page-inner{
+  margin-left:0;
+  padding:0 56px 70px 48px;
+  max-width:900px;
+}
+
+.topbar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:26px 0 18px 0;
+  border-bottom:1px solid var(--paper-line);
+  margin-bottom:34px;
+  position:sticky;
+  top:0;
+  background:var(--paper-0);
+  z-index:3;
+}
+.crumb{
+  font-size:13px;
+  color:var(--ink-500);
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+.crumb b{color:var(--navy-900); font-weight:600;}
+.crumb .sep{color:var(--ink-400);}
+.topbar-actions{display:flex; gap:8px;}
+.pill-btn{
+  border:1px solid var(--paper-line);
+  background:#fff;
+  color:var(--navy-800);
+  font-size:12.5px;
+  font-weight:600;
+  padding:7px 13px;
+  border-radius:20px;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+.pill-btn:hover{border-color:var(--pink-500); color:var(--pink-500);}
+
+section.panel{display:none;}
+section.panel.active{display:block; animation:pageIn .28s ease;}
+@keyframes pageIn{from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:translateY(0);}}
+
+/* ============ HOME / COVER ============ */
+.cover{
+  padding-top:6vh;
+}
+.cover h1{
+  font-family:'Source Serif 4', serif;
+  font-size:46px;
+  line-height:1.08;
+  color:var(--navy-900);
+  margin:0 0 16px 0;
+  max-width:620px;
+}
+.cover p.lead{
+  font-size:16.5px;
+  color:var(--ink-500);
+  max-width:520px;
+  line-height:1.65;
+  margin-bottom:34px;
+}
+.cover-ctas{display:flex; gap:12px; margin-bottom:56px;}
+.btn-primary{
+  background:var(--navy-900);
+  color:#fff;
+  border:none;
+  padding:13px 22px;
+  border-radius:8px;
+  font-size:14.5px;
+  font-weight:600;
+  cursor:pointer;
+  font-family:'Public Sans', sans-serif;
+}
+.btn-primary:hover{background:var(--pink-500);}
+.btn-secondary{
+  background:transparent;
+  color:var(--navy-900);
+  border:1px solid var(--paper-line);
+  padding:13px 22px;
+  border-radius:8px;
+  font-size:14.5px;
+  font-weight:600;
+  cursor:pointer;
+  font-family:'Public Sans', sans-serif;
+}
+.btn-secondary:hover{border-color:var(--navy-900);}
+
+.cover-note{
+  margin-top:36px;
+  font-size:12.5px;
+  color:var(--ink-400);
+  border-left:3px solid var(--paper-line);
+  padding-left:14px;
+  line-height:1.6;
+  max-width:560px;
+}
+
+/* ============ CONTENTS / INDEX ============ */
+.toc-list{list-style:none; padding:0; margin:0;}
+.toc-item{
+  display:flex;
+  align-items:center;
+  gap:18px;
+  padding:18px 4px;
+  border-bottom:1px solid var(--paper-line);
+  cursor:pointer;
+}
+.toc-item:hover .toc-title{color:var(--pink-500);}
+.toc-item:hover{background:var(--pink-050);}
+.toc-num{
+  font-family:'Source Serif 4', serif;
+  font-size:22px;
+  color:var(--ink-400);
+  min-width:34px;
+}
+.toc-body{flex:1;}
+.toc-title{font-family:'Source Serif 4', serif; font-size:18px; color:var(--navy-900); margin:0 0 4px 0;}
+.toc-desc{font-size:13px; color:var(--ink-500); margin:0;}
+.toc-sub{font-size:12px; color:var(--ink-400); margin-top:6px;}
+.toc-arrow{color:var(--ink-400); font-size:18px;}
+
+/* ============ SHARED CONTENT STYLES ============ */
+.page-title{
+  font-family:'Source Serif 4', serif;
+  font-size:32px;
+  color:var(--navy-900);
+  margin:0 0 8px 0;
+}
+.page-sub{
+  font-size:15px;
+  color:var(--ink-500);
+  margin:0 0 30px 0;
+  max-width:640px;
+  line-height:1.6;
+}
+.updated-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  font-size:11.5px;
+  font-weight:600;
+  color:var(--navy-800);
+  background:var(--pink-100);
+  padding:5px 11px;
+  border-radius:14px;
+  margin-bottom:20px;
+}
+
+.section-block{margin-bottom:40px;}
+.section-block h2{
+  font-family:'Source Serif 4', serif;
+  font-size:20px;
+  color:var(--navy-900);
+  border-bottom:1px solid var(--paper-line);
+  padding-bottom:10px;
+  margin:0 0 16px 0;
+}
+.section-block h3{
+  font-size:14.5px;
+  color:var(--navy-800);
+  margin:20px 0 8px 0;
+  font-weight:700;
+}
+.section-block p{font-size:14.5px; color:var(--ink-700); line-height:1.7; margin:0 0 12px 0;}
+
+.card-row{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:16px 0;}
+.info-card{
+  background:#fff;
+  border:1px solid var(--paper-line);
+  border-radius:var(--radius-card);
+  padding:18px 20px;
+}
+.info-card .ic-label{font-size:11px; text-transform:uppercase; letter-spacing:.05em; color:var(--pink-500); font-weight:700; margin-bottom:6px;}
+.info-card p{font-size:13.5px; margin:0; color:var(--ink-700); line-height:1.6;}
+
+table.data-table{width:100%; border-collapse:collapse; margin:14px 0 20px 0; font-size:13.5px;}
+table.data-table th{
+  text-align:left;
+  background:var(--navy-900);
+  color:#fff;
+  padding:10px 14px;
+  font-weight:600;
+  font-size:12.5px;
+}
+table.data-table td{padding:10px 14px; border-bottom:1px solid var(--paper-line); color:var(--ink-700);}
+table.data-table tr:nth-child(even) td{background:var(--paper-1);}
+
+.callout{
+  background:var(--pink-050);
+  border-left:4px solid var(--pink-500);
+  border-radius:0 8px 8px 0;
+  padding:16px 20px;
+  font-size:13.5px;
+  color:var(--navy-800);
+  margin:18px 0;
+  line-height:1.6;
+}
+.callout.strong{background:var(--navy-900); border-left-color:var(--navy-900); color:#fff;}
+
+.talk-track{
+  background:#fff;
+  border:1px dashed var(--pink-400);
+  border-radius:var(--radius-card);
+  padding:16px 20px;
+  margin:16px 0;
+}
+.talk-track .tt-label{font-size:11px; text-transform:uppercase; letter-spacing:.06em; color:var(--pink-500); font-weight:700; margin-bottom:6px;}
+.talk-track p{font-style:italic; color:var(--ink-700); font-size:13.5px; margin:0; line-height:1.6;}
+
+.compliance-flag{
+  display:flex; gap:10px; align-items:flex-start;
+  background:var(--paper-1); border:1px solid var(--navy-700);
+  border-radius:8px; padding:12px 16px; margin:16px 0;
+  font-size:12.5px; color:var(--navy-800); line-height:1.55;
+}
+
+/* ============ CALCULATOR (1% tab) ============ */
+.calc-box{
+  background:#fff;
+  border:1px solid var(--paper-line);
+  border-radius:14px;
+  padding:28px;
+  margin:20px 0 30px 0;
+}
+.calc-controls{display:flex; gap:28px; margin-bottom:22px; flex-wrap:wrap;}
+.calc-field{flex:1; min-width:200px;}
+.calc-field label{display:block; font-size:12px; font-weight:700; color:var(--navy-800); margin-bottom:8px;}
+.calc-field input[type=range]{width:100%; accent-color:var(--pink-500);}
+.calc-field .val{font-family:'Source Serif 4', serif; font-size:15px; color:var(--pink-500); font-weight:600; margin-top:4px;}
+.calc-results{display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px;}
+.result-card{
+  border-radius:10px; padding:16px 18px;
+}
+.result-card.a{background:var(--paper-1);}
+.result-card.b{background:var(--pink-100);}
+.result-card.diff{background:var(--navy-900);}
+.result-card .rc-label{font-size:11.5px; font-weight:700; color:var(--ink-500); margin-bottom:6px;}
+.result-card.b .rc-label{color:var(--navy-700);}
+.result-card.diff .rc-label{color:var(--pink-100);}
+.result-card .rc-val{font-family:'Source Serif 4', serif; font-size:24px; color:var(--navy-900); font-weight:600;}
+.result-card.diff .rc-val{color:#fff;}
+
+/* ============ ACCESS AGE TABLE (access tab) ============ */
+.age-strip{display:flex; gap:0; margin:18px 0 26px 0; border-radius:10px; overflow:hidden; border:1px solid var(--paper-line);}
+.age-block{flex:1; padding:16px 14px; text-align:center; border-right:1px solid var(--paper-line);}
+.age-block:last-child{border-right:none;}
+.age-block .yr{font-family:'Source Serif 4', serif; font-size:20px; color:var(--navy-900); font-weight:600;}
+.age-block .lbl{font-size:11px; color:var(--ink-500); margin-top:4px;}
+.age-block.hl{background:var(--pink-100);}
+
+/* ============ LOOKUP TOOL (job roles / medication questions) ============ */
+.lookup-box{background:#fff; border:1px solid var(--paper-line); border-radius:14px; padding:26px 28px; margin:20px 0 24px 0;}
+.lookup-label{display:block; font-size:12px; font-weight:700; color:var(--navy-800); margin-bottom:8px;}
+.lookup-select{width:100%; padding:12px 14px; font-size:14px; font-family:'Public Sans', sans-serif; border:1px solid var(--paper-line); border-radius:8px; color:var(--ink-900); background:#fff; appearance:auto;}
+.lookup-result{margin-top:22px;}
+.lookup-empty{color:var(--ink-400); font-size:13.5px; font-style:italic; margin:0;}
+.lookup-primary{background:var(--pink-050); border-left:4px solid var(--pink-500); border-radius:0 8px 8px 0; padding:16px 20px; margin-bottom:16px;}
+.lookup-primary .lp-q{font-size:13.5px; font-weight:700; color:var(--navy-900); margin-bottom:10px;}
+.lookup-extra{background:var(--paper-1); border-radius:10px; padding:16px 20px;}
+.lookup-extra .le-title{font-size:11px; text-transform:uppercase; letter-spacing:.05em; color:var(--ink-500); font-weight:700; margin-bottom:10px;}
+.lookup-extra ul{margin:0; padding-left:18px;}
+.lookup-extra li{font-size:13.5px; color:var(--ink-700); line-height:1.7;}
+
+/* ============ ACCESS TOOL (accessing super tab) ============ */
+.access-tool{background:#fff; border:1px solid var(--paper-line); border-radius:14px; padding:26px 28px; margin:20px 0 24px 0;}
+.access-step{margin-bottom:22px;}
+.access-step:last-of-type{margin-bottom:0;}
+.access-step-label{font-size:12px; font-weight:700; color:var(--navy-800); margin-bottom:10px;}
+.access-choice-row{display:flex; gap:10px; flex-wrap:wrap;}
+.access-choice{border:1px solid var(--paper-line); background:#fff; color:var(--navy-800); font-size:13.5px; font-weight:600; padding:10px 18px; border-radius:8px; cursor:pointer; font-family:'Public Sans', sans-serif;}
+.access-choice:hover{border-color:var(--pink-500); color:var(--pink-500);}
+.access-choice.active{background:var(--navy-900); border-color:var(--navy-900); color:#fff;}
+.access-result{margin-top:22px;}
+
+/* responsive */
+@media (max-width:880px){
+  .spine{width:74px; min-width:74px; padding-left:8px;}
+  .brand-text, .tab-btn span:not(.num):not(.flag), .tab-group-label, .spine-foot, .spine-search{display:none;}
+  .tab-btn{justify-content:center; padding:14px 4px;}
+  .card-row{grid-template-columns:1fr;}
+  .page-inner{padding:0 18px 60px 18px; margin-left:20px;}
+  .calc-results{grid-template-columns:1fr;}
+  .cover h1{font-size:32px;}
+}
+</style>
+</head>
+<body>
+
+<div class="frame">
+
+  <!-- ================= SPINE / TAB NAVIGATION ================= -->
+  <nav class="spine">
+    <div class="brand">
+      <div class="brand-mark"><img src="data:image/png;base64,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" alt="Brightday"></div>
+      <div class="brand-text">
+        <div class="firm">Brightday Australia</div>
+        <div class="title">Handbook <span class="version">v1.0</span></div>
+        <div class="internal-note">Internal use only — not to be shared with clients</div>
+      </div>
+    </div>
+
+    <div class="tab-group-label">Start here</div>
+    <button class="tab-btn" data-tab="home" onclick="showTab('home')">
+      <span class="num">—</span><span>Home</span>
+    </button>
+    <button class="tab-btn" data-tab="contents" onclick="showTab('contents')">
+      <span class="num">—</span><span>Contents</span>
+    </button>
+
+    <div class="tab-group-label" style="margin-top:14px;">Client topics</div>
+    <button class="tab-btn" data-tab="basics" onclick="showTab('basics')">
+      <span class="num">01</span><span>The basics</span>
+    </button>
+    <button class="tab-btn" data-tab="contributions" onclick="showTab('contributions')">
+      <span class="num">02</span><span>Contributions</span>
+    </button>
+    <button class="tab-btn" data-tab="onepercent" onclick="showTab('onepercent')">
+      <span class="num">03</span><span>The value of 1%</span>
+    </button>
+    <button class="tab-btn" data-tab="updates" onclick="showTab('updates')">
+      <span class="num">04</span><span>Latest updates</span><span class="flag" title="Recently updated"></span>
+    </button>
+    <button class="tab-btn" data-tab="access" onclick="showTab('access')">
+      <span class="num">05</span><span>Accessing super</span>
+    </button>
+    <button class="tab-btn" data-tab="retirement-guide" onclick="showTab('retirement-guide')">
+      <span class="num">06</span><span>Retirement income guide</span>
+    </button>
+    <button class="tab-btn" data-tab="insurance-basics" onclick="showTab('insurance-basics')">
+      <span class="num">07</span><span>Insurance basics</span>
+    </button>
+    <button class="tab-btn" data-tab="insurance-depth" onclick="showTab('insurance-depth')">
+      <span class="num">08</span><span>Insurance in depth</span>
+    </button>
+    <button class="tab-btn" data-tab="tax" onclick="showTab('tax')">
+      <span class="num">09</span><span>Tax on super</span>
+    </button>
+    <button class="tab-btn" data-tab="insurance-roles" onclick="showTab('insurance-roles')">
+      <span class="num">10</span><span>Insurance — job roles</span>
+    </button>
+    <button class="tab-btn" data-tab="medication-questions" onclick="showTab('medication-questions')">
+      <span class="num">11</span><span>Medication questions</span>
+    </button>
+    <button class="tab-btn" data-tab="complex-clients" onclick="showTab('complex-clients')">
+      <span class="num">12</span><span>Complex clients</span>
+    </button>
+
+    <div class="spine-search">
+      <div class="spine-search-label">Jump to a topic</div>
+      <div class="spine-search-row">
+        <input type="text" id="site-search" placeholder="e.g. TPD, downsizer, plumber…" onkeydown="if(event.key==='Enter'){runSiteSearch();}">
+        <button onclick="runSiteSearch()" aria-label="Search">→</button>
+      </div>
+      <p class="spine-search-msg" id="site-search-msg"></p>
+    </div>
+
+    <div class="spine-foot">
+      Internal reference only.<br>Not to be shared with clients.
+    </div>
+  </nav>
+
+  <!-- ================= PAGE / CONTENT ================= -->
+  <div class="page-wrap">
+    <div class="page-inner">
+
+      <div class="topbar">
+        <div class="crumb"><span id="crumb-text">Home</span></div>
+        <div class="topbar-actions">
+          <button class="pill-btn" onclick="showTab('contents')">Contents</button>
+          <button class="pill-btn" onclick="window.print()">Print page</button>
+        </div>
+      </div>
+
+      <!-- ========== HOME ========== -->
+      <section class="panel" id="panel-home">
+        <div class="cover">
+          <h1>Superannuation, explained the way we explain it.</h1>
+          <p class="lead">A quick-reference guide for calls and meetings — the basics, contribution rules, the compounding numbers that make the case for advice, and what's changed lately. Use the tabs on the left to flick straight to what you need.</p>
+          <div class="cover-ctas">
+            <button class="btn-primary" onclick="showTab('contents')">Open contents page</button>
+            <button class="btn-secondary" onclick="showTab('updates')">See latest updates</button>
+          </div>
+
+          <div class="cover-note">
+            This binder sits alongside your usual compliance material — it's a conversation aid for the 5–10 calls a day, not a substitute for personal advice documentation. Figures marked "example" need confirming against current ATO thresholds before being quoted to a client.
+          </div>
+        </div>
+      </section>
+
+      <!-- ========== CONTENTS ========== -->
+      <section class="panel" id="panel-contents">
+        <h1 class="page-title">Contents</h1>
+        <p class="page-sub">Five tabs, ordered the way a conversation usually moves — from "what is it" through to "when can I use it". Click any row to jump straight there.</p>
+
+        <ul class="toc-list">
+          <li class="toc-item" onclick="showTab('basics')">
+            <div class="toc-num">01</div>
+            <div class="toc-body">
+              <p class="toc-title">The basics</p>
+              <p class="toc-desc">What super is, how it grows, and how to explain it simply.</p>
+              <p class="toc-sub">Covers: what is super · how it works · investment options · fees, in plain terms</p>
+            </div>
+            <div class="toc-arrow">→</div>
+          </li>
+          <li class="toc-item" onclick="showTab('contributions')">
+            <div class="toc-num">02</div>
+            <div class="toc-body">
+              <p class="toc-title">Contributions</p>
+              <p class="toc-desc">Types of contributions and who they suit.</p>
+              <p class="toc-sub">Covers: concessional vs non-concessional · salary sacrifice · spouse contributions</p>
+            </div>
+            <div class="toc-arrow">→</div>
+          </li>
+          <li class="toc-item" onclick="showTab('onepercent')">
+            <div class="toc-num">03</div>
+            <div class="toc-body">
+              <p class="toc-title">The value of 1%</p>
+              <p class="toc-desc">Why the difference between a 7% and 8% return matters over time.</p>
+              <p class="toc-sub">Covers: $100,000 over 30 years · interactive comparison · talking points</p>
+            </div>
+            <div class="toc-arrow">→</div>
+          </li>
+          <li class="toc-item" onclick="showTab('updates')">
+            <div class="toc-num">04</div>
+            <div class="toc-body">
+              <p class="toc-title">Latest updates</p>
+              <p class="toc-desc">Contribution caps and carry-forward rules, kept current.</p>
+              <p class="toc-sub">Covers: concessional cap · non-concessional cap · carry-forward eligibility</p>
+            </div>
+            <div class="toc-arrow">→</div>
+          </li>
+          <li class="toc-item" onclick="showTab('access')">
+            <div class="toc-num">05</div>
+            <div class="toc-body">
+              <p class="toc-title">Accessing your super</p>
+              <p class="toc-desc">Preservation age, conditions of release, and how much can be drawn.</p>
+              <p class="toc-sub">Covers: preservation age table · conditions of release · access amounts</p>
+            </div>
+            <div class="toc-arrow">→</div>
+          </li>
+          <li class="toc-item" onclick="showTab('retirement-guide')">
+            <div class="toc-num">06</div>
+            <div class="toc-body">
+              <p class="toc-title">Retirement income guide</p>
+              <p class="toc-desc">What government figures say a single or couple actually needs — homeowner or renter.</p>
+              <p class="toc-sub">Covers: ASFA Retirement Standard (Moneysmart.gov.au) · Age Pension rates · lump sum targets</p>
+            </div>
+            <div class="toc-arrow">→</div>
+          </li>
+          <li class="toc-item" onclick="showTab('insurance-basics')">
+            <div class="toc-num">07</div>
+            <div class="toc-body">
+              <p class="toc-title">Insurance basics</p>
+              <p class="toc-desc">The three covers clients ask about, explained simply.</p>
+              <p class="toc-sub">Covers: life cover · TPD cover · income protection</p>
+            </div>
+            <div class="toc-arrow">→</div>
+          </li>
+          <li class="toc-item" onclick="showTab('insurance-depth')">
+            <div class="toc-num">08</div>
+            <div class="toc-body">
+              <p class="toc-title">Insurance in depth</p>
+              <p class="toc-desc">Default vs tailored cover, in-super vs outside-super, and the income protection tax angle.</p>
+              <p class="toc-sub">Covers: default vs tailored cover · career-change portability · in/out of super · tax deductibility</p>
+            </div>
+            <div class="toc-arrow">→</div>
+          </li>
+          <li class="toc-item" onclick="showTab('tax')">
+            <div class="toc-num">09</div>
+            <div class="toc-body">
+              <p class="toc-title">Tax on super</p>
+              <p class="toc-desc">How super is taxed while it's growing, from age 60, and once fully retired.</p>
+              <p class="toc-sub">Covers: contributions tax · earnings tax · tax-free access from 60 · retirement phase</p>
+            </div>
+            <div class="toc-arrow">→</div>
+          </li>
+          <li class="toc-item" onclick="showTab('insurance-roles')">
+            <div class="toc-num">10</div>
+            <div class="toc-body">
+              <p class="toc-title">Insurance — job roles</p>
+              <p class="toc-desc">Pick an occupation, get the underwriting questions worth asking.</p>
+              <p class="toc-sub">Covers: 38 roles across trades, mining, transport, emergency services, healthcare, office and more</p>
+            </div>
+            <div class="toc-arrow">→</div>
+          </li>
+          <li class="toc-item" onclick="showTab('medication-questions')">
+            <div class="toc-num">11</div>
+            <div class="toc-body">
+              <p class="toc-title">Medication questions</p>
+              <p class="toc-desc">Pick a health condition, get the follow-up questions worth asking.</p>
+              <p class="toc-sub">Covers: 34 common conditions across metabolic, mental health, musculoskeletal, cancer and more</p>
+            </div>
+            <div class="toc-arrow">→</div>
+          </li>
+          <li class="toc-item" onclick="showTab('complex-clients')">
+            <div class="toc-num">12</div>
+            <div class="toc-body">
+              <p class="toc-title">Complex clients</p>
+              <p class="toc-desc">The situations that don't fit the standard playbook — pick a scenario, see what's different.</p>
+              <p class="toc-sub">Covers: 14 scenarios — cross-border, SMSF, defined benefit, family law, business owners, and more</p>
+            </div>
+            <div class="toc-arrow">→</div>
+          </li>
+        </ul>
+      </section>
+
+      <!-- ========== 01 BASICS ========== -->
+      <section class="panel" id="panel-basics">
+        <h1 class="page-title">01 — The basics</h1>
+        <p class="page-sub">What is super, and how does it actually work? The explanation to reach for on a first call.</p>
+
+        <div class="section-block">
+          <h2>What is superannuation?</h2>
+          <p>[Placeholder] Superannuation is a long-term, tax-effective structure for retirement savings. Money goes in from an employer, from the person themselves, or both — and it's invested and grows over a working life until it can be accessed, generally from preservation age.</p>
+          <div class="talk-track">
+            <div class="tt-label">How we say it to a client</div>
+            <p>"Think of super as a tax-advantaged wrapper around your investments — it's not a product itself, it's the environment your money grows in."</p>
+          </div>
+        </div>
+
+        <div class="section-block">
+          <h2>How does it work?</h2>
+          <div class="card-row">
+            <div class="info-card">
+              <div class="ic-label">Money in</div>
+              <p>Employer Super Guarantee contributions, salary sacrifice, personal contributions, spouse contributions.</p>
+            </div>
+            <div class="info-card">
+              <div class="ic-label">Growth</div>
+              <p>Contributions are invested according to the member's chosen option — growth, balanced, conservative, or a mix.</p>
+            </div>
+            <div class="info-card">
+              <div class="ic-label">Tax treatment</div>
+              <p>Concessional contributions and earnings are generally taxed at up to 15% inside super — often lower than personal marginal rates.</p>
+            </div>
+            <div class="info-card">
+              <div class="ic-label">Money out</div>
+              <p>Generally accessible from preservation age, subject to a condition of release — see Tab 05.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-block">
+          <h2>Investment options, in plain terms</h2>
+          <p>Every investment option is really just a mix of two building blocks — <b>growth assets</b> and <b>defensive assets</b> — in different proportions. The mix determines both the expected long-term return and how much the balance moves around year to year.</p>
+          <div class="card-row">
+            <div class="info-card">
+              <div class="ic-label">Growth assets</div>
+              <p>Shares (Australian and international), property, and other growth-style assets. Higher expected long-term return, but more volatile — balances can fall as well as rise, sometimes sharply, over shorter periods.</p>
+            </div>
+            <div class="info-card">
+              <div class="ic-label">Defensive assets</div>
+              <p>Cash and fixed interest. Lower expected return, but far more stable — this is what cushions a portfolio against short-term market falls and funds near-term withdrawals.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-block">
+          <h2>Risk profiles, from defensive to high conviction</h2>
+          <p>The more growth assets in the mix, the higher the long-term return is expected to be — but the longer a client needs to be able to leave it invested to ride out the ups and downs. As a rule of thumb, the minimum suggested timeframe lengthens as the growth allocation rises.</p>
+          <table class="data-table">
+            <tr><th>Risk profile</th><th>Growth assets</th><th>Defensive assets</th><th>Minimum suggested timeframe</th></tr>
+            <tr><td>Defensive</td><td>15%</td><td>85%</td><td>2+ years</td></tr>
+            <tr><td>Conservative</td><td>30%</td><td>70%</td><td>3+ years</td></tr>
+            <tr><td>Moderate (balanced conservative)</td><td>50%</td><td>50%</td><td>5+ years</td></tr>
+            <tr><td>Balanced</td><td>70%</td><td>30%</td><td>6+ years</td></tr>
+            <tr><td>Growth</td><td>85%</td><td>15%</td><td>7+ years</td></tr>
+            <tr><td>High growth</td><td>90%</td><td>10%</td><td>10+ years</td></tr>
+            <tr><td>High conviction</td><td>98%</td><td>2%</td><td>12+ years</td></tr>
+          </table>
+          <div class="callout">
+            The pattern to explain to a client: as the growth allocation climbs toward 90–98%, the option is built almost entirely around riding out volatility for a materially higher long-term return — which only makes sense with a long enough runway left before the money is needed.
+          </div>
+          <div class="talk-track">
+            <div class="tt-label">How we say it to a client</div>
+            <p>"The name of the option matters less than the mix behind it. What we're really matching is how many years this money has left to work before you need it — the longer that runway, the more growth exposure generally makes sense."</p>
+          </div>
+          <div class="compliance-flag">
+            The percentages and timeframes above are indicative, industry-typical figures for illustrating the concept — actual asset allocations, option names, and minimum timeframes vary by fund and product. Confirm the exact figures against the relevant PDS or investment menu before using them with a client.
+          </div>
+        </div>
+
+        <div class="section-block">
+          <h2>Fees and insurance — the snapshot</h2>
+          <p>[Placeholder] One paragraph on typical fee structures (admin, investment, insurance premiums) and where to find a client's actual fees on their statement.</p>
+        </div>
+      </section>
+
+      <!-- ========== 02 CONTRIBUTIONS ========== -->
+      <section class="panel" id="panel-contributions">
+        <h1 class="page-title">02 — Contributions</h1>
+        <p class="page-sub">The different ways money can go into super, and who each one tends to suit.</p>
+
+        <div class="section-block">
+          <h2>Concessional (before-tax) contributions</h2>
+          <p>[Placeholder] Employer Super Guarantee, salary sacrifice, and personal deductible contributions. Taxed at up to 15% going in, counts toward the concessional cap — see Tab 04 for the current figure.</p>
+          <h3>Who this suits</h3>
+          <p>[Placeholder] Clients on higher marginal tax rates looking to reduce taxable income while building retirement savings.</p>
+        </div>
+
+        <div class="section-block">
+          <h2>Non-concessional (after-tax) contributions</h2>
+          <p>[Placeholder] Personal contributions made from after-tax money, no further tax on the way in, counts toward the non-concessional cap.</p>
+          <h3>Who this suits</h3>
+          <p>[Placeholder] Clients with a lump sum — inheritance, property sale, redundancy — wanting to boost super tax-effectively.</p>
+        </div>
+
+        <div class="card-row">
+          <div class="info-card">
+            <div class="ic-label">Salary sacrifice</div>
+            <p>An arrangement with an employer to direct part of pre-tax salary into super instead of take-home pay.</p>
+          </div>
+          <div class="info-card">
+            <div class="ic-label">Spouse contributions</div>
+            <p>Contributions made on behalf of a lower-income or non-working spouse, which may attract a tax offset.</p>
+          </div>
+          <div class="info-card">
+            <div class="ic-label">Government co-contribution</div>
+            <p>[Placeholder] A government top-up for eligible lower-income earners who make personal after-tax contributions.</p>
+          </div>
+          <div class="info-card">
+            <div class="ic-label">First home super saver</div>
+            <p>[Placeholder] A scheme allowing eligible voluntary contributions to be later withdrawn to help fund a first home deposit.</p>
+          </div>
+        </div>
+
+        <div class="section-block">
+          <h2>Worked examples, by income</h2>
+          <p>The same contribution strategy doesn't suit every client — it largely comes down to their marginal tax rate. Based on 2026–27 tax brackets and a $32,500 concessional cap.</p>
+          <div class="card-row">
+            <div class="info-card">
+              <div class="ic-label">Low income — $45,000</div>
+              <p>Marginal rate is 15% plus 2% Medicare (17%) — close to the 15% contributions tax, so salary sacrifice saves relatively little. The bigger lever here is the government co-contribution: a personal after-tax contribution can attract up to $500 from the government. Spouse contributions may also be worth checking if a partner earns less.</p>
+            </div>
+            <div class="info-card">
+              <div class="ic-label">Medium income — $90,000</div>
+              <p>Marginal rate is 30% plus 2% Medicare (32%) against 15% contributions tax — a 17 percentage point saving on every dollar salary-sacrificed. This is the classic salary sacrifice sweet spot: strong enough tax benefit to be worth prioritising, without triggering Division 293.</p>
+            </div>
+            <div class="info-card">
+              <div class="ic-label">High income — $200,000</div>
+              <p>Marginal rate is 45% plus 2% Medicare (47%) against 15% contributions tax — a 32 percentage point saving, the largest of the three. Maximising the concessional cap each year is usually the priority. Worth checking total income plus contributions against the $250,000 Division 293 threshold, which adds an extra 15% tax on contributions above it.</p>
+            </div>
+          </div>
+          <div class="talk-track">
+            <div class="tt-label">How we say it to a client</div>
+            <p>"The question isn't just 'should I salary sacrifice' — it's how big the gap is between what you'd pay tax at personally and the 15% super pays. The bigger that gap, the harder salary sacrifice works for you."</p>
+          </div>
+          <div class="compliance-flag">
+            Marginal tax rates shown include the 2% Medicare levy and are based on 2026–27 resident tax brackets — they exclude offsets such as LITO and don't account for HECS/HELP repayments, which can change the practical benefit. Treat as general education, not a personal tax calculation.
+          </div>
+        </div>
+      </section>
+
+      <!-- ========== 03 THE VALUE OF 1% ========== -->
+      <section class="panel" id="panel-onepercent">
+        <h1 class="page-title">03 — The value of 1%</h1>
+        <p class="page-sub">A one percentage point difference in return sounds small on paper. Over decades of compounding, it isn't. Use the calculator below live with a client.</p>
+
+        <div class="calc-box">
+          <div class="calc-controls">
+            <div class="calc-field">
+              <label for="calc-balance">Starting balance</label>
+              <input type="range" id="calc-balance" min="10000" max="500000" step="10000" value="100000" oninput="updateCalc()">
+              <div class="val" id="calc-balance-val">$100,000</div>
+            </div>
+            <div class="calc-field">
+              <label for="calc-years">Years invested</label>
+              <input type="range" id="calc-years" min="5" max="40" step="1" value="30" oninput="updateCalc()">
+              <div class="val" id="calc-years-val">30 years</div>
+            </div>
+            <div class="calc-field">
+              <label for="calc-ratea">Return A</label>
+              <input type="range" id="calc-ratea" min="1" max="12" step="0.5" value="7" oninput="updateCalc()">
+              <div class="val" id="calc-ratea-val">7.0%</div>
+            </div>
+            <div class="calc-field">
+              <label for="calc-rateb">Return B</label>
+              <input type="range" id="calc-rateb" min="1" max="12" step="0.5" value="8" oninput="updateCalc()">
+              <div class="val" id="calc-rateb-val">8.0%</div>
+            </div>
+          </div>
+          <div class="calc-results">
+            <div class="result-card a">
+              <div class="rc-label">At return A</div>
+              <div class="rc-val" id="result-a">$761,225</div>
+            </div>
+            <div class="result-card b">
+              <div class="rc-label">At return B</div>
+              <div class="rc-val" id="result-b">$1,006,266</div>
+            </div>
+            <div class="result-card diff">
+              <div class="rc-label">Extra from that 1%</div>
+              <div class="rc-val" id="result-diff">$245,041</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="talk-track">
+          <div class="tt-label">How we say it to a client</div>
+          <p>"On $100,000 over 30 years, the difference between a 7% and an 8% return isn't a rounding error — it's over a quarter of a million dollars, purely from compounding. That's what we're optimising for when we talk about fees, asset allocation and fund performance."</p>
+        </div>
+
+        <div class="callout strong">
+          This is a simplified compound growth illustration for conversation purposes only — it excludes fees, insurance premiums, contributions, inflation, and tax, and assumes a constant annual return, which real investments do not deliver. Not to be provided to clients as personal advice or a projection.
+        </div>
+      </section>
+
+      <!-- ========== 04 LATEST UPDATES ========== -->
+      <section class="panel" id="panel-updates">
+        <h1 class="page-title">04 — Latest updates</h1>
+        <div class="updated-badge">Source: ATO — current as at 1 July 2026 (2026–27 financial year)</div>
+        <p class="page-sub">Contribution caps just moved with the new financial year. This tab should be the first thing updated each 1 July.</p>
+
+        <div class="compliance-flag">
+          <b>Fresh legislation warning:</b> the CGT/negative gearing reform, Division 296, and the SMSF residential LRBA ban further down this page all passed Parliament within the last few weeks. This is about as current as information gets, which cuts both ways — it also means ATO guidance, fund administration, and industry commentary are still catching up. Double-check anything from this section against ato.gov.au or treasury.gov.au immediately before a client conversation, rather than relying on this tab alone.
+        </div>
+
+        <div class="section-block">
+          <h2>What actually changed on 1 July 2026</h2>
+          <div class="callout">
+            The concessional and non-concessional caps both stepped up with indexation, and Payday Super started — employers now have to pay super at the same time as wages, not just quarterly. The Super Guarantee rate itself didn't move; it reached its final legislated rate of 12% back on 1 July 2025 and stays there.
+          </div>
+        </div>
+
+        <div class="section-block">
+          <h2>Contribution caps — last year vs this year</h2>
+          <table class="data-table">
+            <tr><th>Cap type</th><th>2025–26 (last year)</th><th>2026–27 (this year)</th><th>Change</th></tr>
+            <tr><td>Concessional contributions cap</td><td>$30,000</td><td>$32,500</td><td>+$2,500</td></tr>
+            <tr><td>Non-concessional contributions cap</td><td>$120,000</td><td>$130,000</td><td>+$10,000</td></tr>
+            <tr><td>3-year bring-forward cap</td><td>$360,000</td><td>$390,000</td><td>+$30,000</td></tr>
+            <tr><td>General transfer balance cap</td><td>$2.0 million</td><td>$2.1 million</td><td>+$100,000</td></tr>
+            <tr><td>Super Guarantee rate</td><td>12%</td><td>12%</td><td>No change</td></tr>
+          </table>
+          <p style="font-size:12.5px; color:var(--ink-500);">The non-concessional cap is calculated as 4× the concessional cap, so it moves automatically whenever the concessional cap is indexed. Concessional cap indexation moves in $2,500 increments, in line with wages growth (AWOTE).</p>
+        </div>
+
+        <div class="section-block">
+          <h2>Carry-forward (catch-up) concessional contributions</h2>
+          <p>Clients with a total super balance below $500,000 at the end of the previous financial year, and unused concessional cap amounts from up to five prior years, can "carry forward" that unused space and contribute above the standard annual cap in the current year.</p>
+          <div class="card-row">
+            <div class="info-card">
+              <div class="ic-label">Who's eligible</div>
+              <p>Total super balance under $500,000 as at 30 June of the prior financial year, plus unused concessional cap amounts accrued since the 2018–19 year.</p>
+            </div>
+            <div class="info-card">
+              <div class="ic-label">Common use case</div>
+              <p>A client with a lump sum in a high-income year — redundancy payout, inheritance, or business sale — wanting to catch up on missed contribution years.</p>
+            </div>
+          </div>
+          <div class="callout">
+            Timing matters this year: 2025–26 was the last financial year unused cap amounts from 2020–21 could be used. From 2026–27 onward, any unused 2020–21 cap has expired — the carry-forward window only reaches back five years, so it's worth checking a client's oldest available unused amount before it drops off.
+          </div>
+        </div>
+
+        <div class="section-block">
+          <h2>Personal investments — CGT changes</h2>
+          <p>The 2026–27 Federal Budget passed the most significant capital gains tax overhaul since the 50% discount was introduced in 1999. None of it applies yet — the changes land on 1 July 2027 — but clients holding investments outside super need to know it's coming.</p>
+          <table class="data-table">
+            <tr><th>Rule</th><th>Now (until 30 June 2027)</th><th>From 1 July 2027</th></tr>
+            <tr><td>CGT discount, individuals/trusts/partnerships</td><td>50% discount on gains for assets held 12+ months</td><td>Replaced with cost base indexation, plus a 30% minimum tax on the real (inflation-adjusted) gain</td></tr>
+            <tr><td>Pre-CGT assets (acquired before 20 Sep 1985)</td><td>Fully exempt from CGT</td><td>No longer exempt — gains accruing from 1 July 2027 become taxable; gains before that date stay exempt</td></tr>
+            <tr><td>Negative gearing, established residential property</td><td>Rental losses fully deductible against any income</td><td>For properties bought after 12 May 2026, losses can only offset residential property income/gains, not wages or other income</td></tr>
+            <tr><td>Negative gearing, new-build residential property</td><td>Fully deductible</td><td>Unaffected — new builds keep full negative gearing before and after the change</td></tr>
+          </table>
+          <div class="callout">
+            Grandfathering is the key detail to get right with a client: any property or asset already held at 7:30pm AEST on 12 May 2026 keeps its current negative gearing treatment. Only established residential properties purchased after that date, and CGT events happening after 1 July 2027, are caught by the new rules.
+          </div>
+          <p style="font-size:12.5px; color:var(--ink-500);">SMSFs are explicitly excluded from the CGT discount overhaul — a fund's existing effective 10% rate on realised gains in accumulation phase (and 0% in pension phase) is unchanged. See "SMSF and property" below.</p>
+        </div>
+
+        <div class="section-block">
+          <h2>New tax — Division 296 (large super balances)</h2>
+          <p>A genuinely new tax, not an adjustment to an existing one. Division 296 is now law and applies from 1 July 2026, targeting individuals — not funds — with large total super balances.</p>
+          <table class="data-table">
+            <tr><th>Total super balance</th><th>Extra tax on earnings above the threshold</th></tr>
+            <tr><td>$3 million – $10 million</td><td>Additional 15% (on top of the fund's normal tax)</td></tr>
+            <tr><td>Above $10 million</td><td>A further additional 10% on the portion above $10 million (25% extra in total on that slice)</td></tr>
+          </table>
+          <div class="callout">
+            The final law taxes <b>realised</b> earnings only — interest, dividends, rent, and realised capital gains — not unrealised paper gains, which was the most contentious part of the original proposal. It's a personal tax billed to the individual, not the fund, and it applies whether the client is in an APRA fund or an SMSF.
+          </div>
+          <div class="card-row">
+            <div class="info-card">
+              <div class="ic-label">Transitional rule, 2026–27 only</div>
+              <p>For this first year, the balance test looks only at 30 June 2027 — a client over $3 million on 1 July 2026 who drops below it by 30 June 2027 won't be caught for this year.</p>
+            </div>
+            <div class="info-card">
+              <div class="ic-label">SMSF cost base reset</div>
+              <p>SMSFs can elect to reset the cost base of assets to market value as at 30 June 2026, so only gains accruing after that date count toward a member's Division 296 earnings.</p>
+            </div>
+          </div>
+          <p style="font-size:12.5px; color:var(--ink-500);">Both the $3 million and $10 million thresholds are indexed to CPI going forward, in $150,000 and $500,000 increments respectively.</p>
+        </div>
+
+        <div class="section-block">
+          <h2>Claiming tax refunds — what's new</h2>
+          <p>From the 2026–27 income year, a new instant $1,000 deduction is available for work-related expenses. An employed client with less than $1,000 in work-related expenses can simply claim the flat $1,000 — no receipts, no itemising. Anyone with genuine expenses above $1,000 can still itemise and claim the higher amount in the usual way, and other deductions (donations, union fees, professional memberships) can still be claimed on top of the instant deduction.</p>
+          <div class="callout">
+            Worth flagging to clients who've never bothered claiming work-related deductions because it felt like too much admin for a small amount — this removes that friction entirely for anyone under the $1,000 threshold.
+          </div>
+        </div>
+
+        <div class="section-block">
+          <h2>SMSF and property</h2>
+          <p>Two separate but related changes for clients considering property inside an SMSF.</p>
+          <table class="data-table">
+            <tr><th>Change</th><th>Detail</th></tr>
+            <tr><td>Residential property borrowing (LRBA) banned</td><td>New limited recourse borrowing arrangements for residential property are banned from commencement (Royal Assent was 26 June 2026; the ban takes effect roughly 45 days later). Existing residential LRBAs are grandfathered — no forced unwinding.</td></tr>
+            <tr><td>Commercial property borrowing</td><td>Unaffected — SMSFs can still borrow to buy commercial/business real property, including a client's own business premises</td></tr>
+            <tr><td>Buying property outright (no borrowing)</td><td>Unaffected — an SMSF with sufficient balance can still purchase residential or commercial property outright</td></tr>
+            <tr><td>SMSF CGT treatment</td><td>Unchanged and unaffected by the personal CGT overhaul above — SMSFs keep their existing effective 10% rate on gains in accumulation phase, 0% in pension phase</td></tr>
+          </table>
+          <div class="compliance-flag">
+            The exact commencement date for the LRBA ban depends on when Royal Assent formalities complete — confirm the current date before telling a client they've "missed the window" or still have time. Existing arrangements are protected either way, so there's no need to rush a decision on an established LRBA.
+          </div>
+        </div>
+
+        <div class="compliance-flag">
+          These figures are current as at 1 July 2026, sourced from the ATO and Treasury. Contribution caps are indexed to wages growth and can move each financial year — confirm against ato.gov.au before quoting a figure to a client, and update this tab every 1 July. The CGT and negative gearing changes are enacted law but don't take effect until 1 July 2027 — treat that section as "coming" rather than "current" when speaking with clients.
+        </div>
+      </section>
+
+      <!-- ========== 05 ACCESSING SUPER ========== -->
+      <section class="panel" id="panel-access">
+        <h1 class="page-title">05 — Accessing your super</h1>
+        <p class="page-sub">The question every client eventually asks: when can I actually get to it? Click through the two steps below for a quick answer, then use the detail beneath for the full picture.</p>
+
+        <div class="access-tool">
+          <div class="access-step">
+            <div class="access-step-label">Step 1 — are they working or retired?</div>
+            <div class="access-choice-row">
+              <button class="access-choice" data-group="status" data-value="working" onclick="setAccessChoice('status','working')">Working</button>
+              <button class="access-choice" data-group="status" data-value="retired" onclick="setAccessChoice('status','retired')">Retired</button>
+            </div>
+          </div>
+          <div class="access-step">
+            <div class="access-step-label">Step 2 — what age are they?</div>
+            <div class="access-choice-row">
+              <button class="access-choice" data-group="age" data-value="under55" onclick="setAccessChoice('age','under55')">Under 55</button>
+              <button class="access-choice" data-group="age" data-value="55to59" onclick="setAccessChoice('age','55to59')">55–59</button>
+              <button class="access-choice" data-group="age" data-value="60to64" onclick="setAccessChoice('age','60to64')">60–64</button>
+              <button class="access-choice" data-group="age" data-value="65plus" onclick="setAccessChoice('age','65plus')">65 or over</button>
+            </div>
+          </div>
+          <div class="access-result" id="access-result">
+            <p class="lookup-empty">Select a status and an age above to see what access applies.</p>
+          </div>
+        </div>
+
+        <div class="section-block">
+          <h2>Preservation age</h2>
+          <p><b>Preservation age is 60.</b> The transitional rules that phased it up from 55 fully concluded on 1 July 2024 — everyone reaching preservation age today, and every client going forward, has a preservation age of 60. There's no birth-date table to check any more.</p>
+          <p style="font-size:12.5px; color:var(--ink-500);">For context only: under the old transitional rules, anyone born before 1 July 1960 had a preservation age of 55, rising in stages to 60 for anyone born on or after 1 July 1964. That transition is now complete and no longer affects any current or future client.</p>
+        </div>
+
+        <div class="section-block">
+          <h2>Conditions of release</h2>
+          <table class="data-table">
+            <tr><th>Situation</th><th>What it allows</th></tr>
+            <tr><td>Retirement, at or after preservation age (60)</td><td>Full access to the balance</td></tr>
+            <tr><td>Reaching age 65</td><td>Full access, whether working or not</td></tr>
+            <tr><td>Transition to retirement, from age 60, still working</td><td>Limited access via a transition to retirement (TTR) income stream</td></tr>
+            <tr><td>Terminal illness</td><td>Tax-free lump sum access, subject to medical certification</td></tr>
+            <tr><td>Permanent incapacity</td><td>Access to the balance, subject to medical evidence</td></tr>
+            <tr><td>Severe financial hardship</td><td>Limited access, subject to Centrelink and eligibility tests</td></tr>
+            <tr><td>Compassionate grounds</td><td>Limited access for specified expenses, subject to approval</td></tr>
+            <tr><td>First home super saver scheme</td><td>Withdrawal of eligible voluntary contributions for a first home deposit</td></tr>
+          </table>
+        </div>
+
+        <div class="section-block">
+          <h2>Tax when withdrawing</h2>
+          <p>How much access matters, but so does how much tax comes off it. This is the short version — see Tab 09 for the full breakdown of contributions and earnings tax.</p>
+          <table class="data-table">
+            <tr><th>Access scenario</th><th>Tax treatment</th></tr>
+            <tr><td>From age 60, any condition of release</td><td>Tax-free — lump sum or income stream, from a taxed super fund</td></tr>
+            <tr><td>Preservation age to 59 (e.g. retired early, or TTR)</td><td>Taxable component: first $260,000 tax-free (lifetime "low rate cap"), taxed at 17% above that</td></tr>
+            <tr><td>Terminal illness, any age</td><td>Tax-free lump sum, regardless of age</td></tr>
+            <tr><td>Permanent incapacity / TPD</td><td>May receive a tax-free uplift for the future service period; remaining taxable component taxed per age-based rules</td></tr>
+            <tr><td>Severe financial hardship / compassionate grounds, under preservation age</td><td>Taxable component taxed at standard under-preservation-age rates — no low rate cap applies yet</td></tr>
+          </table>
+          <div class="callout">
+            The $260,000 low rate cap is a lifetime figure, not an annual one — it's reduced by any amount a client has already applied it to in the past, and it only ever applies to the taxable component of a lump sum taken between preservation age and 60. From 60 onward, the whole question disappears: it's simply tax-free.
+          </div>
+          <div class="compliance-flag">
+            The low rate cap and related thresholds are indexed and can change each financial year — confirm current figures against ato.gov.au before quoting them to a client. This is general information, not personal tax advice.
+          </div>
+        </div>
+
+        <div class="section-block">
+          <h2>How much can be withdrawn per year, from age 60</h2>
+          <p>From 60, there are two account types a client could be drawing from, and they have different rules. Both use the same age-based minimum. Only one of them has a maximum.</p>
+          <table class="data-table">
+            <tr><th>Age</th><th>Account type</th><th>Minimum per year</th><th>Maximum per year</th></tr>
+            <tr><td>60–64</td><td>Transition to retirement (TTR) — still working, hasn't met a full condition of release</td><td>4% of balance</td><td>10% of balance</td></tr>
+            <tr><td>60–64</td><td>Retirement phase — retired, or otherwise met a full condition of release</td><td>4% of balance</td><td>No maximum — up to and including the full balance</td></tr>
+            <tr><td>65–74</td><td>Retirement phase</td><td>5% of balance</td><td>No maximum</td></tr>
+            <tr><td>75–79</td><td>Retirement phase</td><td>6% of balance</td><td>No maximum</td></tr>
+            <tr><td>80–84</td><td>Retirement phase</td><td>7% of balance</td><td>No maximum</td></tr>
+            <tr><td>85–89</td><td>Retirement phase</td><td>9% of balance</td><td>No maximum</td></tr>
+            <tr><td>90–94</td><td>Retirement phase</td><td>11% of balance</td><td>No maximum</td></tr>
+            <tr><td>95 and over</td><td>Retirement phase</td><td>14% of balance</td><td>No maximum</td></tr>
+          </table>
+          <div class="callout">
+            TTR only exists between 60 and 64. The moment a client turns 65, or meets a full condition of release earlier by genuinely retiring, their TTR account automatically converts to a retirement phase account — the 10% maximum disappears, and only the age-based minimum applies from then on.
+          </div>
+          <p style="font-size:12.5px; color:var(--ink-500);">Minimum and maximum are both recalculated each 1 July based on the account balance on that date (or on a pro-rata basis in the pension's first year, based on the balance at commencement).</p>
+        </div>
+
+        <div class="section-block">
+          <h2>The 4% rule — a planning heuristic, not a legal limit</h2>
+          <p>The legislated figures above are compliance requirements. Separately, the "4% rule" is a widely used rough guide for how much a client could sustainably spend, unrelated to the legal minimum or maximum: draw around 4% of the starting balance in year one, then adjust that dollar amount for inflation each year after. It comes from historical (largely US-based) market research suggesting that pattern had a high chance of lasting roughly 30 years.</p>
+          <div class="card-row">
+            <div class="info-card">
+              <div class="ic-label">Worked example</div>
+              <p>A $1,000,000 balance at retirement → roughly $40,000 in year one. In year two, that $40,000 is simply adjusted for inflation, regardless of how the portfolio performed.</p>
+            </div>
+            <div class="info-card">
+              <div class="ic-label">Where it falls short</div>
+              <p>It's a heuristic, not a promise. It's based on historical market returns and a fixed 30-year horizon, doesn't factor in the Age Pension as a safety net, and ignores a client's actual asset allocation and sequencing risk.</p>
+            </div>
+          </div>
+          <div class="callout">
+            Coincidence worth flagging to a client: the 4% rule figure and the legislated minimum for a retirement phase account under 65 happen to both be 4%. They're not the same thing — one is a spending guideline, the other is a compliance floor — and the legislated minimum keeps climbing with age while the 4% rule doesn't adjust for age at all.
+          </div>
+        </div>
+
+        <div class="talk-track">
+          <div class="tt-label">How we say it to a client</div>
+          <p>"It's not just about turning a certain age — it's about age plus situation. Two clients the same age can have very different answers depending on whether they've actually retired, are still working, or are drawing down through a transition to retirement strategy. And once the money's accessible, how much you draw each year matters just as much as when you can start."</p>
+        </div>
+      </section>
+
+      <!-- ========== 06 RETIREMENT INCOME GUIDE ========== -->
+      <section class="panel" id="panel-retirement-guide">
+        <h1 class="page-title">06 — Retirement income guide</h1>
+        <div class="updated-badge">Source: ASFA Retirement Standard via Moneysmart.gov.au, March quarter 2026 — updated quarterly</div>
+        <p class="page-sub">What government-published figures say a single or a couple actually needs each year — and whether they own their home or rent. Good for grounding a "how much do I need?" conversation in something other than a guess.</p>
+
+        <div class="section-block">
+          <h2>Annual income needed, by household and housing</h2>
+          <p>The Association of Superannuation Funds of Australia (ASFA) publishes two lifestyle benchmarks — modest and comfortable — for singles and couples. Moneysmart.gov.au, the Australian Government's financial guidance service, republishes these figures each quarter.</p>
+          <table class="data-table">
+            <tr><th>Household</th><th>Modest — own home</th><th>Modest — renting</th><th>Comfortable — own home</th></tr>
+            <tr><td>Single</td><td>$36,434/yr ($701/wk)</td><td>$51,164/yr ($983/wk)</td><td>$55,923/yr ($1,075/wk)</td></tr>
+            <tr><td>Couple</td><td>$52,473/yr ($1,009/wk)</td><td>$69,002/yr ($1,327/wk)</td><td>$78,566/yr ($1,510/wk)</td></tr>
+          </table>
+          <p style="font-size:12.5px; color:var(--ink-500);">ASFA doesn't publish a "comfortable — renting" figure — its methodology only extends the renting scenario to the modest benchmark, on the basis that a comfortable lifestyle assumes outright home ownership. A client renting and wanting a comfortable lifestyle needs the comfortable figure plus their actual rent.</p>
+        </div>
+
+        <div class="section-block">
+          <h2>What "modest" and "comfortable" actually mean</h2>
+          <div class="card-row">
+            <div class="info-card">
+              <div class="ic-label">Modest</div>
+              <p>Covers the basics and is better than the Age Pension alone, but allows only occasional, low-cost leisure activities. Mostly funded by the Age Pension.</p>
+            </div>
+            <div class="info-card">
+              <div class="ic-label">Comfortable</div>
+              <p>A broader range of leisure and recreational activities, private health insurance, a reasonable car, good clothes, electronic equipment, and domestic and occasional overseas travel.</p>
+            </div>
+          </div>
+          <p style="font-size:12.5px; color:var(--ink-500);">Both benchmarks assume retirement at 67, reasonable health, and a life expectancy of around 85.</p>
+        </div>
+
+        <div class="section-block">
+          <h2>Super balance needed at retirement</h2>
+          <p>ASFA's estimate of the lump sum needed at 67 to fund each lifestyle, assuming the balance is drawn down over retirement and topped up with the Age Pension where eligible.</p>
+          <table class="data-table">
+            <tr><th>Lifestyle</th><th>Single</th><th>Couple</th></tr>
+            <tr><td>Modest</td><td>$110,000</td><td>$120,000</td></tr>
+            <tr><td>Comfortable</td><td>$630,000</td><td>$730,000</td></tr>
+          </table>
+        </div>
+
+        <div class="section-block">
+          <h2>The Age Pension, for comparison</h2>
+          <div class="card-row">
+            <div class="info-card">
+              <div class="ic-label">Single, full pension</div>
+              <p>$1,200.90 per fortnight — approximately $31,223 per year.</p>
+            </div>
+            <div class="info-card">
+              <div class="ic-label">Couple, full pension</div>
+              <p>$1,810.40 per fortnight combined ($905.20 each) — approximately $47,070 per year.</p>
+            </div>
+          </div>
+          <p style="font-size:12.5px; color:var(--ink-500);">Source: Services Australia / Department of Social Services, rates effective 20 March 2026 to 19 September 2026, indexed twice yearly in March and September. Subject to income and assets tests — a client's actual rate may be lower.</p>
+        </div>
+
+        <div class="talk-track">
+          <div class="tt-label">How we say it to a client</div>
+          <p>"The Age Pension alone gets a single person to roughly a modest lifestyle if they own their home outright. It doesn't get them to comfortable, and it doesn't stretch nearly as far if they're renting — that gap is exactly what a super strategy is there to close."</p>
+        </div>
+
+        <div class="compliance-flag">
+          These figures update quarterly (ASFA Retirement Standard) and twice yearly in March and September (Age Pension). Before quoting a figure to a client, confirm it against the live pages: <a href="https://moneysmart.gov.au/glossary/asfa-retirement-standard" style="color:var(--navy-800);">moneysmart.gov.au/glossary/asfa-retirement-standard</a> and <a href="https://www.servicesaustralia.gov.au/how-much-age-pension-you-can-get" style="color:var(--navy-800);">servicesaustralia.gov.au</a>. This tab is general information, not personal advice.
+        </div>
+      </section>
+
+      <!-- ========== 07 INSURANCE BASICS ========== -->
+      <section class="panel" id="panel-insurance-basics">
+        <h1 class="page-title">07 — Insurance basics</h1>
+        <p class="page-sub">The three covers that live inside most super funds, explained the way you'd explain them on a first call.</p>
+
+        <div class="section-block">
+          <h2>Life cover (death cover)</h2>
+          <p>Pays a lump sum to a client's beneficiaries, or their estate, if they die — and with most policies, if they're diagnosed with a terminal illness and given a limited life expectancy. It's designed to clear debt, replace lost income for dependants, and cover final expenses.</p>
+          <div class="talk-track">
+            <div class="tt-label">How we say it to a client</div>
+            <p>"Life cover isn't really for you — it's for the people who rely on your income. The question is always: if you weren't here, would they be okay?"</p>
+          </div>
+        </div>
+
+        <div class="section-block">
+          <h2>TPD cover (total and permanent disability)</h2>
+          <p>Pays a lump sum if a client becomes permanently unable to work due to illness or injury. Two common definitions insurers use:</p>
+          <div class="card-row">
+            <div class="info-card">
+              <div class="ic-label">Any occupation</div>
+              <p>Pays out if the client can't work in any job they're reasonably suited to by education, training or experience — a higher bar to meet. This is the definition generally available inside super.</p>
+            </div>
+            <div class="info-card">
+              <div class="ic-label">Own occupation</div>
+              <p>Pays out if the client can't work in their specific occupation, even if they could do other work — broader protection, particularly for specialised professions. Generally only available outside super — more in Tab 08.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-block">
+          <h2>Income protection (salary continuance)</h2>
+          <p>Pays a regular, ongoing income — rather than a lump sum — if a client can't work due to illness or injury, after a chosen waiting period and for a chosen benefit period. It's designed to replace part of a client's take-home pay while they recover, rather than pay out a one-off amount.</p>
+          <div class="card-row">
+            <div class="info-card">
+              <div class="ic-label">Waiting period</div>
+              <p>How long a client is off work before payments start — commonly a choice between shorter periods (faster payment, higher premium) and longer periods (cheaper premium, more savings needed to bridge the gap).</p>
+            </div>
+            <div class="info-card">
+              <div class="ic-label">Benefit period</div>
+              <p>How long payments continue once they start — commonly a fixed number of years or through to a set age. Longer benefit periods cost more but protect against a longer-term or permanent inability to work.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-block">
+          <h2>At a glance</h2>
+          <table class="data-table">
+            <tr><th>Cover</th><th>Pays</th><th>Triggered by</th></tr>
+            <tr><td>Life cover</td><td>Lump sum</td><td>Death, or diagnosis of terminal illness</td></tr>
+            <tr><td>TPD cover</td><td>Lump sum</td><td>Permanent inability to work due to illness or injury</td></tr>
+            <tr><td>Income protection</td><td>Regular ongoing payments</td><td>Temporary or long-term inability to work due to illness or injury</td></tr>
+          </table>
+        </div>
+      </section>
+
+      <!-- ========== 08 INSURANCE IN DEPTH ========== -->
+      <section class="panel" id="panel-insurance-depth">
+        <h1 class="page-title">08 — Insurance in depth</h1>
+        <p class="page-sub">Once a client understands what each cover does, these are the conversations that actually change the outcome: default vs tailored cover, whether it's held in or out of super, and the tax angle on income protection.</p>
+
+        <div class="section-block">
+          <h2>Default cover vs tailored cover</h2>
+          <p>Most super funds automatically provide a starting level of life and TPD cover — and sometimes income protection — when an account is opened, without underwriting. It's convenient, but it's built for an average member, not a specific one.</p>
+          <div class="card-row">
+            <div class="info-card">
+              <div class="ic-label">Default cover</div>
+              <p>Automatic, no underwriting to start, generally cheaper per dollar of cover. Sum insured is usually age-based and often reduces as the client gets older — regardless of whether their actual needs (debt, dependants, income) have gone up. Cover can lapse if an account becomes inactive for an extended period, unless the client opts to keep it.</p>
+            </div>
+            <div class="info-card">
+              <div class="ic-label">Tailored cover</div>
+              <p>Underwritten to the individual, sized to their actual debts, income and dependants rather than a standard scale. Can hold level cover instead of stepped/age-reducing cover, and isn't tied to a single default fund.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-block">
+          <h2>Cover that follows a client through career changes</h2>
+          <p>Default cover is attached to whichever super fund a client's employer happens to use. Change jobs, and it's easy for cover to be duplicated, lost, or left behind in an old account without the client realising. Tailored cover, held under the client's own name rather than an employer's default arrangement, moves with them regardless of who they work for.</p>
+          <div class="card-row">
+            <div class="info-card">
+              <div class="ic-label">Portability</div>
+              <p>Cover stays in force through job changes, career breaks, or moves into self-employment — no re-underwriting triggered just by changing employer.</p>
+            </div>
+            <div class="info-card">
+              <div class="ic-label">Guaranteed future insurability</div>
+              <p>Many tailored policies allow the client to increase cover at defined life events — new mortgage, new child, salary increase — without full medical underwriting each time.</p>
+            </div>
+          </div>
+          <div class="callout">
+            This is a common gap to check for: a client who's changed jobs two or three times may be paying for several small, stacked default policies across old super accounts, none of which is actually sized to their current situation.
+          </div>
+        </div>
+
+        <div class="section-block">
+          <h2>Insurance inside super vs outside super</h2>
+          <table class="data-table">
+            <tr><th></th><th>Inside super</th><th>Outside super</th></tr>
+            <tr><td>Who pays the premium</td><td>Paid from the super balance — doesn't touch take-home pay, but erodes retirement savings over time</td><td>Paid personally from after-tax income — reduces cash flow now, retirement balance untouched</td></tr>
+            <tr><td>Underwriting</td><td>Often limited or automatic for default cover</td><td>Individually underwritten — generally more thorough, can mean better terms for a healthy client</td></tr>
+            <tr><td>TPD definition available</td><td>Generally "any occupation" only — the sole purpose test restricts super funds from offering broader definitions</td><td>Both "any occupation" and "own occupation" available</td></tr>
+            <tr><td>Who receives the benefit</td><td>Paid to the super fund first, then released to the client or beneficiaries subject to super rules — can mean delays, and death benefits may be taxed depending on who receives them</td><td>Paid directly to the client or their nominated beneficiary — generally faster, more control over who receives it</td></tr>
+            <tr><td>Cost</td><td>Often cheaper due to group buying power within the fund</td><td>Often more expensive, reflecting individual underwriting and no group discount</td></tr>
+          </table>
+        </div>
+
+        <div class="section-block">
+          <h2>The tax angle: income protection outside super</h2>
+          <p>This is one of the more consistently overlooked planning points. Income protection premiums paid personally, outside super, are generally tax-deductible to the individual at their marginal tax rate — because the benefit itself, if a claim is made, is treated as assessable income. Held inside super, the client doesn't get that personal deduction; the fund itself may claim a deduction internally, but it doesn't flow through to the client's own tax return.</p>
+          <div class="callout strong">
+            In practice: a client paying income protection premiums outside super can often reduce the effective cost of that premium substantially through the tax deduction — while a client paying the same premium from inside super gets none of that personal benefit, even though the premium is quietly reducing their retirement balance.
+          </div>
+          <div class="talk-track">
+            <div class="tt-label">How we say it to a client</div>
+            <p>"Income protection is usually the one cover worth pulling out of super and holding personally — you get a tax deduction on the premium, and it stops quietly eating into your retirement balance every year."</p>
+          </div>
+        </div>
+
+        <div class="compliance-flag">
+          Tax treatment depends on each client's individual circumstances, and deductibility of income protection premiums is a tax position, not general product advice — confirm current ATO guidance and, where appropriate, involve the client's tax agent or accountant before this is discussed as a recommendation rather than general information.
+        </div>
+      </section>
+
+      <!-- ========== 09 TAX ON SUPER ========== -->
+      <section class="panel" id="panel-tax">
+        <h1 class="page-title">09 — Tax on super</h1>
+        <p class="page-sub">Super is taxed differently at three points: while money goes in and grows, once a client can start withdrawing from age 60, and once they're fully in retirement phase. This is the sequence to walk a client through.</p>
+
+        <div class="section-block">
+          <h2>1. While it's growing — the accumulation phase</h2>
+          <div class="card-row">
+            <div class="info-card">
+              <div class="ic-label">Contributions tax</div>
+              <p>Concessional contributions (employer SG, salary sacrifice, personal deductible) are taxed at 15% as they go into the fund. High-income earners pay an extra 15% under Division 293 on contributions above the relevant threshold. Non-concessional contributions have no tax on entry — they're already after-tax money.</p>
+            </div>
+            <div class="info-card">
+              <div class="ic-label">Earnings tax</div>
+              <p>Investment earnings inside the fund are taxed at up to 15% while in accumulation phase. Capital gains on assets held longer than 12 months get a one-third discount, bringing the effective rate down to around 10% on those gains.</p>
+            </div>
+          </div>
+          <p style="font-size:12.5px; color:var(--ink-500);">This 15%-ish tax environment is the core reason super is tax-effective compared to earning and investing the same money personally at a higher marginal rate — see Tab 02 for worked examples by income.</p>
+        </div>
+
+        <div class="section-block">
+          <h2>2. From age 60 — withdrawals begin</h2>
+          <p>Once a client turns 60 and meets a condition of release, withdrawals from a taxed super fund — whether a lump sum or an income stream — are completely tax-free. This applies whether they've fully retired, reached age 65, or are drawing a transition to retirement (TTR) income stream while still working.</p>
+          <div class="callout">
+            The nuance worth knowing: turning 60 makes payments to the member tax-free, but it doesn't automatically make the fund's investment earnings tax-free. A TTR pension for a client who hasn't met a full condition of release (e.g. still working, under 65) is still taxed on earnings up to 15% inside the fund, like accumulation phase — the tax-free earnings treatment is a separate step, covered below.
+          </div>
+        </div>
+
+        <div class="section-block">
+          <h2>3. Fully retired — the retirement phase</h2>
+          <p>Once a client meets a full condition of release — genuine retirement, or simply turning 65 — and moves their balance into an account-based retirement phase pension, investment earnings inside that pension become tax-free, up to the transfer balance cap. Combined with tax-free payments from age 60, this is the most tax-effective phase super offers.</p>
+          <div class="card-row">
+            <div class="info-card">
+              <div class="ic-label">Earnings inside the pension</div>
+              <p>0% tax on investment earnings within the retirement phase account, up to the transfer balance cap — $2.1 million from 2026–27. Any amount above the cap generally needs to stay in, or be moved back to, accumulation phase, where the usual up-to-15% earnings tax applies.</p>
+            </div>
+            <div class="info-card">
+              <div class="ic-label">Payments to the client</div>
+              <p>Pension payments and lump sum withdrawals remain tax-free from age 60, exactly as in stage 2 — retirement phase changes the tax on earnings inside the fund, not the tax on what the client receives.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-block">
+          <h2>The three phases, side by side</h2>
+          <table class="data-table">
+            <tr><th>Phase</th><th>Contributions tax</th><th>Earnings tax</th><th>Withdrawal tax</th></tr>
+            <tr><td>Accumulation (working, any age)</td><td>15% concessional (30% above Div 293 threshold) · 0% non-concessional</td><td>Up to 15%, ~10% effective on discounted capital gains</td><td>Tax-free from 60 if a condition of release is met; taxable component rules apply before 60</td></tr>
+            <tr><td>TTR pension (60+, still working)</td><td>Same as accumulation</td><td>Same as accumulation — not yet in retirement phase</td><td>Tax-free from 60</td></tr>
+            <tr><td>Retirement phase (fully retired or 65+)</td><td>N/A — no further contributions to this account</td><td>0%, up to the transfer balance cap</td><td>Tax-free from 60</td></tr>
+          </table>
+        </div>
+
+        <div class="talk-track">
+          <div class="tt-label">How we say it to a client</div>
+          <p>"Three things change over time, not just one: how your contributions are taxed, how the growth is taxed, and how withdrawals are taxed. By the time you're fully retired, two of those three drop to zero — that's the whole point of the structure."</p>
+        </div>
+
+        <div class="compliance-flag">
+          This is general tax information for taxed super funds and doesn't cover untaxed funds (common in some public sector schemes), which follow different rules. The Division 293 threshold and transfer balance cap are indexed and can change — confirm current figures against ato.gov.au. This is not personal tax advice; complex cases should involve the client's tax agent or accountant.
+        </div>
+      </section>
+
+      <!-- ========== 10 INSURANCE — JOB ROLES ========== -->
+      <section class="panel" id="panel-insurance-roles">
+        <h1 class="page-title">10 — Insurance: job roles</h1>
+        <p class="page-sub">Occupation is one of the biggest drivers of life, TPD and income protection pricing. Select a client's role to see the questions worth asking before referring to underwriting.</p>
+
+        <div class="lookup-box">
+          <label class="lookup-label" for="role-select">Client's occupation</label>
+          <select class="lookup-select" id="role-select" onchange="renderLookup('role')">
+            <option value="">Choose a role…</option>
+          </select>
+          <div class="lookup-result" id="role-result">
+            <p class="lookup-empty">Select a role above to see the questions to ask.</p>
+          </div>
+        </div>
+
+        <div class="compliance-flag">
+          These are starting questions to guide the conversation, not a substitute for the insurer's own personal statement or occupation guide. Actual occupation ratings, loadings and exclusions are set by each insurer and can vary between providers and products.
+        </div>
+      </section>
+
+      <!-- ========== 11 MEDICATION QUESTIONS ========== -->
+      <section class="panel" id="panel-medication-questions">
+        <h1 class="page-title">11 — Medication questions</h1>
+        <p class="page-sub">Select a common health condition to see the follow-up questions worth asking before referring to underwriting — how well controlled something is usually matters more than the diagnosis itself.</p>
+
+        <div class="lookup-box">
+          <label class="lookup-label" for="condition-select">Client's health condition</label>
+          <select class="lookup-select" id="condition-select" onchange="renderLookup('condition')">
+            <option value="">Choose a condition…</option>
+          </select>
+          <div class="lookup-result" id="condition-result">
+            <p class="lookup-empty">Select a condition above to see the questions to ask.</p>
+          </div>
+        </div>
+
+        <div class="compliance-flag">
+          These are starting questions to guide the conversation, not a medical or underwriting assessment. Actual underwriting decisions depend on the insurer's full personal statement, medical evidence, and current guidelines — this tab is here to help gather better information before that referral, not replace it.
+        </div>
+      </section>
+
+      <!-- ========== 12 COMPLEX CLIENTS ========== -->
+      <section class="panel" id="panel-complex-clients">
+        <h1 class="page-title">12 — Complex clients</h1>
+        <p class="page-sub">Everything else in this handbook assumes a straightforward client — one job, one fund, a clean path to retirement in Australia. Select a scenario below to see what's actually different when that's not the case.</p>
+
+        <div class="lookup-box">
+          <label class="lookup-label" for="complex-select">Client scenario</label>
+          <select class="lookup-select" id="complex-select" onchange="renderComplexClient()">
+            <option value="">Choose a scenario…</option>
+          </select>
+          <div class="lookup-result" id="complex-result">
+            <p class="lookup-empty">Select a scenario above to see what's different.</p>
+          </div>
+        </div>
+
+        <div class="compliance-flag">
+          These are starting briefings to flag what's different and who else may need to be involved — not a complete technical guide to any of these areas. Several of these scenarios (cross-border pensions, family law, bankruptcy, defined benefit funds) genuinely need a specialist alongside general advice.
+        </div>
+      </section>
+
+    </div>
+  </div>
+</div>
+
+<script>
+const crumbMap = {
+  home: "Home",
+  contents: "Contents",
+  basics: "Contents  ›  01 The basics",
+  contributions: "Contents  ›  02 Contributions",
+  onepercent: "Contents  ›  03 The value of 1%",
+  updates: "Contents  ›  04 Latest updates",
+  access: "Contents  ›  05 Accessing super",
+  "retirement-guide": "Contents  ›  06 Retirement income guide",
+  "insurance-basics": "Contents  ›  07 Insurance basics",
+  "insurance-depth": "Contents  ›  08 Insurance in depth",
+  tax: "Contents  ›  09 Tax on super",
+  "insurance-roles": "Contents  ›  10 Insurance — job roles",
+  "medication-questions": "Contents  ›  11 Medication questions",
+  "complex-clients": "Contents  ›  12 Complex clients"
+};
+
+function showTab(id){
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('panel-' + id).classList.add('active');
+  const btn = document.querySelector('.tab-btn[data-tab="' + id + '"]');
+  if(btn) btn.classList.add('active');
+  document.getElementById('crumb-text').textContent = crumbMap[id] || id;
+  document.querySelector('.page-inner').scrollIntoView({behavior:'instant', block:'start'});
+  window.scrollTo(0,0);
+  history.replaceState(null, '', '#' + id);
+}
+
+function fmt(n){
+  return '$' + Math.round(n).toLocaleString('en-AU');
+}
+
+function updateCalc(){
+  const balance = parseFloat(document.getElementById('calc-balance').value);
+  const years = parseFloat(document.getElementById('calc-years').value);
+  const rateA = parseFloat(document.getElementById('calc-ratea').value);
+  const rateB = parseFloat(document.getElementById('calc-rateb').value);
+
+  document.getElementById('calc-balance-val').textContent = fmt(balance);
+  document.getElementById('calc-years-val').textContent = years + ' years';
+  document.getElementById('calc-ratea-val').textContent = rateA.toFixed(1) + '%';
+  document.getElementById('calc-rateb-val').textContent = rateB.toFixed(1) + '%';
+
+  const resultA = balance * Math.pow(1 + rateA/100, years);
+  const resultB = balance * Math.pow(1 + rateB/100, years);
+
+  document.getElementById('result-a').textContent = fmt(resultA);
+  document.getElementById('result-b').textContent = fmt(resultB);
+  document.getElementById('result-diff').textContent = fmt(resultB - resultA);
+}
+
+const jobRoleData = {
+  plumber:{category:"Trades & construction", label:"Plumber", question:"What best describes their day-to-day duties?", options:["Mostly on the tools","Mostly office / supervising","Mixture of both","Works underground or in confined spaces"], extra:["Do they work at heights (roofs, scaffolding)?","Do they operate heavy machinery or power tools daily?","Are they self-employed or a business owner?"]},
+  electrician:{category:"Trades & construction", label:"Electrician", question:"What best describes their day-to-day duties?", options:["Mostly hands-on / on the tools","Mostly office / supervising / estimating","Mixture of both","Works on high-voltage or underground infrastructure"], extra:["Do they work at heights?","Do they work with live electrical systems?","Residential, commercial, or industrial settings?"]},
+  carpenter:{category:"Trades & construction", label:"Carpenter", question:"What best describes their day-to-day duties?", options:["On the tools full-time","Site supervision / leading hand","Mixture of both","Shop-based / joinery only"], extra:["Work at heights (roof framing, trusses)?","Use of power tools or machinery daily?"]},
+  builder:{category:"Trades & construction", label:"Builder / construction manager", question:"What best describes their day-to-day duties?", options:["On-site, hands-on","Site supervision only","Mixture of both","Office-based project management"], extra:["Do they manage subcontractors across multiple sites?","Any work at heights or excavation oversight?"]},
+  bricklayer:{category:"Trades & construction", label:"Bricklayer / stonemason", question:"What best describes their day-to-day duties?", options:["On the tools full-time","Supervising a crew","Mixture of both"], extra:["Manual lifting of heavy materials daily?","Work at heights on multi-storey builds?"]},
+  roofer:{category:"Trades & construction", label:"Roofer", question:"What best describes their day-to-day duties?", options:["On the roof full-time","Supervising / quoting","Mixture of both"], extra:["Working at heights above two storeys?","Steep or fragile roof types?"]},
+  painter:{category:"Trades & construction", label:"Painter / decorator", question:"What best describes their day-to-day duties?", options:["Hands-on painting","Supervising a crew","Mixture of both"], extra:["Work at heights (scaffolding, ladders)?","Exposure to solvents or chemical coatings?"]},
+  welder:{category:"Trades & construction", label:"Welder / metal fabricator", question:"What best describes their day-to-day duties?", options:["Workshop-based welding","Site-based / structural welding","Mixture of both","Supervisory / quality control only"], extra:["Any confined space welding?","Any underwater or underground welding?"]},
+  mechanic:{category:"Trades & construction", label:"Mechanic (automotive)", question:"What best describes their day-to-day duties?", options:["Workshop, hands-on","Service advisor / front of house","Mixture of both","Mobile mechanic, on the road"], extra:["Heavy vehicle or machinery servicing?","Use of hoists and heavy lifting equipment?"]},
+  miner_surface:{category:"Mining & resources", label:"Miner — surface", question:"What best describes their day-to-day duties?", options:["Surface operations, on the tools","Office / admin on-site","Mixture of both","FIFO (fly-in fly-out)"], extra:["Operating heavy earthmoving equipment?","Exposure to dust, noise, or extreme heat?"]},
+  miner_underground:{category:"Mining & resources", label:"Miner — underground", question:"What best describes their day-to-day duties?", options:["Underground, on the tools","Underground supervision","Surface support role","FIFO (fly-in fly-out)"], extra:["Depth and duration of underground shifts?","Any confined space or gas exposure risk?"]},
+  rig_worker:{category:"Mining & resources", label:"Oil & gas / rig worker", question:"What best describes their day-to-day duties?", options:["Offshore rig, hands-on","Onshore facility","Office / logistics support","FIFO (fly-in fly-out)"], extra:["Offshore or remote location?","Helicopter transfers as part of the role?"]},
+  truck_driver:{category:"Transport & logistics", label:"Truck driver", question:"What best describes their day-to-day duties?", options:["Local / metro deliveries","Long-haul / interstate","Mixture of both","Office-based logistics / dispatch"], extra:["Hours behind the wheel per week?","Manual loading or unloading involved?"]},
+  delivery_driver:{category:"Transport & logistics", label:"Delivery / courier driver", question:"What best describes their day-to-day duties?", options:["On the road, driving","Office / dispatch","Mixture of both","Rideshare or food delivery, own vehicle"], extra:["Motorbike or bicycle-based delivery?","Peak hour or night shift work?"]},
+  forklift_operator:{category:"Transport & logistics", label:"Forklift / warehouse operator", question:"What best describes their day-to-day duties?", options:["Forklift operation, on the floor","Warehouse supervision / admin","Mixture of both"], extra:["Working at height (order picker, mezzanine)?","Cold storage or hazardous goods handling?"]},
+  pilot:{category:"Transport & logistics", label:"Pilot", question:"What best describes their flying role?", options:["Commercial passenger flights","Charter / agricultural flying","Flight instructor","Desk-based / management role"], extra:["Type of aircraft flown?","Any aerobatic, agricultural, or mustering flying?"]},
+  police:{category:"Emergency & protective services", label:"Police officer", question:"What best describes their day-to-day duties?", options:["Frontline / operational","Desk / administrative","Mixture of both","Specialist tactical unit"], extra:["Regular exposure to high-risk incidents?","Shift work or night shifts involved?"]},
+  firefighter:{category:"Emergency & protective services", label:"Firefighter", question:"What best describes their day-to-day duties?", options:["Frontline / operational","Administrative / training role","Mixture of both"], extra:["Structural, bushfire, or both?","Shift pattern — e.g. 24-hour shifts?"]},
+  paramedic:{category:"Emergency & protective services", label:"Paramedic / ambulance officer", question:"What best describes their day-to-day duties?", options:["Frontline / on-road","Control room / dispatch","Mixture of both"], extra:["Manual patient handling and lifting?","Regular exposure to trauma or hazardous scenes?"]},
+  defence:{category:"Emergency & protective services", label:"Defence force member", question:"What best describes their role?", options:["Combat / operational role","Technical / trade role","Administrative / desk role","Mixture of both"], extra:["Deployed overseas or to hazardous postings?","Specialist role — e.g. diver, aircrew?"]},
+  security_guard:{category:"Emergency & protective services", label:"Security guard", question:"What best describes their day-to-day duties?", options:["Static / site-based","Mobile patrol","Crowd control / events","Office / control room monitoring"], extra:["Regular night shift work?","Any history of physical confrontation risk in the role?"]},
+  nurse:{category:"Healthcare", label:"Registered nurse", question:"What best describes their day-to-day duties?", options:["Hospital / ward-based, hands-on","Community / home visiting","Management / administration","Mixture of both"], extra:["Manual patient handling daily?","Exposure to infectious disease or needle-stick risk?"]},
+  doctor:{category:"Healthcare", label:"Doctor / GP", question:"What best describes their day-to-day duties?", options:["Clinical, patient-facing","Surgical / procedural specialty","Research / administrative","Mixture of both"], extra:["Any surgical or emergency department work?","On-call or after-hours roster?"]},
+  dentist:{category:"Healthcare", label:"Dentist", question:"What best describes their day-to-day duties?", options:["Clinical, hands-on","Practice management / admin","Mixture of both"], extra:["Repetitive fine motor movements relevant to TPD assessment?"]},
+  allied_health:{category:"Healthcare", label:"Allied health (physio, OT, etc.)", question:"What best describes their day-to-day duties?", options:["Hands-on, patient-facing","Administrative / management","Mixture of both"], extra:["Manual therapy involving lifting or repositioning patients?"]},
+  office_admin:{category:"Office & professional", label:"Office / administrative worker", question:"What best describes their day-to-day duties?", options:["Desk-based, full-time","Mixture with some site visits","Client-facing / front of house"], extra:["Any travel required as part of the role?"]},
+  accountant:{category:"Office & professional", label:"Accountant / finance professional", question:"What best describes their day-to-day duties?", options:["Desk-based","Client-facing / travel involved","Mixture of both"], extra:["Business owner, or salaried employee?"]},
+  lawyer:{category:"Office & professional", label:"Lawyer", question:"What best describes their day-to-day duties?", options:["Desk-based / office","Court-based / litigation","Mixture of both"], extra:[]},
+  it_professional:{category:"Office & professional", label:"IT / software professional", question:"What best describes their day-to-day duties?", options:["Desk-based, in-office","Remote / work from home","Field / on-site technical work"], extra:["Any data centre or site-based hardware work?"]},
+  teacher:{category:"Office & professional", label:"Teacher", question:"What best describes their day-to-day duties?", options:["Classroom-based","Administrative / leadership","Mixture of both","Outdoor education / sports coaching"], extra:["Any physical education or excursion supervision duties?"]},
+  real_estate_agent:{category:"Office & professional", label:"Real estate agent", question:"What best describes their day-to-day duties?", options:["Sales, mostly on the road","Property management, office-based","Mixture of both"], extra:[]},
+  farmer:{category:"Agriculture, hospitality & other", label:"Farmer / farm worker", question:"What best describes their day-to-day duties?", options:["Hands-on, on the farm","Farm management / office","Mixture of both"], extra:["Operation of heavy farm machinery?","Livestock handling involved?"]},
+  chef:{category:"Agriculture, hospitality & other", label:"Chef / cook", question:"What best describes their day-to-day duties?", options:["Kitchen, hands-on","Head chef / kitchen management","Mixture of both"], extra:["Long standing shifts with heat exposure?"]},
+  hospitality_worker:{category:"Agriculture, hospitality & other", label:"Hospitality worker (waiter, bartender)", question:"What best describes their day-to-day duties?", options:["Front of house, on your feet","Management / office","Mixture of both"], extra:[]},
+  retail_worker:{category:"Agriculture, hospitality & other", label:"Retail worker", question:"What best describes their day-to-day duties?", options:["On the floor, customer-facing","Store management / office","Mixture of both"], extra:["Any manual stock handling or heavy lifting?"]},
+  cleaner:{category:"Agriculture, hospitality & other", label:"Cleaner", question:"What best describes their work setting?", options:["Commercial / office cleaning","Industrial / hazardous site cleaning","Domestic cleaning"], extra:["Any exposure to chemicals or hazardous waste?"]},
+  hairdresser:{category:"Agriculture, hospitality & other", label:"Hairdresser / beautician", question:"What best describes their day-to-day duties?", options:["Hands-on, on your feet full-time","Salon management / office"], extra:["Repetitive strain exposure from standing or hand use?"]},
+  fisherman:{category:"Agriculture, hospitality & other", label:"Fisherman / maritime worker", question:"What best describes their day-to-day duties?", options:["Commercial fishing, on the water","Office / dockside role","Mixture of both"], extra:["Offshore or coastal operations?","Any diving involved?"]}
+};
+
+const conditionData = {
+  type2_diabetes:{category:"Metabolic & cardiovascular", label:"Type 2 diabetes", question:"How well controlled is it currently?", options:["Well managed, stable","Managed but recently changed treatment","Not well controlled","Newly diagnosed / still being investigated"], extra:["Is there a daily medication — tablets, insulin, or both?","What was the most recent HbA1c result, if known?","Any complications — eyes, kidneys, nerves, heart?","When was it first diagnosed?"]},
+  type1_diabetes:{category:"Metabolic & cardiovascular", label:"Type 1 diabetes", question:"How well controlled is it currently?", options:["Well managed, stable","Managed but recently changed treatment","Not well controlled","Newly diagnosed / still being investigated"], extra:["Daily insulin — injections or pump?","Any history of hypoglycaemic episodes requiring assistance?","Any complications — eyes, kidneys, nerves, heart?"]},
+  hypertension:{category:"Metabolic & cardiovascular", label:"Hypertension (high blood pressure)", question:"How well controlled is it currently?", options:["Well managed, stable","Managed but recently changed treatment","Not well controlled","Newly diagnosed / still being investigated"], extra:["Daily medication to manage it?","Most recent blood pressure reading, if known?","Any related heart or kidney investigations?"]},
+  high_cholesterol:{category:"Metabolic & cardiovascular", label:"High cholesterol", question:"How well controlled is it currently?", options:["Well managed, stable","Managed but recently changed treatment","Not well controlled","Newly diagnosed / still being investigated"], extra:["Daily statin or other medication?","Any related heart investigations, or family history of heart disease?"]},
+  heart_disease:{category:"Metabolic & cardiovascular", label:"Heart disease / coronary artery disease", question:"How well controlled is it currently?", options:["Well managed, stable","Managed but recently changed treatment","Not well controlled","Newly diagnosed / still being investigated"], extra:["Any stents, bypass surgery, or heart attack history?","Daily medication?","Under a cardiologist's ongoing care?"]},
+  atrial_fibrillation:{category:"Metabolic & cardiovascular", label:"Atrial fibrillation", question:"How well controlled is it currently?", options:["Well managed, stable","Managed but recently changed treatment","Not well controlled","Newly diagnosed / still being investigated"], extra:["Daily medication, including any blood thinners?","Any procedures — ablation, cardioversion?"]},
+  stroke:{category:"Metabolic & cardiovascular", label:"Stroke / TIA history", question:"How is recovery / risk management going?", options:["Fully recovered, risk factors managed","Some lasting effects, stable","Ongoing rehabilitation","Recent event, still being assessed"], extra:["Any lasting effects — mobility, speech, cognition?","Daily medication to manage risk factors?","How long ago did it occur?"]},
+  asthma:{category:"Respiratory", label:"Asthma", question:"How well controlled is it currently?", options:["Well managed, stable","Managed but recently changed treatment","Not well controlled","Newly diagnosed / still being investigated"], extra:["Reliever inhaler only, or a daily preventer as well?","Any hospital admissions or ICU stays for asthma?","Any time off work or study due to asthma in the last 12 months?"]},
+  sleep_apnea:{category:"Respiratory", label:"Sleep apnea", question:"How well controlled is it currently?", options:["Well managed, stable","Managed but recently changed treatment","Not well controlled","Newly diagnosed / still being investigated"], extra:["Using a CPAP machine nightly?","Any recent sleep study results?","Any daytime fatigue affecting work?"]},
+  back_spinal:{category:"Musculoskeletal", label:"Back / spinal issues", question:"How well controlled is it currently?", options:["Well managed, stable","Managed but recently changed treatment","Not well controlled","Newly diagnosed / still being investigated"], extra:["Ongoing pain, or fully resolved?","Any surgery, and how long ago?","Any time off work or restricted duties?"]},
+  osteoarthritis:{category:"Musculoskeletal", label:"Osteoarthritis", question:"How well controlled is it currently?", options:["Well managed, stable","Managed but recently changed treatment","Not well controlled","Newly diagnosed / still being investigated"], extra:["Which joints are affected?","Daily pain medication?","Any surgery planned or completed — e.g. joint replacement?"]},
+  rheumatoid_arthritis:{category:"Musculoskeletal", label:"Rheumatoid arthritis", question:"How well controlled is it currently?", options:["Well managed, stable","Managed but recently changed treatment","Not well controlled","Newly diagnosed / still being investigated"], extra:["Under specialist (rheumatologist) care?","Daily medication, including any immunosuppressants?","Any flare-ups affecting work in the last 12 months?"]},
+  fibromyalgia:{category:"Musculoskeletal", label:"Chronic fatigue / fibromyalgia", question:"How well controlled is it currently?", options:["Well managed, stable","Managed but recently changed treatment","Not well controlled","Newly diagnosed / still being investigated"], extra:["Impact on current work capacity?","Any specialist under ongoing care?"]},
+  anxiety:{category:"Mental health", label:"Anxiety", question:"How well controlled is it currently?", options:["Well managed, stable","Managed but recently changed treatment","Not well controlled","Newly diagnosed / still being investigated"], extra:["Currently on medication, seeing a psychologist, or both?","Any time off work in the last two years?","Any hospital admissions?"]},
+  depression:{category:"Mental health", label:"Depression", question:"How well controlled is it currently?", options:["Well managed, stable","Managed but recently changed treatment","Not well controlled","Newly diagnosed / still being investigated"], extra:["Currently on medication, in therapy, or both?","Any time off work in the last two years?","Any history of hospital admission?"]},
+  bipolar:{category:"Mental health", label:"Bipolar disorder", question:"How well controlled is it currently?", options:["Well managed, stable","Managed but recently changed treatment","Not well controlled","Newly diagnosed / still being investigated"], extra:["Currently stable on medication?","Any hospital admissions?","Under ongoing psychiatric care?"]},
+  adhd:{category:"Mental health", label:"ADHD", question:"How well controlled is it currently?", options:["Well managed, stable","Managed but recently changed treatment","Not well controlled","Newly diagnosed / still being investigated"], extra:["Daily medication?","Diagnosed in childhood or as an adult?","Any impact on work history?"]},
+  eating_disorder:{category:"Mental health", label:"Eating disorder history", question:"Current status?", options:["Fully resolved, long-term","In recovery, ongoing support","Not well controlled","Recent diagnosis, still being assessed"], extra:["How long since symptoms resolved, if past?","Any hospital admissions?","Ongoing psychological support?"]},
+  substance_use:{category:"Mental health", label:"Substance use history", question:"Current status?", options:["Past use, long-term abstinence","In recovery, ongoing support","Current use, being managed","Recent — still being assessed"], extra:["How long since last use?","Any treatment program completed?","Any related health complications?"]},
+  thyroid:{category:"Endocrine & autoimmune", label:"Thyroid condition (over/underactive)", question:"How well controlled is it currently?", options:["Well managed, stable","Managed but recently changed treatment","Not well controlled","Newly diagnosed / still being investigated"], extra:["Daily medication?","Most recent thyroid function test results, if known?"]},
+  crohns_uc:{category:"Endocrine & autoimmune", label:"Crohn's disease / ulcerative colitis (IBD)", question:"How well controlled is it currently?", options:["Well managed, stable","Managed but recently changed treatment","Not well controlled","Newly diagnosed / still being investigated"], extra:["Currently in remission, or an active flare?","Daily medication, including any biologics?","Any surgery history?"]},
+  coeliac:{category:"Endocrine & autoimmune", label:"Coeliac disease", question:"How well controlled is it currently?", options:["Well managed, stable","Managed but recently changed treatment","Not well controlled","Newly diagnosed / still being investigated"], extra:["Managed with diet alone?","Any complications from late diagnosis?"]},
+  multiple_sclerosis:{category:"Endocrine & autoimmune", label:"Multiple sclerosis", question:"How well controlled is it currently?", options:["Well managed, stable","Managed but recently changed treatment","Not well controlled","Newly diagnosed / still being investigated"], extra:["Type — relapsing-remitting, or progressive?","Any recent relapses?","Current treatment plan?"]},
+  skin_cancer:{category:"Cancer & oncology", label:"Skin cancer / melanoma history", question:"Current status?", options:["Fully treated, ongoing monitoring","Recently treated","In active treatment","Newly diagnosed / still being investigated"], extra:["What type — melanoma, or basal / squamous cell?","When diagnosed, and how was it treated?","Any ongoing specialist monitoring?"]},
+  other_cancer:{category:"Cancer & oncology", label:"Other cancer history", question:"Current status?", options:["In remission, long-term","In remission, recent","In active treatment","Newly diagnosed / still being investigated"], extra:["Type and stage at diagnosis?","Treatment completed, or ongoing?","How long since remission or all-clear, if applicable?"]},
+  cancer_remission:{category:"Cancer & oncology", label:"Cancer in remission", question:"How long in remission?", options:["Over 5 years","2–5 years","Under 2 years","Recently confirmed"], extra:["Any ongoing surveillance or scans?","Type of cancer and original treatment?"]},
+  epilepsy:{category:"Neurological", label:"Epilepsy", question:"How well controlled is it currently?", options:["Well managed, stable","Managed but recently changed treatment","Not well controlled","Newly diagnosed / still being investigated"], extra:["How long since the most recent seizure?","Daily medication?","Any driving restrictions currently in place?"]},
+  migraine:{category:"Neurological", label:"Migraine", question:"How well controlled is it currently?", options:["Well managed, stable","Managed but recently changed treatment","Not well controlled","Newly diagnosed / still being investigated"], extra:["Frequency — how many per month?","Any preventive daily medication?","Any time off work due to migraines?"]},
+  chronic_kidney_disease:{category:"Other conditions", label:"Chronic kidney disease", question:"How well controlled is it currently?", options:["Well managed, stable","Managed but recently changed treatment","Not well controlled","Newly diagnosed / still being investigated"], extra:["What stage, if known?","Under a nephrologist's care?","Any dialysis involved?"]},
+  pregnancy:{category:"Other conditions", label:"Pregnancy", question:"Which stage?", options:["First trimester","Second trimester","Third trimester","Recent birth / postpartum"], extra:["Any complications with this or previous pregnancies?"]},
+  endometriosis:{category:"Other conditions", label:"Endometriosis", question:"How well controlled is it currently?", options:["Well managed, stable","Managed but recently changed treatment","Not well controlled","Newly diagnosed / still being investigated"], extra:["Any surgery history — e.g. laparoscopy?","Daily medication for symptom management?","Any impact on work attendance?"]},
+  hearing_loss:{category:"Other conditions", label:"Hearing loss", question:"Current status?", options:["Stable, long-term","Recently diagnosed","Progressive / worsening"], extra:["Any hearing aids or implants?","Occupational or non-occupational cause?"]},
+  vision_impairment:{category:"Other conditions", label:"Vision impairment", question:"Current status?", options:["Corrected with glasses / lenses","Stable, long-term condition","Progressive / worsening"], extra:["Any progressive eye condition — e.g. glaucoma?"]},
+  severe_allergies:{category:"Other conditions", label:"Severe allergies / anaphylaxis", question:"Current status?", options:["Well managed, avoidance strategy in place","Recent reaction","Multiple past reactions"], extra:["Carries an EpiPen?","Any hospital admissions for anaphylaxis?"]}
+};
+
+function populateLookupSelect(selectId, data){
+  const select = document.getElementById(selectId);
+  const categories = {};
+  Object.keys(data).forEach(key => {
+    const cat = data[key].category;
+    if(!categories[cat]) categories[cat] = [];
+    categories[cat].push(key);
+  });
+  Object.keys(categories).forEach(cat => {
+    const group = document.createElement('optgroup');
+    group.label = cat;
+    categories[cat].forEach(key => {
+      const opt = document.createElement('option');
+      opt.value = key;
+      opt.textContent = data[key].label;
+      group.appendChild(opt);
+    });
+    select.appendChild(group);
+  });
+}
+
+function renderLookup(type){
+  const data = type === 'role' ? jobRoleData : conditionData;
+  const selectId = type === 'role' ? 'role-select' : 'condition-select';
+  const resultId = type === 'role' ? 'role-result' : 'condition-result';
+  const key = document.getElementById(selectId).value;
+  const container = document.getElementById(resultId);
+  if(!key){
+    container.innerHTML = '<p class="lookup-empty">Select ' + (type === 'role' ? 'a role' : 'a condition') + ' above to see the questions to ask.</p>';
+    return;
+  }
+  const item = data[key];
+  let html = '<div class="lookup-primary"><div class="lp-q">Ask: ' + item.question + '</div>';
+  html += '<select class="lookup-select"><option>Choose an answer…</option>';
+  item.options.forEach(o => { html += '<option>' + o + '</option>'; });
+  html += '</select></div>';
+  if(item.extra && item.extra.length){
+    html += '<div class="lookup-extra"><div class="le-title">Also worth asking</div><ul>';
+    item.extra.forEach(q => { html += '<li>' + q + '</li>'; });
+    html += '</ul></div>';
+  }
+  container.innerHTML = html;
+}
+
+populateLookupSelect('role-select', jobRoleData);
+populateLookupSelect('condition-select', conditionData);
+
+let accessChoice = {status:null, age:null};
+
+const accessMatrix = {
+  under55:{
+    working:{headline:"No standard access yet", detail:"Preservation age is 60, and it hasn't been reached. Super stays preserved regardless of work status.", note:"Special conditions can still apply: terminal illness, permanent incapacity, severe financial hardship, compassionate grounds, or the First Home Super Saver scheme for eligible voluntary contributions."},
+    retired:{headline:"No standard access yet", detail:"Preservation age is 60, and it hasn't been reached. Being retired doesn't unlock access on its own before preservation age.", note:"Special conditions can still apply: terminal illness, permanent incapacity, severe financial hardship, compassionate grounds, or the First Home Super Saver scheme for eligible voluntary contributions."}
+  },
+  "55to59":{
+    working:{headline:"No standard access yet", detail:"Preservation age is 60, and it hasn't been reached. Still working or not doesn't change that.", note:"Special conditions can still apply: terminal illness, permanent incapacity, severe financial hardship, compassionate grounds, or the First Home Super Saver scheme."},
+    retired:{headline:"No standard access yet", detail:"Preservation age is 60, and it hasn't been reached. Being retired doesn't bring access forward.", note:"Special conditions can still apply: terminal illness, permanent incapacity, severe financial hardship, compassionate grounds, or the First Home Super Saver scheme."}
+  },
+  "60to64":{
+    working:{headline:"Limited access — transition to retirement", detail:"Preservation age (60) is met, but while still working, access is via a transition to retirement (TTR) income stream: minimum 4% of the balance per year, maximum 10% — no lump sums until a full condition of release is met.", note:"If they've genuinely retired from an employment arrangement after turning 60, that portion of their super may become fully accessible — worth checking their exact circumstances."},
+    retired:{headline:"Full access", detail:"Preservation age (60) is met and they've retired — this satisfies a full condition of release. Their super becomes fully accessible: minimum 4% of the balance per year if taken as an income stream, no maximum.", note:null}
+  },
+  "65plus":{
+    working:{headline:"Full access", detail:"Turning 65 is its own condition of release, regardless of employment status. Full access applies whether they're still working, semi-retired, or fully retired — no maximum, minimum 5% (65–74) rising with age if taken as an income stream.", note:null},
+    retired:{headline:"Full access", detail:"Preservation age and age 65 are both behind them — full access applies: no maximum, minimum 5% (65–74) rising with age if taken as an income stream.", note:null}
+  }
+};
+
+function setAccessChoice(group, value){
+  accessChoice[group] = value;
+  document.querySelectorAll('.access-choice[data-group="' + group + '"]').forEach(b => b.classList.remove('active'));
+  document.querySelector('.access-choice[data-group="' + group + '"][data-value="' + value + '"]').classList.add('active');
+  renderAccessResult();
+}
+
+function renderAccessResult(){
+  const container = document.getElementById('access-result');
+  const status = accessChoice.status, age = accessChoice.age;
+  if(!status || !age){
+    container.innerHTML = '<p class="lookup-empty">Select a status and an age above to see what access applies.</p>';
+    return;
+  }
+  const result = accessMatrix[age][status];
+  let html = '<div class="lookup-primary"><div class="lp-q">' + result.headline + '</div><p style="font-size:13.5px; color:var(--navy-800); margin:0; line-height:1.6;">' + result.detail + '</p></div>';
+  if(result.note){
+    html += '<div class="lookup-extra"><div class="le-title">Worth noting</div><ul><li>' + result.note + '</li></ul></div>';
+  }
+  container.innerHTML = html;
+}
+
+const complexClientData = {
+  nz_saver:{category:"Cross-border", label:"NZ saver (KiwiSaver / trans-Tasman)", whatsDifferent:"Australia and New Zealand have a trans-Tasman retirement savings portability scheme, letting KiwiSaver balances transfer into an Australian super fund (and vice versa). Transferred KiwiSaver amounts keep certain New Zealand rules attached even once in Australia.", watchFor:["Transferred KiwiSaver money generally can't be accessed under the Australian first home buyer scheme unless specific KiwiSaver first-home rules are met","A KiwiSaver transfer generally can't be split with a spouse under Australian family law the way ordinary super can","Not all Australian super funds accept KiwiSaver transfers — check the receiving fund allows it before starting anything"], involve:"Confirm the receiving fund's trans-Tasman transfer policy before starting anything — not all funds accept these transfers."},
+  uk_pension:{category:"Cross-border", label:"UK pension", whatsDifferent:"Direct transfers from UK pensions into Australian super are generally not possible — no Australian super fund currently holds QROPS (Qualifying Recognised Overseas Pension Scheme) status, so a UK pension usually stays in the UK and is drawn from there rather than transferred here.", watchFor:["UK pension income received while living in Australia is generally assessable income here, and may also have UK tax implications — this typically needs specialist cross-border tax advice","UK State Pension and private/workplace UK pensions are treated differently — confirm which type the client has","QROPS status can change — always confirm the current position before assuming a transfer isn't possible"], involve:"This one usually needs a specialist in UK/Australian cross-border pension advice — not a standard super conversation."},
+  expat_nonresident:{category:"Cross-border", label:"Non-resident / expat client", whatsDifferent:"A client who's moved overseas, or is no longer an Australian tax resident, faces different rules around contributions, access, and how their super is taxed.", watchFor:["Non-residents can generally still hold Australian super, but eligibility to contribute may be affected depending on residency and visa status","A departing Australia superannuation payment (DASP) may apply for eligible temporary residents who've left permanently, taxed at different rates to a normal withdrawal","Confirm current tax residency status carefully — it affects far more than just super"], involve:"Cross-border tax residency questions usually need the client's accountant involved alongside advice."},
+  existing_ttr:{category:"Already in a strategy", label:"Already on a TTR pension", whatsDifferent:"A client already drawing a transition to retirement income stream has an existing 4%–10% drawdown arrangement in place. The job here is reviewing whether it's still the right structure, not setting one up from scratch.", watchFor:["Check whether they've since met a full condition of release (retired, or turned 65) — if so, the TTR should have converted to a retirement phase pension with no maximum, and it's worth confirming this actually happened","Review whether the salary sacrifice plus TTR combination is still tax-effective given their current income","Confirm the current drawdown sits between the minimum and maximum for their age and account type — see Tab 05"], involve:null},
+  workers_comp:{category:"Already in a strategy", label:"Client on workers compensation", whatsDifferent:"Workers compensation payments can interact with, and potentially reduce, income protection benefits and TPD claims — most income protection policies won't pay in full on top of workers compensation for the same period.", watchFor:["Check the exact offset clause in the income protection policy — some reduce dollar-for-dollar, others use a different formula","Confirm whether super contributions are still being made while on workers compensation — this can lapse depending on the employer arrangement","If a TPD claim is being considered, workers compensation payments or any lump sum settlement may affect eligibility or the amount payable"], involve:"Loop in the insurer directly for the exact offset calculation before setting client expectations."},
+  smsf_member:{category:"Fund structure", label:"Self-managed super fund (SMSF) member", whatsDifferent:"An SMSF member is also a trustee, with direct legal responsibility for compliance, investment decisions and administration — the usual assumptions about a default or retail fund handling things in the background don't apply.", watchFor:["Confirm the SMSF's trust deed actually allows the strategy being discussed — e.g. TTR pensions, some contribution types","Pension minimums and maximums are the trustee's own responsibility to calculate and pay correctly by 30 June each year","Insurance inside an SMSF must be actively arranged — there's no automatic default cover"], involve:"SMSF administration and compliance should sit with the client's SMSF accountant/administrator, alongside advice."},
+  defined_benefit:{category:"Fund structure", label:"Defined benefit fund member", whatsDifferent:"Defined benefit funds pay based on a formula — salary and years of service — not an accumulated balance. The balance-based logic used throughout the rest of this handbook doesn't directly apply, and many are untaxed funds with different tax rules.", watchFor:["Untaxed defined benefit funds don't follow the standard 15% contributions tax or the tax-free-from-60 rule covered in Tab 09 — confirm the fund's specific tax treatment","The defined benefit income cap ($131,250 for 2026–27) can affect how much of a pension gets concessional tax treatment above that level","Contribution caps can work differently for defined benefit accruals — check with the fund directly"], involve:"Defined benefit funds are specialised — confirm details directly with the fund, since generic rules often don't apply."},
+  multiple_accounts:{category:"Fund structure", label:"Multiple super accounts", whatsDifferent:"A client with several super accounts is likely paying multiple sets of fees and, potentially, multiple insurance premiums — but consolidating isn't automatically the right call.", watchFor:["Check what insurance cover exists on each account before closing any of them — cover can be lost permanently and may not be replaceable on the same terms","Confirm there's no exit cost from moving investments, particularly out of an SMSF or a fund holding illiquid assets","Use ATO online services via myGov to identify all accounts, including any lost or unclaimed super"], involve:null},
+  family_law_split:{category:"Life events", label:"Divorce / relationship separation", whatsDifferent:"Super can be split between separating partners under family law, similar to other property — it doesn't happen automatically and generally needs a formal agreement or court order.", watchFor:["A KiwiSaver transfer balance generally can't be split this way — see the NZ saver scenario above","Splitting can be structured as a payment split or a percentage allocation of the benefit — confirm which approach the agreement specifies","The receiving partner's split amount usually retains its preserved status and original tax components"], involve:"Family law super splitting needs a family lawyer to draft the agreement or order — advice here is complementary, not a substitute."},
+  estate_death_benefit:{category:"Life events", label:"Death benefit / estate planning", whatsDifferent:"Super isn't automatically covered by a client's will — it's paid according to a binding (or non-binding) death benefit nomination, or at trustee discretion if there isn't one.", watchFor:["Check whether a binding nomination exists and when it expires — most lapse after three years unless it's a non-lapsing type the fund offers","Confirm the nominated person is actually an eligible dependant under super law — not everyone a client wants to nominate qualifies","Tax on a death benefit depends heavily on who receives it — a dependant for tax purposes generally receives it tax-free, a non-dependant may not"], involve:null},
+  bankruptcy:{category:"Life events", label:"Client facing bankruptcy", whatsDifferent:"Super is generally protected from creditors in bankruptcy, which makes it different from most other assets — but that protection has real limits.", watchFor:["Contributions made specifically to defeat creditors can be clawed back by a bankruptcy trustee — timing and intent both matter","Once benefits are withdrawn from super, that protection disappears — cash sitting in a bank account isn't protected the same way","This is a specialist area — general reassurance that 'super is protected' isn't enough without checking the specific circumstances"], involve:"Recommend the client speaks with a lawyer or registered bankruptcy trustee before making any super-related decisions."},
+  business_owner:{category:"Contributions & business", label:"Small business owner / self-employed", whatsDifferent:"A business owner doesn't have an employer making Super Guarantee contributions on their behalf — building super is entirely down to their own personal contributions, and there are business-specific concessions worth checking.", watchFor:["Personal deductible contributions count toward the concessional cap just like salary sacrifice — timing around business income matters","Small business CGT concessions can allow eligible business sale proceeds to be contributed to super outside the normal caps, subject to a lifetime limit — this needs specialist advice","Cash flow discipline matters more here — without payroll-driven contributions, it's easy for a business owner's own super to fall behind"], involve:null},
+  downsizer:{category:"Contributions & business", label:"Downsizer contribution", whatsDifferent:"Clients aged 55 and over selling a home they've owned for at least 10 years may be able to contribute up to $300,000 each ($600,000 per couple) from the sale proceeds into super, outside the normal contribution caps.", watchFor:["The home must have been owned for at least 10 years, and the contribution generally needs to be made within 90 days of settlement","There's no work test and no upper age limit — this is one of the few contribution types available to older clients regardless of work status","It still counts toward the client's transfer balance cap and total super balance, which can affect other caps and Age Pension assessment"], involve:null},
+  excess_contributions:{category:"Contributions & business", label:"Excess contributions", whatsDifferent:"A client who's gone over their concessional or non-concessional cap faces automatic ATO consequences, not a discretionary choice — this needs to be handled promptly once identified.", watchFor:["Excess concessional contributions are included in assessable income and taxed at the client's marginal rate, less a 15% offset for tax already paid in the fund","Excess non-concessional contributions can be withdrawn along with associated earnings to avoid a higher penalty tax, but there's a specific ATO process and timeframe for this","The ATO issues a determination automatically — it's not something that can be quietly ignored or self-corrected outside that formal process"], involve:"Time-sensitive — refer to a registered tax agent as soon as excess contributions are identified."}
+};
+
+function renderComplexClient(){
+  const key = document.getElementById('complex-select').value;
+  const container = document.getElementById('complex-result');
+  if(!key){
+    container.innerHTML = '<p class="lookup-empty">Select a scenario above to see what\'s different.</p>';
+    return;
+  }
+  const item = complexClientData[key];
+  let html = '<div class="lookup-primary"><div class="lp-q">What\'s different</div><p style="font-size:13.5px; color:var(--navy-800); margin:0; line-height:1.6;">' + item.whatsDifferent + '</p></div>';
+  html += '<div class="lookup-extra"><div class="le-title">Watch for</div><ul>';
+  item.watchFor.forEach(w => { html += '<li>' + w + '</li>'; });
+  html += '</ul></div>';
+  if(item.involve){
+    html += '<div class="callout strong" style="margin-top:16px;">' + item.involve + '</div>';
+  }
+  container.innerHTML = html;
+}
+
+populateLookupSelect('complex-select', complexClientData);
+
+const searchIndex = {
+  home:["home","cover","start"],
+  contents:["contents","index","menu","all tabs","overview"],
+  basics:["basics","what is super","how super works","risk profile","risk profiles","growth assets","defensive assets","conservative","balanced","moderate","high growth","high conviction","investment options","fees"],
+  contributions:["contributions","concessional","non-concessional","salary sacrifice","spouse contribution","co-contribution","government co-contribution","first home super saver","fhss","low income","medium income","high income","worked examples","before tax","after tax"],
+  onepercent:["1%","one percent","compounding","calculator","returns","7%","8%","value of 1%","balance growth"],
+  updates:["latest updates","contribution caps","cap","carry forward","carry-forward","cgt","capital gains tax","division 296","div 296","new tax","new taxes","tax refund","instant deduction","work related deduction","smsf property","lrba","negative gearing","payday super","fy2026","fy2027","this year last year"],
+  access:["accessing super","access","preservation age","condition of release","conditions of release","transition to retirement","ttr","4% rule","four percent rule","minimum drawdown","maximum drawdown","withdraw","withdrawal","low rate cap","working retired","when can i access"],
+  "retirement-guide":["retirement income","asfa","age pension","how much do i need","how much do you need","modest","comfortable","retirement standard","single couple"],
+  "insurance-basics":["insurance basics","life cover","death cover","tpd","total and permanent disability","income protection","waiting period","benefit period"],
+  "insurance-depth":["default cover","tailored cover","in super","outside super","income protection tax","own occupation","any occupation","insurance in depth"],
+  tax:["tax on super","contributions tax","earnings tax","tax free 60","tax free sixty","retirement phase tax","division 293","div 293"],
+  "insurance-roles":["job roles","occupation","occupations","plumber","electrician","miner","truck driver","pilot","police","nurse","doctor","underwriting questions","job role"],
+  "medication-questions":["medication","medications","diabetes","asthma","depression","anxiety","cancer","health condition","health conditions","underwriting","condition"],
+  "complex-clients":["complex clients","nz saver","kiwisaver","uk pension","workers compensation","workcover","smsf member","defined benefit","family law","divorce","bankruptcy","downsizer","excess contributions","expat","non-resident","complex"]
+};
+
+function runSiteSearch(){
+  const input = document.getElementById('site-search');
+  const msg = document.getElementById('site-search-msg');
+  const query = input.value.trim().toLowerCase();
+  if(!query){ msg.textContent = ''; return; }
+  let bestTab = null, bestScore = 0;
+  Object.keys(searchIndex).forEach(tabId => {
+    let score = 0;
+    searchIndex[tabId].forEach(kw => {
+      if(kw.includes(query) || query.includes(kw)) score++;
+    });
+    if(score > bestScore){ bestScore = score; bestTab = tabId; }
+  });
+  if(bestTab){
+    showTab(bestTab);
+    const label = (crumbMap[bestTab] || bestTab).split('›').pop().trim();
+    msg.textContent = 'Opened: ' + label;
+    input.value = '';
+  } else {
+    msg.textContent = 'No match — try a different word.';
+  }
+}
+
+const startTab = window.location.hash ? window.location.hash.substring(1) : 'home';
+showTab(crumbMap[startTab] ? startTab : 'home');
+updateCalc();
+</script>
+
+</body>
+</html>

@@ -461,6 +461,27 @@ table.data-table tr:nth-child(even) td{background:var(--paper-1);}
 .advice-badge.redirect{background:var(--maroon-700); color:#fff;}
 .tier-table td.tier-name{font-weight:700; color:var(--navy-900);}
 
+/* ============ TRAINING QUIZ (tab 14) ============ */
+.quiz-box{background:#fff; border:1px solid var(--paper-line); border-radius:14px; padding:26px 28px; margin:20px 0 24px 0;}
+.quiz-progress{font-size:11.5px; font-weight:700; text-transform:uppercase; letter-spacing:.05em; color:var(--ink-500); margin-bottom:14px;}
+.quiz-statement{font-family:'Source Serif 4', serif; font-size:18px; color:var(--navy-900); line-height:1.5; margin-bottom:20px; min-height:54px;}
+.quiz-choices{display:flex; gap:10px; flex-wrap:wrap; margin-bottom:16px;}
+.quiz-choice{flex:1; min-width:140px; border:1px solid var(--paper-line); background:#fff; color:var(--navy-800); font-size:13.5px; font-weight:600; padding:12px 14px; border-radius:8px; cursor:pointer; font-family:'Public Sans', sans-serif;}
+.quiz-choice:hover:not(:disabled){border-color:var(--pink-500); color:var(--pink-500);}
+.quiz-choice:disabled{cursor:default;}
+.quiz-choice.correct-safe{background:var(--navy-900); border-color:var(--navy-900); color:#fff;}
+.quiz-choice.correct-danger{background:var(--maroon-700); border-color:var(--maroon-700); color:#fff;}
+.quiz-choice.wrong-pick{background:var(--paper-1); border-color:var(--ink-400); color:var(--ink-500); text-decoration:line-through;}
+.quiz-feedback{font-size:13.5px; color:var(--ink-700); line-height:1.6; padding:14px 16px; border-radius:8px; background:var(--paper-1); margin-bottom:18px; min-height:20px;}
+.quiz-feedback.danger{background:var(--maroon-700); color:#fff;}
+.quiz-feedback.danger b{color:#fff;}
+.quiz-feedback.empty{display:none;}
+.quiz-nav{display:flex; align-items:center; justify-content:space-between; gap:12px;}
+.quiz-nav button{border:1px solid var(--paper-line); background:#fff; color:var(--navy-800); font-size:13px; font-weight:600; padding:9px 16px; border-radius:8px; cursor:pointer; font-family:'Public Sans', sans-serif;}
+.quiz-nav button:hover{border-color:var(--pink-500); color:var(--pink-500);}
+.quiz-nav button:disabled{opacity:0.4; cursor:default;}
+.quiz-score{font-size:13px; font-weight:700; color:var(--navy-900);}
+
 /* responsive */
 @media (max-width:880px){
   .spine{width:74px; min-width:74px; padding-left:8px;}
@@ -932,9 +953,53 @@ table.data-table tr:nth-child(even) td{background:var(--paper-1);}
         </div>
 
         <div class="section-block">
-          <h2>What actually changed on 1 July 2026</h2>
+          <h2>What actually changed on 1 July 2026 — the full list</h2>
+          <p>This was a heavier-than-usual 1 July. Here's everything that landed, not just the headline items.</p>
+          <table class="data-table">
+            <tr><th>Change</th><th>What it means</th></tr>
+            <tr><td>Payday Super starts</td><td>Employers must now pay super at the same time as wages, not quarterly — detail below</td></tr>
+            <tr><td>Super Guarantee rate</td><td>Stays at 12% — no change. It reached its final legislated rate on 1 July 2025; Payday Super changes timing, not the rate</td></tr>
+            <tr><td>Super now paid on Government Paid Parental Leave</td><td>A new 12% super contribution on Government PPL, for children born or adopted from 1 July 2025 — detail below</td></tr>
+            <tr><td>Concessional and non-concessional caps indexed</td><td>Up from $30,000 to $32,500, and $120,000 to $130,000 — table below</td></tr>
+            <tr><td>Government co-contribution thresholds indexed</td><td>Lower threshold up to $49,293, upper threshold up to $64,293</td></tr>
+            <tr><td>Division 296 starts</td><td>New tax on total super balances above $3 million — detail further down this page</td></tr>
+            <tr><td>$1,000 instant tax deduction</td><td>Replaces the old $300 receipt-free threshold for work-related expenses — detail further down this page</td></tr>
+            <tr><td>ATO Small Business Superannuation Clearing House closes</td><td>Employers who relied on this free service need a new way to pay super — relevant for any client who's also a small business owner</td></tr>
+          </table>
+          <p style="font-size:12.5px; color:var(--ink-500);">The SMSF residential borrowing ban and the CGT/negative gearing reform also passed Parliament this year, but land on different dates — covered in their own sections below, since they're not 1 July changes specifically.</p>
+        </div>
+
+        <div class="section-block">
+          <h2>Payday Super — the detail</h2>
+          <p>The biggest structural change to how super gets paid since compulsory super began. Employers must now pay super contributions at the same time as wages — matching the pay cycle, whether that's weekly, fortnightly, or monthly — instead of quarterly.</p>
+          <div class="card-row">
+            <div class="info-card">
+              <div class="ic-label">The 7-day rule</div>
+              <p>Contributions must reach the employee's super fund within seven business days of each payday. If it's not showing in the fund within that window, something's wrong — a genuinely useful thing to tell a client who wants to check their own employer is compliant.</p>
+            </div>
+            <div class="info-card">
+              <div class="ic-label">Why it matters for balances</div>
+              <p>Super that used to sit with the employer for up to 90 days before reaching the fund now gets invested almost immediately — more time in the market means more compounding over a working life, even though the contribution rate itself hasn't changed.</p>
+            </div>
+          </div>
           <div class="callout">
-            The concessional and non-concessional caps both stepped up with indexation, and Payday Super started — employers now have to pay super at the same time as wages, not just quarterly. The Super Guarantee rate itself didn't move; it reached its final legislated rate of 12% back on 1 July 2025 and stays there.
+            This doesn't change how much goes into anyone's super — it only changes when. The Super Guarantee rate is still 12% either way; Payday Super is purely a timing and compliance reform.
+          </div>
+        </div>
+
+        <div class="section-block">
+          <h2>Super on Paid Parental Leave — new this year</h2>
+          <p>For the first time, Government-funded Paid Parental Leave attracts a superannuation contribution. This closes a long-standing gap where parents taking Government PPL — historically disproportionately women — saw their super stall completely during time out of paid work.</p>
+          <table class="data-table">
+            <tr><th>Detail</th><th>What applies</th></tr>
+            <tr><td>Contribution rate</td><td>12%, matching the standard Super Guarantee rate</td></tr>
+            <tr><td>Who's eligible</td><td>Parents receiving Government-funded Parental Leave Pay for a child born or adopted from 1 July 2025</td></tr>
+            <tr><td>Who pays it</td><td>The ATO, directly into the parent's nominated super fund — it doesn't come from the employer</td></tr>
+            <tr><td>Timing</td><td>Paid as a lump sum (plus an interest component) after the end of the financial year in which the leave was taken — not paid progressively like ordinary employer contributions</td></tr>
+            <tr><td>Tax treatment</td><td>Taxed at 15% inside the fund, and counts toward the recipient's concessional cap, just like employer contributions</td></tr>
+          </table>
+          <div class="callout">
+            Separately, Government Paid Parental Leave itself increased to 26 weeks (130 days) for children born or adopted from 1 July 2026, up from 24 weeks — worth knowing as context, even though the leave length change itself isn't a super rule.
           </div>
         </div>
 
@@ -946,9 +1011,11 @@ table.data-table tr:nth-child(even) td{background:var(--paper-1);}
             <tr><td>Non-concessional contributions cap</td><td>$120,000</td><td>$130,000</td><td>+$10,000</td></tr>
             <tr><td>3-year bring-forward cap</td><td>$360,000</td><td>$390,000</td><td>+$30,000</td></tr>
             <tr><td>General transfer balance cap</td><td>$2.0 million</td><td>$2.1 million</td><td>+$100,000</td></tr>
+            <tr><td>Government co-contribution — lower threshold</td><td>Confirm against ATO</td><td>$49,293</td><td>Indexed up</td></tr>
+            <tr><td>Government co-contribution — upper threshold</td><td>Confirm against ATO</td><td>$64,293</td><td>Indexed up</td></tr>
             <tr><td>Super Guarantee rate</td><td>12%</td><td>12%</td><td>No change</td></tr>
           </table>
-          <p style="font-size:12.5px; color:var(--ink-500);">The non-concessional cap is calculated as 4× the concessional cap, so it moves automatically whenever the concessional cap is indexed. Concessional cap indexation moves in $2,500 increments, in line with wages growth (AWOTE).</p>
+          <p style="font-size:12.5px; color:var(--ink-500);">The non-concessional cap is calculated as 4× the concessional cap, so it moves automatically whenever the concessional cap is indexed. Concessional cap indexation moves in $2,500 increments, in line with wages growth (AWOTE). The current co-contribution thresholds are confirmed against the ATO; last year's exact figures should be checked directly rather than assumed before quoting a year-on-year comparison to a client.</p>
         </div>
 
         <div class="section-block">
@@ -1613,6 +1680,35 @@ table.data-table tr:nth-child(even) td{background:var(--paper-1);}
           </div>
         </div>
 
+        <div class="section-block">
+          <h2>Training quiz — factual, general, or personal advice?</h2>
+          <p>50 statements written the way they might actually come out on a call, shuffled and served 10 at a time. Good for onboarding a new client manager, or a quick refresher for the whole team.</p>
+          <div class="quiz-box">
+            <div id="quiz-active-view">
+              <div class="quiz-progress" id="quiz-progress">Question 1 of 10</div>
+              <div class="quiz-statement" id="quiz-statement"></div>
+              <div class="quiz-choices">
+                <button class="quiz-choice" id="quiz-btn-factual" onclick="answerQuiz('factual')">Factual</button>
+                <button class="quiz-choice" id="quiz-btn-general" onclick="answerQuiz('general')">General advice</button>
+                <button class="quiz-choice" id="quiz-btn-personal" onclick="answerQuiz('personal')">Personal advice</button>
+              </div>
+              <div class="quiz-feedback empty" id="quiz-feedback"></div>
+              <div class="quiz-nav">
+                <button id="quiz-prev" onclick="navQuiz(-1)">← Back</button>
+                <span class="quiz-score" id="quiz-score-label"></span>
+                <button id="quiz-next" onclick="navQuiz(1)">Next →</button>
+              </div>
+            </div>
+            <div id="quiz-complete-view" style="display:none;">
+              <div class="quiz-statement" id="quiz-complete-score"></div>
+              <div class="quiz-nav" style="justify-content:flex-start; gap:10px;">
+                <button onclick="startBatch(true)">Retake these 10</button>
+                <button onclick="startBatch(false)">10 more</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div class="compliance-flag">
           This tab explains the general legal framework, not Brightday's specific internal policy — your compliance team may set narrower rules than the legal minimum described here, and their guidance always takes precedence. If in doubt on a live call, the safe default is always to redirect rather than answer.
         </div>
@@ -1888,7 +1984,7 @@ const searchIndex = {
   basics:["basics","what is super","how super works","risk profile","risk profiles","growth assets","defensive assets","conservative","balanced","moderate","high growth","high conviction","investment options","fees"],
   contributions:["contributions","concessional","non-concessional","salary sacrifice","spouse contribution","co-contribution","government co-contribution","first home super saver","fhss","low income","medium income","high income","worked examples","before tax","after tax"],
   onepercent:["1%","one percent","compounding","calculator","returns","7%","8%","value of 1%","balance growth"],
-  updates:["latest updates","contribution caps","cap","carry forward","carry-forward","cgt","capital gains tax","division 296","div 296","new tax","new taxes","tax refund","instant deduction","work related deduction","smsf property","lrba","negative gearing","payday super","fy2026","fy2027","this year last year"],
+  updates:["latest updates","contribution caps","cap","carry forward","carry-forward","cgt","capital gains tax","division 296","div 296","new tax","new taxes","tax refund","instant deduction","work related deduction","smsf property","lrba","negative gearing","payday super","paid parental leave","ppl","parental leave super","co-contribution threshold","fy2026","fy2027","this year last year"],
   access:["accessing super","access","preservation age","condition of release","conditions of release","transition to retirement","ttr","4% rule","four percent rule","minimum drawdown","maximum drawdown","withdraw","withdrawal","low rate cap","working retired","when can i access"],
   "retirement-guide":["retirement income","asfa","age pension","how much do i need","how much do you need","modest","comfortable","retirement standard","single couple"],
   "insurance-basics":["insurance basics","life cover","death cover","tpd","total and permanent disability","income protection","waiting period","benefit period"],
@@ -1970,6 +2066,165 @@ function renderAdviceCheck(){
 }
 
 populateLookupSelect('advice-select', adviceCheckData);
+
+const quizData = [
+  {text:"Looking at your statement, your current balance is $84,200.", answer:"factual", explain:"Just reading a number off the screen — no opinion attached."},
+  {text:"The PDS lists the admin fee for this option as 0.15% per year.", answer:"factual", explain:"A published figure, read out as-is."},
+  {text:"This option's return over the past 12 months was 9.2%, according to the fund's published report.", answer:"factual", explain:"Reporting a published historical figure is fine — the trap is adding any opinion on top of it, like whether that's good or bad."},
+  {text:"Your PDS shows the concessional cap this year is $32,500.", answer:"factual", explain:"A published figure, no commentary."},
+  {text:"Super withdrawals are tax-free from age 60 — that's just how the rule works.", answer:"factual", explain:"A fixed rule stated plainly."},
+  {text:"TPD cover pays a lump sum, income protection pays an ongoing amount — that's the basic difference.", answer:"factual", explain:"A definition, not a recommendation to hold either one."},
+  {text:"I can see here your insurance premium last quarter was $412.", answer:"factual", explain:"Reading a figure off the account, nothing evaluative added."},
+  {text:"The screen shows your investment option is currently 70% growth, 30% defensive.", answer:"factual", explain:"A description of the current setup, not a comment on whether it's right for them."},
+  {text:"Preservation age for everyone now is 60, no matter when you were born.", answer:"factual", explain:"A fixed rule, true for every client."},
+  {text:"Your account shows two active insurance policies — life and TPD.", answer:"factual", explain:"A statement of what's on file."},
+  {text:"The minimum pension drawdown at your age is 5% a year — that's set by law.", answer:"factual", explain:"A legislated rule, not a suggestion."},
+  {text:"According to this year's ASFA benchmark, a comfortable retirement for a couple is about $78,566 a year.", answer:"factual", explain:"A published industry figure, reported without commentary on whether it applies to them."},
+  {text:"The SMSF residential property borrowing ban started a few weeks ago — that's a new law, not something specific to your fund.", answer:"factual", explain:"A description of legislation, not advice about what to do with it."},
+  {text:"Your total super balance across both accounts is $412,000, combined.", answer:"factual", explain:"Arithmetic on figures already on file — not a recommendation to combine them."},
+  {text:"Division 296 only applies once a balance is over $3 million — that's the threshold.", answer:"factual", explain:"A rule, stated without applying it to this specific person's plans."},
+  {text:"The system shows your last contribution was processed on the 14th.", answer:"factual", explain:"A record from the account, nothing more."},
+  {text:"Employers now have to pay super at the same time as wages under Payday Super — that started this financial year.", answer:"factual", explain:"A description of a law change, not an opinion on it."},
+  {text:"Honestly, I've seen a lot of funds get much better returns than that lately.", answer:"general", explain:"Sounds like small talk, but comparing performance and implying they're missing out is an opinion about a product — general advice."},
+  {text:"Yeah, growth options definitely perform better over time, so that's usually the way to go.", answer:"general", explain:"An opinion recommending a type of option, even without naming this client specifically."},
+  {text:"Most people your age are moving into something a bit more aggressive for better returns.", answer:"general", explain:"\"Most people\" framing still nudges toward a specific strategy — that's general advice, not a fact about the client."},
+  {text:"That fund's been pretty average, to be honest — there are better performers out there.", answer:"general", explain:"A comparative opinion about a specific fund's performance — this is exactly the kind of comment that slips out easily and is general advice about a product."},
+  {text:"If you want better returns, you'd generally want more in shares and less in cash.", answer:"general", explain:"A generic recommendation about asset allocation — still advice, even phrased as a general rule."},
+  {text:"A lot of our clients switch to high growth once the market's doing well, like it is right now.", answer:"general", explain:"Market commentary plus a nudge toward switching — a classic slip that sounds like harmless chat."},
+  {text:"Honestly, that return's on the low side — funds with more growth assets tend to do a lot better.", answer:"general", explain:"A judgement on performance plus an implied comparison — general advice, however casually it's said."},
+  {text:"It's a good time to be a bit more aggressive, with the market performing the way it has.", answer:"general", explain:"Market timing commentary is an opinion about strategy — general advice, not a fact."},
+  {text:"TTR pensions are a pretty smart way to cut down your tax while you're still working.", answer:"general", explain:"An opinion recommending a strategy, framed generally rather than for this specific person."},
+  {text:"I'd say income protection outside super is the better way to go, tax-wise.", answer:"general", explain:"A recommendation about structure, even without referencing this client's actual numbers."},
+  {text:"Combining your accounts is generally the smart move — saves you on fees.", answer:"general", explain:"A blanket recommendation, phrased casually but still an opinion, not a fact."},
+  {text:"Honestly, most people are better off in an industry fund than a retail one.", answer:"general", explain:"An opinion comparing product types — textbook general advice, dressed up as a throwaway comment."},
+  {text:"If it were me, I'd be maxing out my concessional contributions every year.", answer:"general", explain:"\"If it were me\" still lands as a recommendation to the person listening — general advice."},
+  {text:"Binding nominations are just better, always worth locking one in.", answer:"general", explain:"An opinion about a product feature, stated as a blanket rule."},
+  {text:"You'd want to be topping up your super if you can — everyone should really.", answer:"general", explain:"A generic recommendation, not tied to this person, but still advice."},
+  {text:"Term deposits inside super are a pretty safe bet if you're worried about the market.", answer:"general", explain:"An opinion about an asset class in response to a worry — an easy, sympathetic-sounding slip into advice."},
+  {text:"Given what you've told me about your mortgage, I reckon salary sacrificing another $200 a fortnight would really help you.", answer:"personal", explain:"Tied directly to their mortgage details — personal advice, however conversationally it's phrased."},
+  {text:"With your balance and your age, yeah, I'd combine those two accounts if I were you.", answer:"personal", explain:"\"If I were you\" plus their actual balance and age — personal advice."},
+  {text:"Since you've got two kids and a mortgage, $750,000 in TPD cover sounds about right for you.", answer:"personal", explain:"A specific dollar figure built from their stated circumstances — personal advice."},
+  {text:"Honestly, with your balance, an SMSF probably makes more sense for you than what you're in now.", answer:"personal", explain:"Applies their specific balance to a structural recommendation — personal advice."},
+  {text:"Since you said you're retiring at 62, starting a TTR now sounds like the right move for you.", answer:"personal", explain:"Based on their stated retirement plan — personal advice."},
+  {text:"With your balance getting close to $3 million, you'll probably want to restructure before that new tax hits you.", answer:"personal", explain:"Applies a rule directly to their specific balance and nudges toward action — personal advice."},
+  {text:"Given what you've told me about your health, I'd get that cover sorted now rather than waiting.", answer:"personal", explain:"Based on personal health details they've shared — personal advice."},
+  {text:"Your income's right near that Division 293 threshold, so I'd pull back on contributions this year if I were you.", answer:"personal", explain:"Applies a rule to their specific income and recommends an action — personal advice."},
+  {text:"Based on your spouse's income, spouse contributions sound like a good move for you two.", answer:"personal", explain:"Built from personal financial details they've disclosed — personal advice."},
+  {text:"Since you're self-employed with irregular income, I'd keep income protection outside super in your case.", answer:"personal", explain:"Tailored to their specific employment situation — personal advice."},
+  {text:"You mentioned your parents needing aged care — sounds like it's worth looking at your own cash flow for that.", answer:"personal", explain:"Responds directly to something personal they shared, with a suggested action — personal advice."},
+  {text:"With your balance, I don't reckon the downsizer contribution is really worth it for you.", answer:"personal", explain:"A recommendation based on their specific balance — personal advice, even phrased casually."},
+  {text:"Since you're going through a separation, I'd hold off on touching your super until that's sorted.", answer:"personal", explain:"Tied to their specific personal circumstances — personal advice."},
+  {text:"Given your risk profile and how long you've got, high growth sounds like the right fit for you.", answer:"personal", explain:"References their own stated risk profile and timeframe — personal advice, even though it sounds like a general comment."},
+  {text:"Since you're already over the cap this year, I wouldn't put anything more in before June 30 if I were you.", answer:"personal", explain:"Based on their specific contribution history this year — personal advice."},
+  {text:"Given the business sale, that small business CGT contribution sounds like it could work well for you.", answer:"personal", explain:"Tied to a specific event in their life — personal advice."},
+  {text:"With your family situation, I'd nominate your spouse as the binding beneficiary.", answer:"personal", explain:"A recommendation built on their specific family situation — personal advice."}
+];
+
+function shuffleArray(arr){
+  const a = arr.slice();
+  for(let i = a.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+let quizShuffled = shuffleArray(quizData.map((q, i) => i));
+let quizBatchNum = 0;
+let quizBatch = [];
+let quizPos = 0;
+let quizBatchAnswers = [];
+
+function startBatch(reset){
+  if(reset){
+    quizShuffled = shuffleArray(quizData.map((q, i) => i));
+    quizBatchNum = 0;
+  } else {
+    quizBatchNum++;
+    if(quizBatchNum * 10 >= quizShuffled.length){
+      quizShuffled = shuffleArray(quizData.map((q, i) => i));
+      quizBatchNum = 0;
+    }
+  }
+  quizBatch = quizShuffled.slice(quizBatchNum * 10, quizBatchNum * 10 + 10);
+  quizBatchAnswers = new Array(quizBatch.length).fill(null);
+  quizPos = 0;
+  document.getElementById('quiz-active-view').style.display = '';
+  document.getElementById('quiz-complete-view').style.display = 'none';
+  renderQuiz();
+}
+
+function renderQuiz(){
+  const dataIndex = quizBatch[quizPos];
+  const q = quizData[dataIndex];
+  document.getElementById('quiz-statement').textContent = '"' + q.text + '"';
+  document.getElementById('quiz-progress').textContent = 'Question ' + (quizPos + 1) + ' of ' + quizBatch.length;
+  const correctCount = quizBatchAnswers.filter((a, i) => a !== null && a === quizData[quizBatch[i]].answer).length;
+  const answeredCount = quizBatchAnswers.filter(a => a !== null).length;
+  document.getElementById('quiz-score-label').textContent = correctCount + ' correct out of ' + answeredCount + ' answered';
+  document.getElementById('quiz-prev').disabled = quizPos === 0;
+  document.getElementById('quiz-next').textContent = quizPos === quizBatch.length - 1 ? 'See results' : 'Next →';
+
+  const btns = {factual: document.getElementById('quiz-btn-factual'), general: document.getElementById('quiz-btn-general'), personal: document.getElementById('quiz-btn-personal')};
+  const feedback = document.getElementById('quiz-feedback');
+  const userAnswer = quizBatchAnswers[quizPos];
+
+  Object.keys(btns).forEach(k => { btns[k].classList.remove('correct-safe','correct-danger','wrong-pick'); btns[k].disabled = false; });
+
+  if(userAnswer){
+    Object.keys(btns).forEach(k => { btns[k].disabled = true; });
+    const correctClass = q.answer === 'factual' ? 'correct-safe' : 'correct-danger';
+    btns[q.answer].classList.add(correctClass);
+    if(userAnswer !== q.answer){
+      btns[userAnswer].classList.add('wrong-pick');
+    }
+    feedback.classList.remove('empty');
+    let msg;
+    if(q.answer !== 'factual'){
+      msg = 'This is ' + labelFor(q.answer) + ' — not something this team should say on a call, regardless of whether you classified it correctly. ' + (userAnswer === q.answer ? 'Correct classification. ' : 'To be clear, the correct classification was ' + labelFor(q.answer) + ', not ' + labelFor(userAnswer) + '. ') + q.explain;
+      feedback.classList.add('danger');
+    } else {
+      msg = (userAnswer === q.answer ? 'Correct. ' : 'Not quite — the answer is Factual. ') + q.explain;
+      feedback.classList.remove('danger');
+    }
+    feedback.textContent = msg;
+  } else {
+    feedback.classList.add('empty');
+    feedback.classList.remove('danger');
+    feedback.textContent = '';
+  }
+}
+
+function labelFor(key){
+  return key === 'factual' ? 'Factual' : (key === 'general' ? 'General advice' : 'Personal advice');
+}
+
+function answerQuiz(choice){
+  if(quizBatchAnswers[quizPos] !== null) return;
+  quizBatchAnswers[quizPos] = choice;
+  renderQuiz();
+}
+
+function navQuiz(direction){
+  if(direction > 0 && quizPos === quizBatch.length - 1){
+    showQuizComplete();
+    return;
+  }
+  const newPos = quizPos + direction;
+  if(newPos < 0 || newPos >= quizBatch.length) return;
+  quizPos = newPos;
+  renderQuiz();
+}
+
+function showQuizComplete(){
+  const correctCount = quizBatchAnswers.filter((a, i) => a !== null && a === quizData[quizBatch[i]].answer).length;
+  const answeredCount = quizBatchAnswers.filter(a => a !== null).length;
+  document.getElementById('quiz-complete-score').textContent = 'Score: ' + correctCount + ' out of ' + answeredCount + ' answered (' + quizBatch.length + ' questions this round).';
+  document.getElementById('quiz-active-view').style.display = 'none';
+  document.getElementById('quiz-complete-view').style.display = '';
+}
+
+startBatch(true);
 
 const startTab = window.location.hash ? window.location.hash.substring(1) : 'home';
 showTab(crumbMap[startTab] ? startTab : 'home');

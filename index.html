@@ -1701,6 +1701,7 @@ table.data-table tr:nth-child(even) td{background:var(--paper-1);}
             </div>
             <div id="quiz-complete-view" style="display:none;">
               <div class="quiz-statement" id="quiz-complete-score"></div>
+              <div id="quiz-complete-breakdown" class="quiz-feedback" style="margin-top:0;"></div>
               <div class="quiz-nav" style="justify-content:flex-start; gap:10px;">
                 <button onclick="startBatch(true)">Retake these 10</button>
                 <button onclick="startBatch(false)">10 more</button>
@@ -2068,14 +2069,14 @@ function renderAdviceCheck(){
 populateLookupSelect('advice-select', adviceCheckData);
 
 const quizData = [
-  {text:"Looking at your statement, your current balance is $84,200.", answer:"factual", explain:"Just reading a number off the screen — no opinion attached."},
-  {text:"The PDS lists the admin fee for this option as 0.15% per year.", answer:"factual", explain:"A published figure, read out as-is."},
-  {text:"This option's return over the past 12 months was 9.2%, according to the fund's published report.", answer:"factual", explain:"Reporting a published historical figure is fine — the trap is adding any opinion on top of it, like whether that's good or bad."},
-  {text:"Your PDS shows the concessional cap this year is $32,500.", answer:"factual", explain:"A published figure, no commentary."},
-  {text:"Super withdrawals are tax-free from age 60 — that's just how the rule works.", answer:"factual", explain:"A fixed rule stated plainly."},
-  {text:"TPD cover pays a lump sum, income protection pays an ongoing amount — that's the basic difference.", answer:"factual", explain:"A definition, not a recommendation to hold either one."},
-  {text:"I can see here your insurance premium last quarter was $412.", answer:"factual", explain:"Reading a figure off the account, nothing evaluative added."},
-  {text:"The screen shows your investment option is currently 70% growth, 30% defensive.", answer:"factual", explain:"A description of the current setup, not a comment on whether it's right for them."},
+  {text:"I'm not the financial adviser — I'm not licensed to give financial advice, so I won't be making any recommendations about your super or your investments.", answer:"factual", explain:"A statement about his own role and licensing status — not an opinion about the client's situation. A real, and good, line from one of our own calls."},
+  {text:"Your five-year rolling average return, according to the fund's own figures, is 7.79%.", answer:"factual", explain:"Reporting the fund's published number is fine on its own — watch what gets added right after a number like this."},
+  {text:"All it is is you have to tell the adviser this, you can't tell me — it's a licensing thing.", answer:"factual", explain:"Correctly naming his own boundary — a real, safe line worth using more often on calls."},
+  {text:"We're obviously not gonna tell you to take on board insurance that you don't think you may need.", answer:"factual", explain:"A statement about how the business operates, not an opinion about this client's specific level of cover."},
+  {text:"Your current investment option is 88% in growth assets and 12% in defensive assets, according to your account.", answer:"factual", explain:"A description of the current setup, not a comment on whether that split is right for them."},
+  {text:"I don't even know if I can help you yet — your return could be better than most super funds out there, or we could tell you to stay exactly where you are.", answer:"factual", explain:"A genuinely good, non-committal hedge — the opposite of pre-judging the outcome before the research is done."},
+  {text:"A statement of advice is a formal document that sets out the adviser's recommendations, their reasoning, and all the fees involved.", answer:"factual", explain:"A description of a document and process, not advice itself."},
+  {text:"You don't get charged a fee unless you choose to implement the advice.", answer:"factual", explain:"A fee-structure fact, stated the same way to every client."},
   {text:"Preservation age for everyone now is 60, no matter when you were born.", answer:"factual", explain:"A fixed rule, true for every client."},
   {text:"Your account shows two active insurance policies — life and TPD.", answer:"factual", explain:"A statement of what's on file."},
   {text:"The minimum pension drawdown at your age is 5% a year — that's set by law.", answer:"factual", explain:"A legislated rule, not a suggestion."},
@@ -2086,14 +2087,14 @@ const quizData = [
   {text:"The system shows your last contribution was processed on the 14th.", answer:"factual", explain:"A record from the account, nothing more."},
   {text:"Employers now have to pay super at the same time as wages under Payday Super — that started this financial year.", answer:"factual", explain:"A description of a law change, not an opinion on it."},
   {text:"Honestly, I've seen a lot of funds get much better returns than that lately.", answer:"general", explain:"Sounds like small talk, but comparing performance and implying they're missing out is an opinion about a product — general advice."},
-  {text:"Yeah, growth options definitely perform better over time, so that's usually the way to go.", answer:"general", explain:"An opinion recommending a type of option, even without naming this client specifically."},
-  {text:"Most people your age are moving into something a bit more aggressive for better returns.", answer:"general", explain:"\"Most people\" framing still nudges toward a specific strategy — that's general advice, not a fact about the client."},
-  {text:"That fund's been pretty average, to be honest — there are better performers out there.", answer:"general", explain:"A comparative opinion about a specific fund's performance — this is exactly the kind of comment that slips out easily and is general advice about a product."},
-  {text:"If you want better returns, you'd generally want more in shares and less in cash.", answer:"general", explain:"A generic recommendation about asset allocation — still advice, even phrased as a general rule."},
-  {text:"A lot of our clients switch to high growth once the market's doing well, like it is right now.", answer:"general", explain:"Market commentary plus a nudge toward switching — a classic slip that sounds like harmless chat."},
-  {text:"Honestly, that return's on the low side — funds with more growth assets tend to do a lot better.", answer:"general", explain:"A judgement on performance plus an implied comparison — general advice, however casually it's said."},
-  {text:"It's a good time to be a bit more aggressive, with the market performing the way it has.", answer:"general", explain:"Market timing commentary is an opinion about strategy — general advice, not a fact."},
-  {text:"TTR pensions are a pretty smart way to cut down your tax while you're still working.", answer:"general", explain:"An opinion recommending a strategy, framed generally rather than for this specific person."},
+  {text:"That return's only a couple of percent higher than a high interest bank account.", answer:"general", explain:"An evaluative comparison of a return — an opinion about performance, not a fact, even before any personal numbers get attached to it."},
+  {text:"They'll explain why increasing your risk would be beneficial for you and help you get the best returns possible going forward.", answer:"general", explain:"Foreshadowing the adviser's conclusion before the adviser has even spoken — an opinion about outcome and strategy."},
+  {text:"Their job's not to pay out as much as they can — their job's to minimise as much as they pay out.", answer:"general", explain:"An opinion about an entire category of product (default insurance), designed to prime doubt about the client's current cover."},
+  {text:"That passive investment strategy isn't the worst thing in the world, but you don't get the ability to pivot investments individually when something like COVID hits.", answer:"general", explain:"An opinion comparing investment approaches — general advice, even wrapped in a concession up front."},
+  {text:"That's not really the goal of having a financial adviser — most people over 65 end up relying on some form of pension.", answer:"general", explain:"Ties a statistic to an implied criticism of the client's current strategy — an opinion, not a fact."},
+  {text:"High growth suits someone who's got a decent runway before retirement — it smooths out over time.", answer:"general", explain:"A generic opinion about a strategy category — fine as education, risky the moment it's aimed at one person's timeframe."},
+  {text:"Active, managed portfolios let you actually pivot into industries that make sense, instead of just riding out the market.", answer:"general", explain:"An opinion favouring one product type over another — general advice about a strategy, not a fact about it."},
+  {text:"Default insurance tends to leave people underinsured compared to what a proper review would find.", answer:"general", explain:"A blanket opinion about a category of cover — general advice, even though it's framed as a well-known truth."},
   {text:"I'd say income protection outside super is the better way to go, tax-wise.", answer:"general", explain:"A recommendation about structure, even without referencing this client's actual numbers."},
   {text:"Combining your accounts is generally the smart move — saves you on fees.", answer:"general", explain:"A blanket recommendation, phrased casually but still an opinion, not a fact."},
   {text:"Honestly, most people are better off in an industry fund than a retail one.", answer:"general", explain:"An opinion comparing product types — textbook general advice, dressed up as a throwaway comment."},
@@ -2101,21 +2102,21 @@ const quizData = [
   {text:"Binding nominations are just better, always worth locking one in.", answer:"general", explain:"An opinion about a product feature, stated as a blanket rule."},
   {text:"You'd want to be topping up your super if you can — everyone should really.", answer:"general", explain:"A generic recommendation, not tied to this person, but still advice."},
   {text:"Term deposits inside super are a pretty safe bet if you're worried about the market.", answer:"general", explain:"An opinion about an asset class in response to a worry — an easy, sympathetic-sounding slip into advice."},
-  {text:"Given what you've told me about your mortgage, I reckon salary sacrificing another $200 a fortnight would really help you.", answer:"personal", explain:"Tied directly to their mortgage details — personal advice, however conversationally it's phrased."},
-  {text:"With your balance and your age, yeah, I'd combine those two accounts if I were you.", answer:"personal", explain:"\"If I were you\" plus their actual balance and age — personal advice."},
-  {text:"Since you've got two kids and a mortgage, $750,000 in TPD cover sounds about right for you.", answer:"personal", explain:"A specific dollar figure built from their stated circumstances — personal advice."},
+  {text:"Having $150,000 inside your super with 88% invested in the market, you want your risk to reward ratio to be there.", answer:"personal", explain:"The same \"risk to reward\" idea as a general truism, but tied to this client's actual balance and allocation — that's what turns it into personal advice."},
+  {text:"Based on your $110,000 salary, ideally you'd want about $6,875 a month in income protection — so you're about $2,875 short of that right now.", answer:"personal", explain:"A specific needs calculation built entirely from this client's own salary — a textbook personal advice calculation, not a fact."},
+  {text:"If we do find something for you, regardless of how you feel about it, it's legally proven to be better.", answer:"personal", explain:"Asserts a conclusion about this client's outcome before the advice process has even happened — personal advice, and a misleading claim on top of it."},
   {text:"Honestly, with your balance, an SMSF probably makes more sense for you than what you're in now.", answer:"personal", explain:"Applies their specific balance to a structural recommendation — personal advice."},
-  {text:"Since you said you're retiring at 62, starting a TTR now sounds like the right move for you.", answer:"personal", explain:"Based on their stated retirement plan — personal advice."},
+  {text:"You've got four kids relying on you — that's exactly why you need life insurance and TPD in place.", answer:"personal", explain:"Reasons directly from this client's specific dependants to a stated need — personal advice, softened by sounding like concern."},
   {text:"With your balance getting close to $3 million, you'll probably want to restructure before that new tax hits you.", answer:"personal", explain:"Applies a rule directly to their specific balance and nudges toward action — personal advice."},
-  {text:"Given what you've told me about your health, I'd get that cover sorted now rather than waiting.", answer:"personal", explain:"Based on personal health details they've shared — personal advice."},
+  {text:"You've got two kids and you hurt yourself on the forklift — that's exactly why income protection makes sense for you.", answer:"personal", explain:"Ties this client's job and family situation directly to a product recommendation — personal advice dressed up as a caring observation."},
   {text:"Your income's right near that Division 293 threshold, so I'd pull back on contributions this year if I were you.", answer:"personal", explain:"Applies a rule to their specific income and recommends an action — personal advice."},
-  {text:"Based on your spouse's income, spouse contributions sound like a good move for you two.", answer:"personal", explain:"Built from personal financial details they've disclosed — personal advice."},
+  {text:"Given how long you've got until retirement, I'd be looking at a notch above what you're in now — high growth would suit you.", answer:"personal", explain:"Personal advice, correctly classified — fine for a licensed provisional adviser to say under supervision, not for unlicensed intake staff."},
   {text:"Since you're self-employed with irregular income, I'd keep income protection outside super in your case.", answer:"personal", explain:"Tailored to their specific employment situation — personal advice."},
-  {text:"You mentioned your parents needing aged care — sounds like it's worth looking at your own cash flow for that.", answer:"personal", explain:"Responds directly to something personal they shared, with a suggested action — personal advice."},
+  {text:"I'll look at adding an extra 10% to your cover, given your situation.", answer:"personal", explain:"A specific recommended change to cover, tied to this client — personal advice, appropriate from a licensed adviser, not from intake staff."},
   {text:"With your balance, I don't reckon the downsizer contribution is really worth it for you.", answer:"personal", explain:"A recommendation based on their specific balance — personal advice, even phrased casually."},
-  {text:"Since you're going through a separation, I'd hold off on touching your super until that's sorted.", answer:"personal", explain:"Tied to their specific personal circumstances — personal advice."},
+  {text:"You want it to cover the mortgage, so I'd be looking at around $350,000 in life cover for you.", answer:"personal", explain:"A specific dollar recommendation built from a client's stated goal (covering the mortgage) — personal advice."},
   {text:"Given your risk profile and how long you've got, high growth sounds like the right fit for you.", answer:"personal", explain:"References their own stated risk profile and timeframe — personal advice, even though it sounds like a general comment."},
-  {text:"Since you're already over the cap this year, I wouldn't put anything more in before June 30 if I were you.", answer:"personal", explain:"Based on their specific contribution history this year — personal advice."},
+  {text:"Since you're doing this on your own with a mortgage, I think your cover should be increased to actually cover it.", answer:"personal", explain:"Reasons from this client's specific circumstances (sole earner, mortgage) to a recommended action — personal advice."},
   {text:"Given the business sale, that small business CGT contribution sounds like it could work well for you.", answer:"personal", explain:"Tied to a specific event in their life — personal advice."},
   {text:"With your family situation, I'd nominate your spouse as the binding beneficiary.", answer:"personal", explain:"A recommendation built on their specific family situation — personal advice."}
 ];
@@ -2220,6 +2221,32 @@ function showQuizComplete(){
   const correctCount = quizBatchAnswers.filter((a, i) => a !== null && a === quizData[quizBatch[i]].answer).length;
   const answeredCount = quizBatchAnswers.filter(a => a !== null).length;
   document.getElementById('quiz-complete-score').textContent = 'Score: ' + correctCount + ' out of ' + answeredCount + ' answered (' + quizBatch.length + ' questions this round).';
+
+  const tally = {
+    factual: {correct: 0, total: 0},
+    general: {correct: 0, total: 0},
+    personal: {correct: 0, total: 0}
+  };
+  quizBatch.forEach((dataIndex, i) => {
+    const category = quizData[dataIndex].answer;
+    const userAns = quizBatchAnswers[i];
+    if(userAns !== null){
+      tally[category].total++;
+      if(userAns === category) tally[category].correct++;
+    }
+  });
+
+  let breakdown = '<b>By category</b><br>';
+  ['factual','general','personal'].forEach(cat => {
+    const t = tally[cat];
+    if(t.total > 0){
+      breakdown += labelFor(cat) + ': ' + t.correct + ' out of ' + t.total + ' correct<br>';
+    } else {
+      breakdown += labelFor(cat) + ': not covered this round<br>';
+    }
+  });
+  document.getElementById('quiz-complete-breakdown').innerHTML = breakdown;
+
   document.getElementById('quiz-active-view').style.display = 'none';
   document.getElementById('quiz-complete-view').style.display = '';
 }

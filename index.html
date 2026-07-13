@@ -482,6 +482,73 @@ table.data-table tr:nth-child(even) td{background:var(--paper-1);}
 .quiz-nav button:disabled{opacity:0.4; cursor:default;}
 .quiz-score{font-size:13px; font-weight:700; color:var(--navy-900);}
 
+/* ============ PRACTICE EXAM (tab 14) ============ */
+.exam-launch{background:#fff; border:1px solid var(--paper-line); border-radius:14px; padding:26px 28px; margin:20px 0 24px 0; display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap;}
+.exam-launch-text{flex:1; min-width:260px;}
+.exam-launch-text h3{font-family:'Source Serif 4', serif; font-size:19px; color:var(--navy-900); margin:0 0 6px 0;}
+.exam-launch-text p{font-size:13.5px; color:var(--ink-500); margin:0; line-height:1.5;}
+.exam-start-btn{background:var(--pink-500); color:#fff; border:none; font-size:14px; font-weight:700; padding:14px 26px; border-radius:8px; cursor:pointer; font-family:'Public Sans', sans-serif; white-space:nowrap;}
+.exam-start-btn:hover{background:var(--maroon-700);}
+
+.exam-overlay{position:fixed; inset:0; background:var(--paper-0); z-index:500; overflow-y:auto; display:none;}
+.exam-overlay.active{display:block;}
+.exam-shell{max-width:820px; margin:0 auto; padding:50px 32px 80px 32px;}
+.exam-topline{display:flex; align-items:center; justify-content:space-between; margin-bottom:8px;}
+.exam-badge{font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:.08em; color:var(--pink-500); background:var(--pink-050); padding:6px 14px; border-radius:14px;}
+.exam-exit{border:1px solid var(--paper-line); background:#fff; color:var(--ink-500); font-size:12.5px; font-weight:600; padding:8px 14px; border-radius:8px; cursor:pointer; font-family:'Public Sans', sans-serif;}
+.exam-exit:hover{border-color:var(--maroon-700); color:var(--maroon-700);}
+.exam-title{font-family:'Source Serif 4', serif; font-size:26px; color:var(--navy-900); margin:14px 0 26px 0;}
+
+.exam-progress-bar{height:6px; background:var(--paper-1); border-radius:4px; overflow:hidden; margin-bottom:28px;}
+.exam-progress-fill{height:100%; background:var(--pink-500); border-radius:4px; transition:width .2s ease;}
+.exam-qnum{font-size:12px; font-weight:700; color:var(--ink-500); text-transform:uppercase; letter-spacing:.05em; margin-bottom:10px;}
+.exam-statement{font-family:'Source Serif 4', serif; font-size:22px; color:var(--navy-900); line-height:1.5; margin-bottom:28px; min-height:90px;}
+.exam-choices{display:flex; flex-direction:column; gap:12px; margin-bottom:32px;}
+.exam-choice{border:1.5px solid var(--paper-line); background:#fff; color:var(--navy-800); font-size:15px; font-weight:600; padding:16px 18px; border-radius:10px; cursor:pointer; font-family:'Public Sans', sans-serif; text-align:left;}
+.exam-choice:hover{border-color:var(--pink-500);}
+.exam-choice.selected{background:var(--navy-900); border-color:var(--navy-900); color:#fff;}
+.exam-choice.correct-safe{background:var(--navy-900); border-color:var(--navy-900); color:#fff;}
+.exam-choice.correct-danger{background:var(--maroon-700); border-color:var(--maroon-700); color:#fff;}
+.exam-choice.wrong-pick{background:var(--paper-1); border-color:var(--ink-400); color:var(--ink-500); text-decoration:line-through;}
+.exam-choice:disabled{cursor:default;}
+.exam-feedback{font-size:14.5px; color:var(--ink-700); line-height:1.6; padding:16px 20px; border-radius:10px; background:var(--paper-1); margin-bottom:22px; min-height:24px;}
+.exam-feedback.danger{background:var(--maroon-700); color:#fff;}
+.exam-feedback.empty{display:none;}
+.exam-nav{display:flex; justify-content:space-between; align-items:center;}
+.exam-nav button{border:1px solid var(--paper-line); background:#fff; color:var(--navy-800); font-size:13.5px; font-weight:600; padding:11px 20px; border-radius:8px; cursor:pointer; font-family:'Public Sans', sans-serif;}
+.exam-nav button:hover:not(:disabled){border-color:var(--pink-500); color:var(--pink-500);}
+.exam-nav button:disabled{opacity:0.35; cursor:default;}
+.exam-nav button.primary{background:var(--navy-900); border-color:var(--navy-900); color:#fff;}
+.exam-nav button.primary:hover{background:var(--pink-500); border-color:var(--pink-500); color:#fff;}
+
+/* results */
+.exam-results-score{text-align:center; margin-bottom:8px;}
+.exam-results-score .big{font-family:'Source Serif 4', serif; font-size:56px; font-weight:700; color:var(--navy-900); line-height:1;}
+.exam-results-score .lbl{font-size:13px; color:var(--ink-500); margin-top:6px;}
+.exam-cat-grid{display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px; margin:28px 0;}
+.exam-cat-card{border-radius:10px; padding:18px 16px; text-align:center;}
+.exam-cat-card.factual{background:var(--paper-1);}
+.exam-cat-card.general{background:var(--pink-050);}
+.exam-cat-card.personal{background:#FBEAF1;}
+.exam-cat-card .cat-name{font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:.05em; color:var(--ink-500); margin-bottom:8px;}
+.exam-cat-card .cat-score{font-family:'Source Serif 4', serif; font-size:28px; font-weight:700; color:var(--navy-900);}
+.exam-focus{background:var(--navy-900); color:#fff; border-radius:10px; padding:20px 24px; margin:20px 0;}
+.exam-focus .fl{font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:.08em; color:var(--pink-400); margin-bottom:8px;}
+.exam-focus p{font-size:14.5px; line-height:1.6; margin:0;}
+.exam-results-actions{display:flex; gap:12px; flex-wrap:wrap; margin-top:24px;}
+.exam-results-actions button{border:1px solid var(--paper-line); background:#fff; color:var(--navy-800); font-size:13.5px; font-weight:700; padding:12px 20px; border-radius:8px; cursor:pointer; font-family:'Public Sans', sans-serif;}
+.exam-results-actions button:hover{border-color:var(--pink-500); color:var(--pink-500);}
+.exam-results-actions button.primary{background:var(--pink-500); border-color:var(--pink-500); color:#fff;}
+.exam-results-actions button.primary:hover{background:var(--maroon-700); border-color:var(--maroon-700);}
+
+.exam-mistakes{margin-top:24px; display:none;}
+.exam-mistakes.show{display:block;}
+.exam-mistake-card{background:#fff; border:1px solid var(--paper-line); border-left:4px solid var(--maroon-700); border-radius:0 8px 8px 0; padding:16px 20px; margin-bottom:14px;}
+.exam-mistake-card .em-q{font-family:'Source Serif 4', serif; font-size:15.5px; color:var(--navy-900); margin-bottom:10px; line-height:1.4;}
+.exam-mistake-card .em-row{font-size:13px; margin-bottom:4px;}
+.exam-mistake-card .em-row b{color:var(--navy-900);}
+.exam-mistake-card .em-explain{font-size:13px; color:var(--ink-700); margin-top:8px; line-height:1.55; border-top:1px solid var(--paper-line); padding-top:8px;}
+
 /* responsive */
 @media (max-width:880px){
   .spine{width:74px; min-width:74px; padding-left:8px;}
@@ -493,6 +560,7 @@ table.data-table tr:nth-child(even) td{background:var(--paper-1);}
   .cover h1{font-size:32px;}
 }
 </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body>
 
@@ -1757,7 +1825,7 @@ table.data-table tr:nth-child(even) td{background:var(--paper-1);}
 
         <div class="section-block">
           <h2>Training quiz — factual, general, or personal advice?</h2>
-          <p>50 statements written the way they might actually come out on a call, shuffled and served 10 at a time. Good for onboarding a new client manager, or a quick refresher for the whole team.</p>
+          <p>90 statements written the way they might actually come out on a call, shuffled and served 10 at a time. Good for onboarding a new client manager, or a quick refresher for the whole team.</p>
           <div class="quiz-box">
             <div id="quiz-active-view">
               <div class="quiz-progress" id="quiz-progress">Question 1 of 10</div>
@@ -1785,12 +1853,91 @@ table.data-table tr:nth-child(even) td{background:var(--paper-1);}
           </div>
         </div>
 
+        <div class="section-block">
+          <h2>Practice exam</h2>
+          <p>A 20-question exam pulled from the full question bank — see whether each answer's right as you go, then get a full category breakdown, a review of anything missed, and a downloadable PDF report at the end.</p>
+          <div class="exam-launch">
+            <div class="exam-launch-text">
+              <h3>20 questions. One result at the end.</h3>
+              <p>20 questions, find out if you're right straight away — then a full breakdown by factual, general, and personal once you're done.</p>
+            </div>
+            <button class="exam-start-btn" onclick="startExam()">Start practice exam →</button>
+          </div>
+        </div>
+
         <div class="compliance-flag">
           This tab explains the general legal framework, not Brightday's specific internal policy — your compliance team may set narrower rules than the legal minimum described here, and their guidance always takes precedence. If in doubt on a live call, the safe default is always to redirect rather than answer.
         </div>
       </section>
 
     </div>
+  </div>
+</div>
+
+<!-- ============ PRACTICE EXAM OVERLAY ============ -->
+<div class="exam-overlay" id="exam-overlay">
+  <div class="exam-shell">
+
+    <div id="exam-question-view">
+      <div class="exam-topline">
+        <span class="exam-badge">Practice exam</span>
+        <button class="exam-exit" onclick="exitExam()">Exit exam ✕</button>
+      </div>
+      <h1 class="exam-title">Factual, general, or personal?</h1>
+      <div class="exam-progress-bar"><div class="exam-progress-fill" id="exam-progress-fill" style="width:5%;"></div></div>
+      <div class="exam-qnum" id="exam-qnum">Question 1 of 20</div>
+      <div class="exam-statement" id="exam-statement"></div>
+      <div class="exam-choices">
+        <button class="exam-choice" id="exam-btn-factual" onclick="answerExam('factual')">Factual</button>
+        <button class="exam-choice" id="exam-btn-general" onclick="answerExam('general')">General advice</button>
+        <button class="exam-choice" id="exam-btn-personal" onclick="answerExam('personal')">Personal advice</button>
+      </div>
+      <div class="exam-feedback empty" id="exam-feedback"></div>
+      <div class="exam-nav">
+        <button id="exam-prev" onclick="examNav(-1)">← Back</button>
+        <button class="primary" id="exam-next" onclick="examNav(1)">Next →</button>
+      </div>
+    </div>
+
+    <div id="exam-results-view" style="display:none;">
+      <div class="exam-topline">
+        <span class="exam-badge">Practice exam — results</span>
+        <button class="exam-exit" onclick="exitExam()">Exit exam ✕</button>
+      </div>
+      <div class="exam-results-score">
+        <div class="big" id="exam-score-big">14/20</div>
+        <div class="lbl">questions correct</div>
+      </div>
+
+      <div class="exam-cat-grid">
+        <div class="exam-cat-card factual">
+          <div class="cat-name">Factual</div>
+          <div class="cat-score" id="exam-cat-factual">0/0</div>
+        </div>
+        <div class="exam-cat-card general">
+          <div class="cat-name">General advice</div>
+          <div class="cat-score" id="exam-cat-general">0/0</div>
+        </div>
+        <div class="exam-cat-card personal">
+          <div class="cat-name">Personal advice</div>
+          <div class="cat-score" id="exam-cat-personal">0/0</div>
+        </div>
+      </div>
+
+      <div class="exam-focus">
+        <div class="fl">What to focus on next</div>
+        <p id="exam-focus-text">Loading recommendation…</p>
+      </div>
+
+      <div class="exam-results-actions">
+        <button class="primary" onclick="toggleMistakes()" id="exam-mistakes-btn">See my mistakes</button>
+        <button onclick="downloadExamPdf()">Download PDF report</button>
+        <button onclick="startExam()">Retake exam (new 20)</button>
+      </div>
+
+      <div class="exam-mistakes" id="exam-mistakes"></div>
+    </div>
+
   </div>
 </div>
 
@@ -2179,29 +2326,72 @@ const quizData = [
   {text:"Active, managed portfolios let you actually pivot into industries that make sense, instead of just riding out the market.", answer:"general", explain:"An opinion favouring one product type over another — general advice about a strategy, not a fact about it."},
   {text:"Default insurance tends to leave people underinsured compared to what a proper review would find.", answer:"general", explain:"A blanket opinion about a category of cover — general advice, even though it's framed as a well-known truth."},
   {text:"I'd say income protection outside super is the better way to go, tax-wise.", answer:"general", explain:"A recommendation about structure, even without referencing this client's actual numbers."},
-  {text:"Combining your accounts is generally the smart move — saves you on fees.", answer:"general", explain:"A blanket recommendation, phrased casually but still an opinion, not a fact."},
+  {text:"Combining your accounts is generally the smart move — saves you on fees.", answer:"general", explain:"The “your” here is doing conversational work, not personalising work. Test it: would this be true, word-for-word, for literally any client with more than one account? Yes — doesn’t matter how many accounts or how much in fees. That’s what makes it general, not the word “your.”"},
   {text:"Honestly, most people are better off in an industry fund than a retail one.", answer:"general", explain:"An opinion comparing product types — textbook general advice, dressed up as a throwaway comment."},
   {text:"If it were me, I'd be maxing out my concessional contributions every year.", answer:"general", explain:"\"If it were me\" still lands as a recommendation to the person listening — general advice."},
   {text:"Binding nominations are just better, always worth locking one in.", answer:"general", explain:"An opinion about a product feature, stated as a blanket rule."},
-  {text:"You'd want to be topping up your super if you can — everyone should really.", answer:"general", explain:"A generic recommendation, not tied to this person, but still advice."},
-  {text:"Term deposits inside super are a pretty safe bet if you're worried about the market.", answer:"general", explain:"An opinion about an asset class in response to a worry — an easy, sympathetic-sounding slip into advice."},
+  {text:"You'd want to be topping up your super if you can — everyone should really.", answer:"general", explain:"This one basically announces itself — “everyone should really” explicitly frames it as a universal recommendation, not one built from this client’s situation. Still advice, still off-limits, but general through and through."},
+  {text:"Term deposits inside super are a pretty safe bet if you're worried about the market.", answer:"general", explain:"“If you’re worried about the market” responds to a feeling, not a fact about this client’s actual holdings or balance. It would land the same way on anyone who voiced that worry — nothing here is specific to this client’s real numbers."},
   {text:"Having $150,000 inside your super with 88% invested in the market, you want your risk to reward ratio to be there.", answer:"personal", explain:"The same \"risk to reward\" idea as a general truism, but tied to this client's actual balance and allocation — that's what turns it into personal advice."},
   {text:"Based on your $110,000 salary, ideally you'd want about $6,875 a month in income protection — so you're about $2,875 short of that right now.", answer:"personal", explain:"A specific needs calculation built entirely from this client's own salary — a textbook personal advice calculation, not a fact."},
   {text:"If we do find something for you, regardless of how you feel about it, it's legally proven to be better.", answer:"personal", explain:"Asserts a conclusion about this client's outcome before the advice process has even happened — personal advice, and a misleading claim on top of it."},
-  {text:"Honestly, with your balance, an SMSF probably makes more sense for you than what you're in now.", answer:"personal", explain:"Applies their specific balance to a structural recommendation — personal advice."},
+  {text:"Honestly, with your balance, an SMSF probably makes more sense for you than what you're in now.", answer:"personal", explain:"“Your balance” without a number still refers to one specific, real balance that only this client has. Swap in “someone’s balance” and the sentence loses the thing that makes it a recommendation — it becomes a vague generality rather than an actual verdict on whether to restructure."},
   {text:"You've got four kids relying on you — that's exactly why you need life insurance and TPD in place.", answer:"personal", explain:"Reasons directly from this client's specific dependants to a stated need — personal advice, softened by sounding like concern."},
   {text:"With your balance getting close to $3 million, you'll probably want to restructure before that new tax hits you.", answer:"personal", explain:"Applies a rule directly to their specific balance and nudges toward action — personal advice."},
   {text:"You've got two kids and you hurt yourself on the forklift — that's exactly why income protection makes sense for you.", answer:"personal", explain:"Ties this client's job and family situation directly to a product recommendation — personal advice dressed up as a caring observation."},
   {text:"Your income's right near that Division 293 threshold, so I'd pull back on contributions this year if I were you.", answer:"personal", explain:"Applies a rule to their specific income and recommends an action — personal advice."},
-  {text:"Given how long you've got until retirement, I'd be looking at a notch above what you're in now — high growth would suit you.", answer:"personal", explain:"Personal advice, correctly classified — fine for a licensed provisional adviser to say under supervision, not for unlicensed intake staff."},
+  {text:"Given how long you've got until retirement, I'd be looking at a notch above what you're in now — high growth would suit you.", answer:"personal", explain:"No exact number for “how long you’ve got,” but “what you’re in now” anchors this to this client’s actual current allocation, not a category. You can’t say “a notch above what someone’s typically in” and have it mean the same thing — the recommendation is a step up from their specific starting point. Also worth knowing: correctly classified as personal advice either way, and fine for a licensed provisional adviser to say under supervision — not for unlicensed intake staff."},
   {text:"Since you're self-employed with irregular income, I'd keep income protection outside super in your case.", answer:"personal", explain:"Tailored to their specific employment situation — personal advice."},
   {text:"I'll look at adding an extra 10% to your cover, given your situation.", answer:"personal", explain:"A specific recommended change to cover, tied to this client — personal advice, appropriate from a licensed adviser, not from intake staff."},
-  {text:"With your balance, I don't reckon the downsizer contribution is really worth it for you.", answer:"personal", explain:"A recommendation based on their specific balance — personal advice, even phrased casually."},
+  {text:"With your balance, I don't reckon the downsizer contribution is really worth it for you.", answer:"personal", explain:"Same pattern as the SMSF example above — “your balance” points to one real number the adviser has actually seen, even though it isn’t spoken aloud. The recommendation only holds for whatever that specific balance actually is, which is what makes it personal rather than general."},
   {text:"You want it to cover the mortgage, so I'd be looking at around $350,000 in life cover for you.", answer:"personal", explain:"A specific dollar recommendation built from a client's stated goal (covering the mortgage) — personal advice."},
-  {text:"Given your risk profile and how long you've got, high growth sounds like the right fit for you.", answer:"personal", explain:"References their own stated risk profile and timeframe — personal advice, even though it sounds like a general comment."},
+  {text:"Given your risk profile and how long you've got, high growth sounds like the right fit for you.", answer:"personal", explain:"This is the sneaky one — no dollar figures anywhere, so it can feel general. But “your risk profile” and “how long you’ve got” both point to information specific to this client that’s already been established earlier in the call. Swap in “someone’s risk profile and timeframe” and it stops sounding like a verdict about this particular person — which is exactly why it’s personal, not general."},
   {text:"Since you're doing this on your own with a mortgage, I think your cover should be increased to actually cover it.", answer:"personal", explain:"Reasons from this client's specific circumstances (sole earner, mortgage) to a recommended action — personal advice."},
   {text:"Given the business sale, that small business CGT contribution sounds like it could work well for you.", answer:"personal", explain:"Tied to a specific event in their life — personal advice."},
-  {text:"With your family situation, I'd nominate your spouse as the binding beneficiary.", answer:"personal", explain:"A recommendation built on their specific family situation — personal advice."}
+  {text:"With your family situation, I'd nominate your spouse as the binding beneficiary.", answer:"personal", explain:"A recommendation built on their specific family situation — personal advice."},
+
+  {text:"Your account shows two active insurance policies — life and TPD, according to what's on file.", answer:"factual", explain:"A record from the account, nothing added to it."},
+  {text:"The advisers are legally obligated to act in your best interest — that's a Corporations Act requirement, not optional.", answer:"factual", explain:"A description of the legal duty itself, not an opinion about this client's situation."},
+  {text:"There's no fee for you to be presented the advice — that's obligation-free either way.", answer:"factual", explain:"A fee-structure fact, the same for every client."},
+  {text:"The screen shows your five-year return sitting at 6.94%, with about 75% in growth assets.", answer:"factual", explain:"Reading two figures off the account — no comparison or judgement attached yet."},
+  {text:"Once you're off the call, you'll get a calendar invite by email to confirm the next appointment.", answer:"factual", explain:"A description of the admin process, not advice of any kind."},
+  {text:"I'm one of Brightday's provisional advisers, working under the mentorship of Scott Brouwer.", answer:"factual", explain:"A statement of role and supervision status — a real, correct disclosure to make."},
+  {text:"It's hard to judge a fund's performance off just one year — that's why the five-year figure gets used instead.", answer:"factual", explain:"A methodology point, not a comment on whether this client's actual return is good or bad."},
+  {text:"Your defensive allocation works out to about 17% once it's recalculated properly.", answer:"factual", explain:"A corrected figure, reported plainly."},
+  {text:"The industry standard range for a balanced option is generally between 70% and 85% in growth assets.", answer:"factual", explain:"A published industry benchmark, not a recommendation to sit anywhere in that range."},
+  {text:"A transition to retirement pension is capped at a maximum of 10% of the balance per year, regardless of who holds it.", answer:"factual", explain:"A legislated rule, true for every TTR account."},
+  {text:"It's a recorded line, so I can't give you my personal opinion on that.", answer:"factual", explain:"Correctly naming the boundary and declining to cross it — a genuinely good habit to reinforce."},
+  {text:"Would you feel comfortable if we looked into a high growth option for you?", answer:"factual", explain:"A consent question about doing further research — it isn't a recommendation itself, just checking in before proceeding."},
+  {text:"We'll do the research and come back with some options — you're not on the hook for anything either way.", answer:"factual", explain:"A description of the process and its obligation-free nature, not an opinion on the client's situation."},
+  {text:"Anything discussed today isn't advice until it comes through in writing on the next call.", answer:"factual", explain:"A statement about process and status, correctly framing today's conversation."},
+
+  {text:"If you've got a big chunk of your super in the market, you'd want to make sure it's working as hard for you as you put into it.", answer:"general", explain:"“If you’ve got a big chunk” is a condition, not a data point — it never says how big. Swap in “if someone’s got a big chunk” and it reads identically. A sentence that survives losing its “you” for a hypothetical “someone” is general advice, not personal."},
+  {text:"The Australian property market's been doing phenomenally well lately — worth having some exposure there.", answer:"general", explain:"A performance opinion plus an implied suggestion to invest in a category — general advice about an asset class."},
+  {text:"Overseas property's been performing really strongly too, if you're looking to diversify.", answer:"general", explain:"An opinion about an asset class's performance framed as a suggestion — general advice."},
+  {text:"For your age, you could generally afford to take on a bit more risk.", answer:"general", explain:"Notice it never states an actual age — “for your age” just means “for someone at that general life stage.” Swap in “for someone at that stage of their career” and the sentence is untouched. No real number is doing the work, which is the tell that it’s general, not personal."},
+  {text:"It's generally worth having a look at diversifying into infrastructure or raw materials.", answer:"general", explain:"A recommendation about asset classes, phrased generically rather than for one client."},
+  {text:"A lot of clients feel more comfortable once they understand growth versus defensive — worth getting familiar with the split.", answer:"general", explain:"Sounds like reassurance, but it's nudging toward reviewing or changing the current split — an opinion, not a fact."},
+  {text:"Most big super funds just default you into a passive strategy without asking what you're actually trying to achieve.", answer:"general", explain:"An opinion critical of an entire category of fund — priming doubt about the client's current setup, without personalising it yet."},
+  {text:"Big industry funds tend to have a chosen insurance provider — it's worth shopping around independently.", answer:"general", explain:"An opinion recommending a course of action, framed as a general truth about industry funds."},
+  {text:"It's often worth combining accounts once you're paying two sets of admin fees.", answer:"general", explain:"Same shape as the other consolidation example — “once you’re paying two sets of admin fees” describes a situation any client with two accounts could be in, without citing this client’s actual fee total. Swap “you’re” for “someone is” and it lands exactly the same way."},
+  {text:"A bucket strategy — some growth, some conservative, some cash — is a popular way to structure retirement drawdowns.", answer:"general", explain:"An opinion recommending a structure, even though it's framed as general education."},
+  {text:"Once you're within ten years of retiring, it's generally worth revisiting how much risk you're carrying.", answer:"general", explain:"“Within ten years of retiring” is a category, not this client’s real timeframe — it doesn’t reference their actual age or retirement date. Test it: “once someone’s within ten years of retiring...” reads identically. True for a whole cohort, not built from one person’s specifics."},
+  {text:"It's fairly common for people to underestimate how much cover they actually need.", answer:"general", explain:"Sounds like a neutral observation, but it's priming the client to think their own cover is probably insufficient — an opinion, not a fact."},
+  {text:"Term deposits are often seen as the safe option, but they don't always keep up with inflation.", answer:"general", explain:"An opinion comparing asset classes — general advice about a product type."},
+
+  {text:"With nearly 75% of your money in the market and only a 6.94% return, that's the biggest concern that's jumped out at us for you.", answer:"personal", explain:"Ties this client's actual allocation and return together into a verdict — personal advice, built from their own numbers."},
+  {text:"Given your balance and your timeframe, I'd be moving you from 17% up closer to 90% or 95% — what we'd call high conviction.", answer:"personal", explain:"A specific reallocation recommendation built from this client's actual balance and timeframe — personal advice."},
+  {text:"You're currently at 88% growth — for your age, you could probably do a little more, if you're comfortable with it.", answer:"personal", explain:"Combines their actual current allocation with an age-based nudge aimed specifically at them — personal advice, even softened with \"if you're comfortable.\""},
+  {text:"Since you've mentioned wanting maximum growth and you've got years until retirement, high conviction looks like the right fit for you specifically.", answer:"personal", explain:"Explicitly built from their stated goals and timeframe — personal advice."},
+  {text:"Looking at your numbers, buying a property wouldn't be the best option for you right now.", answer:"personal", explain:"A recommendation weighed against this client's own numbers and situation — personal advice, and also a category of advice (direct property) that may sit outside standard licensing scope."},
+  {text:"Given your balance is $150,000, I'd say you're taking on more risk than I'd be comfortable with for someone in your position.", answer:"personal", explain:"Ties a specific balance to a personal risk assessment — personal advice."},
+  {text:"Since you're the sole income earner with a mortgage, I'd recommend increasing your cover to reflect that.", answer:"personal", explain:"Reasons from this client's specific household and financial situation to a recommended action — personal advice."},
+  {text:"Based on what you've told me about your job on the forklift, $500,000 in TPD cover looks about right for you.", answer:"personal", explain:"A specific dollar figure built from their stated occupation — personal advice."},
+  {text:"Your balance dropped during COVID and you didn't change anything — given that, I think you've got the discipline for a high growth strategy.", answer:"personal", explain:"There’s no dollar figure here, but “your balance dropped during COVID and you didn’t change anything” is a fact about this specific client’s actual past behaviour — nobody else shares that exact history. The conclusion is drawn directly from it, which is what makes it personal rather than a general comment about resilience."},
+  {text:"Since it's just you now managing the mortgage, I'd suggest bumping your income protection up to match your full salary.", answer:"personal", explain:"A specific recommendation built from their changed personal circumstances — personal advice."},
+  {text:"Given your age and the fact you're still 12 years from retirement, I'd be comfortable recommending high conviction for you.", answer:"personal", explain:"Ties their specific age and timeframe to an explicit recommendation — personal advice."},
+  {text:"You said you want maximum growth and you've got your own share portfolio already — a high conviction option makes sense given all that.", answer:"personal", explain:"Builds directly on personal details this client has shared — personal advice."},
+  {text:"Given you've told me you're planning to retire within the next few years, I think it's worth locking in some defensive assets now.", answer:"personal", explain:"“Within the next few years” isn’t an exact date, but it’s repeating something this client specifically told the adviser about their own plans. Swap in a hypothetical client and the sentence no longer makes sense, because it’s answering something only this person said — that’s what keeps it personal despite the lack of a hard number."}
 ];
 
 function shuffleArray(arr){
@@ -2335,6 +2525,226 @@ function showQuizComplete(){
 }
 
 startBatch(true);
+
+/* ============ PRACTICE EXAM ============ */
+let examQuestions = [];
+let examAnswers = [];
+let examPos = 0;
+
+function stratifiedExamSet(){
+  const byCategory = { factual: [], general: [], personal: [] };
+  quizData.forEach((q, i) => byCategory[q.answer].push(i));
+  const counts = { factual: 7, general: 6, personal: 7 };
+  let picked = [];
+  Object.keys(counts).forEach(cat => {
+    const shuffled = shuffleArray(byCategory[cat]);
+    picked = picked.concat(shuffled.slice(0, counts[cat]));
+  });
+  return shuffleArray(picked);
+}
+
+function startExam(){
+  examQuestions = stratifiedExamSet();
+  examAnswers = new Array(examQuestions.length).fill(null);
+  examPos = 0;
+  document.getElementById('exam-overlay').classList.add('active');
+  document.getElementById('exam-question-view').style.display = '';
+  document.getElementById('exam-results-view').style.display = 'none';
+  document.getElementById('exam-mistakes').classList.remove('show');
+  document.getElementById('exam-mistakes').innerHTML = '';
+  document.getElementById('exam-mistakes-btn').textContent = 'See my mistakes';
+  window.scrollTo(0, 0);
+  renderExamQuestion();
+}
+
+function exitExam(){
+  document.getElementById('exam-overlay').classList.remove('active');
+}
+
+function renderExamQuestion(){
+  const dataIndex = examQuestions[examPos];
+  const q = quizData[dataIndex];
+  document.getElementById('exam-statement').textContent = '"' + q.text + '"';
+  document.getElementById('exam-qnum').textContent = 'Question ' + (examPos + 1) + ' of ' + examQuestions.length;
+  document.getElementById('exam-progress-fill').style.width = Math.round(((examPos + 1) / examQuestions.length) * 100) + '%';
+  document.getElementById('exam-prev').disabled = examPos === 0;
+  document.getElementById('exam-next').textContent = examPos === examQuestions.length - 1 ? 'Finish exam' : 'Next →';
+
+  const btns = { factual: document.getElementById('exam-btn-factual'), general: document.getElementById('exam-btn-general'), personal: document.getElementById('exam-btn-personal') };
+  const feedback = document.getElementById('exam-feedback');
+  Object.values(btns).forEach(b => { b.classList.remove('selected', 'correct-safe', 'correct-danger', 'wrong-pick'); b.disabled = false; });
+
+  const chosen = examAnswers[examPos];
+  if(chosen){
+    Object.values(btns).forEach(b => { b.disabled = true; });
+    const correctClass = q.answer === 'factual' ? 'correct-safe' : 'correct-danger';
+    btns[q.answer].classList.add(correctClass);
+    if(chosen !== q.answer) btns[chosen].classList.add('wrong-pick');
+    feedback.classList.remove('empty');
+    let msg;
+    if(q.answer !== 'factual'){
+      msg = 'This is ' + labelFor(q.answer) + ' \u2014 not something this team should say on a call, regardless of whether you classified it correctly. ' + (chosen === q.answer ? 'Correct classification. ' : 'The correct classification was ' + labelFor(q.answer) + '. ') + q.explain;
+      feedback.classList.add('danger');
+    } else {
+      msg = (chosen === q.answer ? 'Correct. ' : 'Not quite \u2014 the answer is Factual. ') + q.explain;
+      feedback.classList.remove('danger');
+    }
+    feedback.textContent = msg;
+  } else {
+    feedback.classList.add('empty');
+    feedback.classList.remove('danger');
+    feedback.textContent = '';
+  }
+}
+
+function answerExam(choice){
+  if(examAnswers[examPos] !== null) return;
+  examAnswers[examPos] = choice;
+  renderExamQuestion();
+}
+
+function examNav(direction){
+  if(direction > 0 && examPos === examQuestions.length - 1){
+    finishExam();
+    return;
+  }
+  const newPos = examPos + direction;
+  if(newPos < 0 || newPos >= examQuestions.length) return;
+  examPos = newPos;
+  renderExamQuestion();
+}
+
+function finishExam(){
+  document.getElementById('exam-question-view').style.display = 'none';
+  document.getElementById('exam-results-view').style.display = '';
+  renderExamResults();
+  window.scrollTo(0, 0);
+}
+
+function examCategoryStats(){
+  const stats = {
+    factual: { correct: 0, total: 0 },
+    general: { correct: 0, total: 0 },
+    personal: { correct: 0, total: 0 }
+  };
+  examQuestions.forEach((dataIndex, i) => {
+    const cat = quizData[dataIndex].answer;
+    stats[cat].total++;
+    if(examAnswers[i] === cat) stats[cat].correct++;
+  });
+  return stats;
+}
+
+function renderExamResults(){
+  const stats = examCategoryStats();
+  const totalCorrect = stats.factual.correct + stats.general.correct + stats.personal.correct;
+  document.getElementById('exam-score-big').textContent = totalCorrect + '/' + examQuestions.length;
+  document.getElementById('exam-cat-factual').textContent = stats.factual.correct + '/' + stats.factual.total;
+  document.getElementById('exam-cat-general').textContent = stats.general.correct + '/' + stats.general.total;
+  document.getElementById('exam-cat-personal').textContent = stats.personal.correct + '/' + stats.personal.total;
+
+  // work out weakest category by percentage
+  const cats = ['factual', 'general', 'personal'];
+  let weakest = null, weakestPct = 2;
+  cats.forEach(c => {
+    const pct = stats[c].total ? stats[c].correct / stats[c].total : 1;
+    if(pct < weakestPct){ weakestPct = pct; weakest = c; }
+  });
+
+  const focusMessages = {
+    factual: 'Factual questions were the weakest area this round — these are meant to be the safe, straightforward ones. Worth re-reading the "Three tiers" section at the top of this tab and running another round to make sure the basics are locked in.',
+    general: 'General advice was the weakest area this round — this is usually the trickiest category, since it often sounds like harmless chat rather than advice. Revisit "Same fact, three ways" further up this tab, paying close attention to the general-advice column specifically.',
+    personal: 'Personal advice was the weakest area this round — watch for sentences that fold in a client\u2019s own numbers or circumstances to reach a verdict. The "Check a real client question" tool above is good practice for spotting this pattern.'
+  };
+  const allStrong = weakestPct >= 0.85;
+  document.getElementById('exam-focus-text').textContent = allStrong
+    ? 'Strong result across all three categories this round. Keep the 90-question training quiz in rotation to stay sharp, and retake this exam periodically as a refresher.'
+    : focusMessages[weakest];
+
+  // build mistakes list (hidden until toggled)
+  let html = '';
+  examQuestions.forEach((dataIndex, i) => {
+    const q = quizData[dataIndex];
+    const userAns = examAnswers[i];
+    if(userAns !== q.answer){
+      html += '<div class="exam-mistake-card">';
+      html += '<div class="em-q">"' + q.text + '"</div>';
+      html += '<div class="em-row"><b>Your answer:</b> ' + (userAns ? labelFor(userAns) : 'Not answered') + '</div>';
+      html += '<div class="em-row"><b>Correct answer:</b> ' + labelFor(q.answer) + '</div>';
+      html += '<div class="em-explain">' + q.explain + '</div>';
+      html += '</div>';
+    }
+  });
+  if(!html){
+    html = '<p style="font-size:14px; color:var(--ink-500);">No mistakes this round \u2014 nothing to review.</p>';
+  }
+  document.getElementById('exam-mistakes').innerHTML = html;
+}
+
+function toggleMistakes(){
+  const el = document.getElementById('exam-mistakes');
+  const btn = document.getElementById('exam-mistakes-btn');
+  el.classList.toggle('show');
+  btn.textContent = el.classList.contains('show') ? 'Hide my mistakes' : 'See my mistakes';
+}
+
+function downloadExamPdf(){
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF({ unit: 'pt', format: 'a4' });
+  const stats = examCategoryStats();
+  const totalCorrect = stats.factual.correct + stats.general.correct + stats.personal.correct;
+  const margin = 48;
+  let y = margin;
+  const pageW = doc.internal.pageSize.getWidth();
+  const maxW = pageW - margin * 2;
+
+  doc.setFont('helvetica', 'bold'); doc.setFontSize(18); doc.setTextColor(19, 53, 90);
+  doc.text('Practice Exam Report', margin, y); y += 22;
+  doc.setFont('helvetica', 'normal'); doc.setFontSize(10); doc.setTextColor(100, 112, 132);
+  doc.text('Brightday Australia \u00b7 Factual vs Advice \u00b7 ' + new Date().toLocaleDateString('en-AU'), margin, y); y += 28;
+
+  doc.setFont('helvetica', 'bold'); doc.setFontSize(14); doc.setTextColor(19, 53, 90);
+  doc.text('Score: ' + totalCorrect + ' / ' + examQuestions.length, margin, y); y += 22;
+
+  doc.setFontSize(11);
+  doc.text('Factual: ' + stats.factual.correct + '/' + stats.factual.total, margin, y);
+  doc.text('General: ' + stats.general.correct + '/' + stats.general.total, margin + 180, y);
+  doc.text('Personal: ' + stats.personal.correct + '/' + stats.personal.total, margin + 340, y);
+  y += 28;
+
+  doc.setFont('helvetica', 'bold'); doc.setFontSize(12); doc.setTextColor(245, 13, 115);
+  doc.text('What to focus on next', margin, y); y += 16;
+  doc.setFont('helvetica', 'normal'); doc.setFontSize(10.5); doc.setTextColor(30, 39, 51);
+  const focusText = document.getElementById('exam-focus-text').textContent;
+  const focusLines = doc.splitTextToSize(focusText, maxW);
+  doc.text(focusLines, margin, y); y += focusLines.length * 13 + 20;
+
+  doc.setFont('helvetica', 'bold'); doc.setFontSize(13); doc.setTextColor(19, 53, 90);
+  doc.text('Questions to review', margin, y); y += 18;
+
+  let anyMistakes = false;
+  examQuestions.forEach((dataIndex, i) => {
+    const q = quizData[dataIndex];
+    const userAns = examAnswers[i];
+    if(userAns === q.answer) return;
+    anyMistakes = true;
+    if(y > 750){ doc.addPage(); y = margin; }
+    doc.setFont('helvetica', 'bold'); doc.setFontSize(10.5); doc.setTextColor(19, 53, 90);
+    const qLines = doc.splitTextToSize('"' + q.text + '"', maxW);
+    doc.text(qLines, margin, y); y += qLines.length * 13 + 4;
+    doc.setFont('helvetica', 'normal'); doc.setFontSize(9.5); doc.setTextColor(154, 10, 79);
+    doc.text('Your answer: ' + (userAns ? labelFor(userAns) : 'Not answered') + '   |   Correct: ' + labelFor(q.answer), margin, y); y += 14;
+    doc.setTextColor(30, 39, 51);
+    const explainLines = doc.splitTextToSize(q.explain, maxW);
+    doc.text(explainLines, margin, y); y += explainLines.length * 12 + 16;
+  });
+  if(!anyMistakes){
+    doc.setFont('helvetica', 'normal'); doc.setFontSize(10.5); doc.setTextColor(30, 39, 51);
+    doc.text('No mistakes this round.', margin, y);
+  }
+
+  doc.save('brightday-practice-exam-results.pdf');
+}
 
 const startTab = window.location.hash ? window.location.hash.substring(1) : 'home';
 showTab(crumbMap[startTab] ? startTab : 'home');

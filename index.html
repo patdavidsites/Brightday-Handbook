@@ -1866,7 +1866,7 @@ table.data-table tr:nth-child(even) td{background:var(--paper-1);}
 
         <div class="section-block">
           <h2>Training quiz — factual, general, or personal advice?</h2>
-          <p>90 statements written the way they might actually come out on a call, shuffled and served 10 at a time. Good for onboarding a new client manager, or a quick refresher for the whole team.</p>
+          <p>89 statements written the way they might actually come out on a call, shuffled and served 10 at a time. Good for onboarding a new client manager, or a quick refresher for the whole team.</p>
           <div class="quiz-box">
             <div id="quiz-active-view">
               <div class="quiz-progress" id="quiz-progress">Question 1 of 10</div>
@@ -2406,7 +2406,6 @@ const quizData = [
   {text:"The industry standard range for a balanced option is generally between 70% and 85% in growth assets.", answer:"factual", explain:"A published industry benchmark, not a recommendation to sit anywhere in that range."},
   {text:"A transition to retirement pension is capped at a maximum of 10% of the balance per year, regardless of who holds it.", answer:"factual", explain:"A legislated rule, true for every TTR account."},
   {text:"It's a recorded line, so I can't give you my personal opinion on that.", answer:"factual", explain:"Correctly naming the boundary and declining to cross it — a genuinely good habit to reinforce."},
-  {text:"Would you feel comfortable if we looked into a high growth option for you?", answer:"factual", explain:"A consent question about doing further research — it isn't a recommendation itself, just checking in before proceeding."},
   {text:"We'll do the research and come back with some options — you're not on the hook for anything either way.", answer:"factual", explain:"A description of the process and its obligation-free nature, not an opinion on the client's situation."},
   {text:"Anything discussed today isn't advice until it comes through in writing on the next call.", answer:"factual", explain:"A statement about process and status, correctly framing today's conversation."},
 
@@ -2703,7 +2702,7 @@ function renderExamResults(){
   };
   const allStrong = weakestPct >= 0.85;
   document.getElementById('exam-focus-text').textContent = allStrong
-    ? 'Strong result across all three categories this round. Keep the 90-question training quiz in rotation to stay sharp, and retake this exam periodically as a refresher.'
+    ? 'Strong result across all three categories this round. Keep the 89-question training quiz in rotation to stay sharp, and retake this exam periodically as a refresher.'
     : focusMessages[weakest];
 
   // build mistakes list (hidden until toggled)

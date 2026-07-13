@@ -541,6 +541,23 @@ table.data-table tr:nth-child(even) td{background:var(--paper-1);}
 .exam-results-actions button.primary{background:var(--pink-500); border-color:var(--pink-500); color:#fff;}
 .exam-results-actions button.primary:hover{background:var(--maroon-700); border-color:var(--maroon-700);}
 
+.exam-tips{margin-top:26px;}
+.exam-tips-heading{font-family:'Source Serif 4', serif; font-size:20px; color:var(--navy-900); margin-bottom:6px;}
+.exam-tips-sub{font-size:13px; color:var(--ink-500); margin-bottom:16px;}
+.exam-tip-block{margin-bottom:24px;}
+.exam-tip-block-title{display:inline-flex; align-items:center; gap:8px; font-size:12px; font-weight:800; text-transform:uppercase; letter-spacing:.06em; padding:6px 14px; border-radius:14px; margin-bottom:12px;}
+.exam-tip-block-title.general{background:var(--pink-050); color:var(--pink-500);}
+.exam-tip-block-title.personal{background:#FBEAF1; color:var(--maroon-700);}
+.exam-tip-block-title.factual{background:var(--paper-1); color:var(--navy-800);}
+.exam-tip-row{display:flex; gap:14px; margin-bottom:12px; align-items:stretch;}
+.exam-tip-cell{flex:1; border-radius:8px; padding:14px 16px; font-size:13.5px; line-height:1.5;}
+.exam-tip-cell.avoid{background:#FDF0F5; color:#5A1230;}
+.exam-tip-cell.instead{background:var(--paper-1); color:var(--navy-900);}
+.exam-tip-cell .tc-label{display:block; font-size:10.5px; font-weight:800; text-transform:uppercase; letter-spacing:.05em; margin-bottom:6px;}
+.exam-tip-cell.avoid .tc-label{color:var(--maroon-700);}
+.exam-tip-cell.instead .tc-label{color:var(--navy-700);}
+.exam-tips-allgood{background:var(--paper-1); border-radius:10px; padding:18px 20px; font-size:14px; color:var(--navy-900); margin-bottom:10px;}
+
 .exam-mistakes{margin-top:24px; display:none;}
 .exam-mistakes.show{display:block;}
 .exam-mistake-card{background:#fff; border:1px solid var(--paper-line); border-left:4px solid var(--maroon-700); border-radius:0 8px 8px 0; padding:16px 20px; margin-bottom:14px;}
@@ -1929,6 +1946,8 @@ table.data-table tr:nth-child(even) td{background:var(--paper-1);}
         <p id="exam-focus-text">Loading recommendation…</p>
       </div>
 
+      <div class="exam-tips" id="exam-tips"></div>
+
       <div class="exam-results-actions">
         <button class="primary" onclick="toggleMistakes()" id="exam-mistakes-btn">See my mistakes</button>
         <button onclick="downloadExamPdf()">Download PDF report</button>
@@ -2334,7 +2353,7 @@ const quizData = [
   {text:"Term deposits inside super are a pretty safe bet if you're worried about the market.", answer:"general", explain:"“If you’re worried about the market” responds to a feeling, not a fact about this client’s actual holdings or balance. It would land the same way on anyone who voiced that worry — nothing here is specific to this client’s real numbers."},
   {text:"Having $150,000 inside your super with 88% invested in the market, you want your risk to reward ratio to be there.", answer:"personal", explain:"The same \"risk to reward\" idea as a general truism, but tied to this client's actual balance and allocation — that's what turns it into personal advice."},
   {text:"Based on your $110,000 salary, ideally you'd want about $6,875 a month in income protection — so you're about $2,875 short of that right now.", answer:"personal", explain:"A specific needs calculation built entirely from this client's own salary — a textbook personal advice calculation, not a fact."},
-  {text:"If we do find something for you, regardless of how you feel about it, it's legally proven to be better.", answer:"personal", explain:"Asserts a conclusion about this client's outcome before the advice process has even happened — personal advice, and a misleading claim on top of it."},
+  {text:"Whatever we come back with for you will check out as the better option — that holds regardless of how you feel about it.", answer:"personal", explain:"Asserts a conclusion about this client's outcome before the advice process has even happened — personal advice, and a misleading claim on top of it."},
   {text:"Honestly, with your balance, an SMSF probably makes more sense for you than what you're in now.", answer:"personal", explain:"“Your balance” without a number still refers to one specific, real balance that only this client has. Swap in “someone’s balance” and the sentence loses the thing that makes it a recommendation — it becomes a vague generality rather than an actual verdict on whether to restructure."},
   {text:"You've got four kids relying on you — that's exactly why you need life insurance and TPD in place.", answer:"personal", explain:"Reasons directly from this client's specific dependants to a stated need — personal advice, softened by sounding like concern."},
   {text:"With your balance getting close to $3 million, you'll probably want to restructure before that new tax hits you.", answer:"personal", explain:"Applies a rule directly to their specific balance and nudges toward action — personal advice."},
@@ -2368,7 +2387,7 @@ const quizData = [
   {text:"If you've got a big chunk of your super in the market, you'd want to make sure it's working as hard for you as you put into it.", answer:"general", explain:"“If you’ve got a big chunk” is a condition, not a data point — it never says how big. Swap in “if someone’s got a big chunk” and it reads identically. A sentence that survives losing its “you” for a hypothetical “someone” is general advice, not personal."},
   {text:"The Australian property market's been doing phenomenally well lately — worth having some exposure there.", answer:"general", explain:"A performance opinion plus an implied suggestion to invest in a category — general advice about an asset class."},
   {text:"Overseas property's been performing really strongly too, if you're looking to diversify.", answer:"general", explain:"An opinion about an asset class's performance framed as a suggestion — general advice."},
-  {text:"For your age, you could generally afford to take on a bit more risk.", answer:"general", explain:"Notice it never states an actual age — “for your age” just means “for someone at that general life stage.” Swap in “for someone at that stage of their career” and the sentence is untouched. No real number is doing the work, which is the tell that it’s general, not personal."},
+  {text:"For your age, you could generally afford to take on a bit more risk.", answer:"personal", explain:"No exact number, but “your age” is still addressed directly at this one client rather than a category — treated as personal advice here, erring on the side of caution rather than resting on the general/personal line."},
   {text:"It's generally worth having a look at diversifying into infrastructure or raw materials.", answer:"general", explain:"A recommendation about asset classes, phrased generically rather than for one client."},
   {text:"A lot of clients feel more comfortable once they understand growth versus defensive — worth getting familiar with the split.", answer:"general", explain:"Sounds like reassurance, but it's nudging toward reviewing or changing the current split — an opinion, not a fact."},
   {text:"Most big super funds just default you into a passive strategy without asking what you're actually trying to achieve.", answer:"general", explain:"An opinion critical of an entire category of fund — priming doubt about the client's current setup, without personalising it yet."},
@@ -2679,6 +2698,65 @@ function renderExamResults(){
     html = '<p style="font-size:14px; color:var(--ink-500);">No mistakes this round \u2014 nothing to review.</p>';
   }
   document.getElementById('exam-mistakes').innerHTML = html;
+
+  renderPracticalTips(stats, weakest, weakestPct);
+}
+
+const practicalTips = {
+  factual:[
+    { avoid:"Not sure how to answer, so staying vague or guessing at a number.", instead:"\"The concessional cap this year is $32,500\" \u2014 just the figure, stated plainly. If you don't know it, say \"let me check that\" rather than estimate." },
+    { avoid:"Adding a comment on top of a fact, like whether it's good or bad.", instead:"State the number or rule on its own \u2014 e.g. \"Preservation age is 60\" \u2014 and stop there. No comparison, no opinion attached." },
+    { avoid:"Treating a licensing disclosure as optional small talk.", instead:"\"I'm not the financial adviser, so I won't be making recommendations about your super or investments\" \u2014 say this early, plainly, every time." }
+  ],
+  general:[
+    { avoid:"\"That fund's been pretty average \u2014 there are better performers out there.\"", instead:"\"Here's the published return for that fund \u2014 I'll pass it to the team for their view.\"" },
+    { avoid:"\"Combining your accounts is generally the smart move \u2014 saves you on fees.\"", instead:"\"I'll note you've got a couple of accounts \u2014 the adviser can look at whether combining makes sense for you.\"" },
+    { avoid:"\"For your age, you could generally afford to take on a bit more risk.\"", instead:"\"I'll let the adviser talk you through what different risk options could look like for someone in your situation.\"" },
+    { avoid:"\"Their job's not to pay out as much as they can \u2014 their job's to minimise as much as they pay out.\"", instead:"\"Default cover gets assessed against your job classification at claim time \u2014 that's just how it's designed to work.\"" },
+    { avoid:"\"It's generally worth making personal contributions if you're on a lower income.\"", instead:"\"There's a government co-contribution scheme with income thresholds \u2014 the adviser can check whether you qualify.\"" }
+  ],
+  personal:[
+    { avoid:"\"Based on your $110,000 salary, you're about $2,875 a month short of full cover.\"", instead:"\"Income protection's often calculated at up to 75% of salary \u2014 the adviser will run the exact numbers for you.\"" },
+    { avoid:"\"You've got four kids relying on you \u2014 that's exactly why you need life insurance and TPD in place.\"", instead:"\"I'll note your family situation down for the team \u2014 they'll look at what cover options might suit.\"" },
+    { avoid:"\"Given how long you've got until retirement, I'd be looking at a notch above what you're in now.\"", instead:"\"The adviser will be able to run through what a different risk profile could look like given your timeframe.\"" },
+    { avoid:"\"Whatever we come back with for you will check out as the better option, regardless of how you feel about it.\"", instead:"\"We'll come back with the numbers \u2014 and if you're better off staying where you are, we'll tell you that too.\"" },
+    { avoid:"\"Honestly, with your balance, an SMSF probably makes more sense for you than what you're in now.\"", instead:"\"I'll pass your balance and situation to the adviser \u2014 they can look at whether an SMSF is worth exploring for you.\"" }
+  ]
+};
+
+function renderPracticalTips(stats, weakest, weakestPct){
+  const container = document.getElementById('exam-tips');
+  const catLabels = { factual:'Factual', general:'General advice', personal:'Personal advice' };
+  const cats = ['factual','general','personal'];
+
+  // decide which categories get a tip block: anything under 90%, weakest always included, worst-first order
+  const needsWork = cats
+    .map(c => ({ cat:c, pct: stats[c].total ? stats[c].correct / stats[c].total : 1 }))
+    .filter(c => c.pct < 0.9 || c.cat === weakest)
+    .sort((a,b) => a.pct - b.pct);
+
+  let html = '<div class="exam-tips-heading">What you can and can\u2019t say \u2014 with real examples</div>';
+  html += '<div class="exam-tips-sub">Even if this exam never gets retaken, these are the concrete swaps worth remembering from this round.</div>';
+
+  if(needsWork.length === 0){
+    html += '<div class="exam-tips-allgood">Every category came in at 90% or better this round \u2014 genuinely strong. Use the pairs below as a refresher regardless, since these are the patterns most likely to slip out on a live call.</div>';
+    needsWork.push({ cat:'general', pct:1 }, { cat:'personal', pct:1 });
+  }
+
+  needsWork.forEach(entry => {
+    const tips = practicalTips[entry.cat];
+    html += '<div class="exam-tip-block">';
+    html += '<span class="exam-tip-block-title ' + entry.cat + '">' + catLabels[entry.cat] + ' \u2014 ' + Math.round(entry.pct * 100) + '% this round</span>';
+    tips.forEach(t => {
+      html += '<div class="exam-tip-row">';
+      html += '<div class="exam-tip-cell avoid"><span class="tc-label">Don\u2019t say</span>' + t.avoid + '</div>';
+      html += '<div class="exam-tip-cell instead"><span class="tc-label">Say instead</span>' + t.instead + '</div>';
+      html += '</div>';
+    });
+    html += '</div>';
+  });
+
+  container.innerHTML = html;
 }
 
 function toggleMistakes(){
@@ -2740,8 +2818,49 @@ function downloadExamPdf(){
   });
   if(!anyMistakes){
     doc.setFont('helvetica', 'normal'); doc.setFontSize(10.5); doc.setTextColor(30, 39, 51);
-    doc.text('No mistakes this round.', margin, y);
+    doc.text('No mistakes this round.', margin, y); y += 20;
   }
+
+  // practical examples, weakest categories first
+  const cats = ['factual', 'general', 'personal'];
+  let weakestForPdf = null, weakestPctForPdf = 2;
+  cats.forEach(c => {
+    const pct = stats[c].total ? stats[c].correct / stats[c].total : 1;
+    if(pct < weakestPctForPdf){ weakestPctForPdf = pct; weakestForPdf = c; }
+  });
+  const catLabels = { factual: 'Factual', general: 'General advice', personal: 'Personal advice' };
+  let tipCats = cats
+    .map(c => ({ cat: c, pct: stats[c].total ? stats[c].correct / stats[c].total : 1 }))
+    .filter(c => c.pct < 0.9 || c.cat === weakestForPdf)
+    .sort((a, b) => a.pct - b.pct);
+  if(tipCats.length === 0) tipCats = [{ cat: 'general', pct: 1 }, { cat: 'personal', pct: 1 }];
+
+  if(y > 700){ doc.addPage(); y = margin; }
+  doc.setFont('helvetica', 'bold'); doc.setFontSize(13); doc.setTextColor(19, 53, 90);
+  doc.text('What you can and can\u2019t say — with examples', margin, y); y += 20;
+
+  tipCats.forEach(entry => {
+    const tips = practicalTips[entry.cat];
+    if(y > 700){ doc.addPage(); y = margin; }
+    doc.setFont('helvetica', 'bold'); doc.setFontSize(11); doc.setTextColor(245, 13, 115);
+    doc.text(catLabels[entry.cat] + ' — ' + Math.round(entry.pct * 100) + '% this round', margin, y); y += 16;
+
+    tips.forEach(t => {
+      if(y > 720){ doc.addPage(); y = margin; }
+      doc.setFont('helvetica', 'bold'); doc.setFontSize(9.5); doc.setTextColor(154, 10, 79);
+      doc.text('DON\u2019T SAY', margin, y); y += 12;
+      doc.setFont('helvetica', 'normal'); doc.setTextColor(30, 39, 51);
+      const avoidLines = doc.splitTextToSize(t.avoid, maxW);
+      doc.text(avoidLines, margin, y); y += avoidLines.length * 12 + 6;
+
+      doc.setFont('helvetica', 'bold'); doc.setFontSize(9.5); doc.setTextColor(19, 53, 90);
+      doc.text('SAY INSTEAD', margin, y); y += 12;
+      doc.setFont('helvetica', 'normal'); doc.setTextColor(30, 39, 51);
+      const insteadLines = doc.splitTextToSize(t.instead, maxW);
+      doc.text(insteadLines, margin, y); y += insteadLines.length * 12 + 16;
+    });
+    y += 6;
+  });
 
   doc.save('brightday-practice-exam-results.pdf');
 }

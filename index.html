@@ -152,6 +152,91 @@ body{
   line-height:1.5;
 }
 
+.spine-secret{
+  display:block;
+  padding:10px 18px 2px 4px;
+  font-size:10px;
+  color:rgba(255,255,255,0.22);
+  text-decoration:none;
+  background:none;
+  border:none;
+  cursor:pointer;
+  font-family:'Public Sans', sans-serif;
+  text-align:left;
+  letter-spacing:.02em;
+  transition:color .15s ease;
+}
+.spine-secret:hover{color:rgba(255,255,255,0.55);}
+
+/* ============ ADVISER QUESTIONS TAB ============ */
+.aq-toggle{display:flex; gap:8px; margin:0 0 26px 0;}
+.aq-toggle-btn{
+  font-family:'Public Sans', sans-serif;
+  font-size:13px;
+  font-weight:600;
+  color:var(--ink-500);
+  background:var(--paper-1);
+  border:1px solid var(--paper-line);
+  border-radius:20px;
+  padding:8px 18px;
+  cursor:pointer;
+  transition:all .15s ease;
+}
+.aq-toggle-btn:hover{color:var(--navy-900); border-color:var(--navy-600);}
+.aq-toggle-btn.active{background:var(--navy-900); color:#fff; border-color:var(--navy-900);}
+
+.aq-view{display:none;}
+.aq-view.active{display:block;}
+
+.aq-select{
+  display:block;
+  width:100%;
+  max-width:420px;
+  font-family:'Public Sans', sans-serif;
+  font-size:14px;
+  font-weight:600;
+  color:var(--navy-900);
+  background:#fff;
+  border:1px solid var(--paper-line);
+  border-radius:8px;
+  padding:10px 14px;
+  margin:0 0 22px 0;
+  cursor:pointer;
+}
+.aq-select:focus{outline:none; border-color:var(--pink-500);}
+
+.aq-group{margin-bottom:34px;}
+.aq-group-title{
+  font-family:'Source Serif 4', serif;
+  font-size:17px;
+  color:var(--navy-900);
+  background:var(--pink-050);
+  border-left:4px solid var(--pink-500);
+  padding:8px 16px;
+  border-radius:0 6px 6px 0;
+  margin:0 0 14px 0;
+}
+.aq-item{
+  background:#fff;
+  border:1px solid var(--paper-line);
+  border-radius:var(--radius-card);
+  padding:14px 18px;
+  margin-bottom:10px;
+}
+.aq-item .aq-q{font-size:14px; font-weight:700; color:var(--navy-800); margin:0 0 6px 0; line-height:1.5;}
+.aq-item .aq-a{font-size:13.5px; color:var(--ink-700); margin:0; line-height:1.6;}
+.aq-note{
+  background:var(--paper-1);
+  border:1px dashed var(--ink-400);
+  border-radius:var(--radius-card);
+  padding:12px 18px;
+  margin-bottom:10px;
+  font-size:13px;
+  color:var(--ink-700);
+  line-height:1.6;
+}
+.aq-note b{color:var(--navy-800);}
+
 .spine-search{
   margin-top:auto;
   padding:16px 18px 0 4px;
@@ -685,6 +770,7 @@ table.data-table tr:nth-child(even) td{background:var(--paper-1);}
     <div class="spine-foot">
       Internal reference only.<br>Not to be shared with clients.
     </div>
+    <button class="spine-secret" onclick="showTab('adviser-questions')">adviser questions</button>
   </nav>
 
   <!-- ================= PAGE / CONTENT ================= -->
@@ -1911,6 +1997,30 @@ table.data-table tr:nth-child(even) td{background:var(--paper-1);}
         </div>
       </section>
 
+      <!-- ========== ADVISER QUESTIONS (hidden entry point) ========== -->
+      <section class="panel" id="panel-adviser-questions">
+        <h1 class="page-title">Adviser questions</h1>
+        <p class="page-sub">Real client questions pulled from SOA presentation and follow-up call transcripts, with the answers actually given. Anonymised — not attributable to a specific call or client.</p>
+
+        <div class="aq-toggle">
+          <button class="aq-toggle-btn active" id="aq-btn-page" onclick="showAdviserView('page')">By SOA page</button>
+          <button class="aq-toggle-btn" id="aq-btn-topic" onclick="showAdviserView('topic')">By topic</button>
+        </div>
+
+        <div class="callout">
+          Page references are approximate — SOA page numbers shift slightly by client and document length. Items with no reliable page tie (mostly from follow-up calls, not the SOA walkthrough itself) sit in a "not page-specific" group at the end of the page view.
+        </div>
+
+        <div class="aq-view active" id="aq-view-page">
+          <select class="aq-select" id="aq-page-select" onchange="filterAdviserQA('page', this.value)"></select>
+          <div id="aq-page-results"></div>
+        </div>
+        <div class="aq-view" id="aq-view-topic">
+          <select class="aq-select" id="aq-topic-select" onchange="filterAdviserQA('topic', this.value)"></select>
+          <div id="aq-topic-results"></div>
+        </div>
+      </section>
+
     </div>
   </div>
 </div>
@@ -2001,7 +2111,8 @@ const crumbMap = {
   smsf: "Contents  ›  11 SMSF",
   "medication-questions": "Contents  ›  12 Medication questions",
   "complex-clients": "Contents  ›  13 Complex clients",
-  "factual-vs-advice": "Contents  ›  14 Factual info vs advice"
+  "factual-vs-advice": "Contents  ›  14 Factual info vs advice",
+  "adviser-questions": "Adviser questions"
 };
 
 function showTab(id){
@@ -2013,9 +2124,9 @@ function showTab(id){
   document.getElementById('crumb-text').textContent = crumbMap[id] || id;
   document.getElementById('home-top-banner').classList.toggle('active', id === 'home');
   document.getElementById('sidebar-brand').style.display = id === 'home' ? 'none' : '';
-  document.querySelector('.page-inner').scrollIntoView({behavior:'instant', block:'start'});
-  window.scrollTo(0,0);
-  history.replaceState(null, '', '#' + id);
+  try{ document.querySelector('.page-inner').scrollIntoView({behavior:'instant', block:'start'}); }catch(e){}
+  try{ window.scrollTo(0,0); }catch(e){}
+  try{ history.replaceState(null, '', '#' + id); }catch(e){}
 }
 
 function fmt(n){
@@ -2890,9 +3001,348 @@ function downloadExamPdf(){
   doc.save('brightday-practice-exam-results.pdf');
 }
 
+
+/* ============ ADVISER QUESTIONS DATA ============ */
+const adviserQAData = [
+  // --- Page 16 area: Strategy Recommendations & Estate Planning ---
+  {topic:"Estate Planning / Beneficiaries", page:16,
+    q:`Why do I need a binding beneficiary nomination instead of just relying on my will?`,
+    a:`Super isn't a "willable" asset — it doesn't automatically follow what's written in a will. A non-binding nomination is just a suggestion to the fund trustee and can be overridden or contested. A binding nomination is a binding agreement that the fund must pay out to the named person(s), with no discretion. Binding nominations need to be kept up to date (reviewed at annual reviews) — an outdated one could still legally pay out to an unintended person (e.g. an ex-partner) if it isn't updated.`},
+  {topic:"Estate Planning / Beneficiaries", page:16,
+    q:`If my partner and I are both nominated as each other's beneficiary and we both pass away together (e.g. a car accident) — does it go straight to our kids, or does it have to go through something else?`,
+    a:`If the primary nominated beneficiary has also passed away, it goes to that person's estate, not directly to the kids — it then follows whatever the will specifies (e.g. if the will says it passes to the kids in that event, that's what happens). It's not an automatic direct pass-through; the will still matters here.`},
+  {topic:"Insurance", page:16,
+    q:`What does "opting in" to a super fund's insurance mean?`,
+    a:`It instructs the fund not to cancel the insurance under any circumstance, unless the account balance hits zero — it keeps cover in force.`},
+  {topic:"Risk / Investment Strategy", page:16,
+    q:`Why haven't I heard of [the recommended fund/platform] before?`,
+    a:`It's a "wrap"/adviser-driven platform — it doesn't market to the public, and only takes on clients who already have an adviser.`},
+
+  // --- Page 17: Fees ---
+  {topic:"Fees", page:17,
+    q:`Is this fee for financial advice, or does it cover ongoing management too?`,
+    a:`The upfront fee (commonly around $4,950) covers advice preparation, strategy research, the licensee fee, and implementation. The ongoing fee (1% + GST, or 1.1% of balance, capped around $10k/yr) covers ongoing management and annual reviews, and encompasses financial advice too.`},
+  {topic:"Fees", page:17,
+    q:`If we later add my partner's super too, does that mean paying two lots of fees, or would it combine into one?`,
+    a:`The upfront fee is generally a flat cost regardless. The ongoing/management fee for a combined balance is more case-by-case — this is the kind of thing worth checking with management rather than giving a firm answer on the spot.`},
+
+  // --- Page 18: Insurance commission ---
+  {topic:"Fees", page:18,
+    q:`Do advisers get paid commission on insurance?`,
+    a:`Yes — this is disclosed explicitly as a standard line item in the SOA, on its own page.`},
+  {topic:"Fees", page:18,
+    q:`Does that commission come out of my pocket or my super as an extra cost?`,
+    a:`No — the premium itself comes out of super as normal, but the commission is paid directly to the adviser by the insurance provider, not as an additional deduction from the client.`},
+
+  // --- Page 22: Insurance policy features ---
+  {topic:"Insurance", page:22,
+    q:`What does the "premium waiver" clause mean?`,
+    a:`On an income protection claim, TPD and life premiums are waived for the length of the claim (though still claimable) — no need to keep paying premiums out of super during a long claim.`},
+  {topic:"Insurance", page:22,
+    q:`What is a "life buyback" clause on linked life/TPD cover?`,
+    a:`Linking life and TPD cover reduces cost, but a TPD claim reduces the life benefit by that amount. A buyback clause lets the client reinstate life cover to the full amount after 12 months.`},
+  {topic:"Insurance", page:22,
+    q:`What do "waiting period" and "benefit period" mean on income protection?`,
+    a:`Waiting period is how long someone needs to be off work before a claim starts (e.g. 30 or 60 days). Benefit period is how long the claim can run — default cover is often a 5-year benefit period, and a commonly recommended upgrade is to age 65 so a long-term claim stays covered rather than running out after 5 years.`},
+  {topic:"Insurance", page:22,
+    q:`What does an "indexed" or "increasing claim benefit" feature do?`,
+    a:`While on a long-term claim, the payment rises yearly with inflation so it doesn't lose purchasing power.`},
+
+  // --- Page 23: Insurance need & suitability ---
+  {topic:"Insurance", page:23,
+    q:`How do you work out how much insurance cover I actually need?`,
+    a:`Through a "needs analysis" — factoring in debts (like a mortgage), dependants/children costs, funeral costs, and medical costs — used to calculate the recommended life/TPD figure.`},
+  {topic:"Insurance", page:23,
+    q:`Will this insurance/policy setup change over time?`,
+    a:`Yes — it's reviewed at each annual review, and usually adjusted (cover amounts altered) every 1–2 years as the client's debts and circumstances change, rather than being rewritten as a whole new policy.`},
+  {topic:"Insurance", page:23,
+    q:`Why is the new premium so much more, when it's "the same insurer" as what I already have?`,
+    a:`Usually the cover isn't actually equivalent — default/industry-fund insurance is typically "group" or partially underwritten cover (similar in spirit to third-party-fire-and-theft car insurance), while the recommended policy is fully medically underwritten (comparable to full comprehensive cover). Fully underwritten cover also means the adviser can advocate directly through the entire claims process with direct insurer contacts; with group/default cover through an industry fund, the adviser can generally only help to an extent. Specific cover increases (e.g. a longer income protection benefit period, or a higher life cover amount) also push cost up.`},
+  {topic:"Insurance", page:23,
+    q:`I'm currently on workers' compensation — can we still sort out my insurance today?`,
+    a:`No — insurance generally can't be changed or replaced while an active workers' comp claim is ongoing (providers won't allow changes mid-claim, and nothing gets cancelled without new cover already in place). The super/investment side can still proceed as normal; the insurance conversation is deferred until the claim is settled.`},
+  {topic:"Insurance", page:23,
+    q:`If I'm not fully happy with the insurance recommendation, can I ask for something closer to what I currently have?`,
+    a:`Yes — that's exactly what the secondary follow-up call with the insurance specialist is for; adjustments and tweaks happen there before anything is finalised. There's no obligation to take the SOA's insurance recommendation as-is.`},
+
+  // --- Page 27: Projection / inflation table ---
+  {topic:"Risk / Investment Strategy", page:27,
+    q:`Why is there no assumed contribution amount in the future-balance projection?`,
+    a:`It's deliberately excluded — super guarantee rates and a client's income or job can change over time, so projecting contributions would risk showing an inflated best-case scenario (and would breach advice standards).`},
+  {topic:"Risk / Investment Strategy", page:27,
+    q:`Is there a way I can model my own numbers, including contributions, since your projection excludes them?`,
+    a:`Yes — staff point clients to the MoneySmart compound interest calculator (moneysmart.gov.au), a free government tool, to run their own scenarios including contributions.`},
+
+  // --- Page 29: Performance & benchmark ---
+  {topic:"Fees", page:29,
+    q:`If the fee difference is roughly 2% a year, don't I need more than 2% extra return just to break even?`,
+    a:`No re-subtraction is needed — the return figures shown for each scenario (current fund vs. proposed) are already net of all fees, so the comparison already accounts for the fee difference.`},
+  {topic:"Fees", page:29,
+    q:`Are the returns shown net or gross, and net of which fees?`,
+    a:`Net returns — net of all fees for that scenario. Showing gross figures instead would be considered misleading.`},
+  {topic:"Risk / Investment Strategy", page:29,
+    q:`What is a "benchmark" in super/investing?`,
+    a:`A minimum performance target a fund or strategy is expected to meet. Funds that consistently miss it tend to get taken over or merged into a larger fund.`},
+  {topic:"Risk / Investment Strategy", page:29,
+    q:null, note:true,
+    a:`Standard disclaimer used throughout: past performance is not a reliable indicator of future performance.`},
+
+  // --- Page 30: Approach to investing / MDA ---
+  {topic:"Risk / Investment Strategy", page:30,
+    q:`What is an MDA (managed discretionary account)?`,
+    a:`An arrangement where an appointed manager (e.g. the firm's investment house) implements investment decisions on the client's behalf per an agreed program, then notifies the client after — as opposed to a model portfolio, where every change needs a Record of Advice walkthrough and consent first.`},
+  {topic:"Risk / Investment Strategy", page:30,
+    q:`Why wasn't an MDA recommended for me, if a different client got one?`,
+    a:`MDAs carry a higher management fee — at a lower super balance, that extra cost isn't worth the benefit yet. It's kept as an option to revisit at a future annual review once the balance grows (e.g. "probably in the next few years").`},
+  {topic:"Risk / Investment Strategy", page:30,
+    q:`How do you actually monitor what the investment manager does with my money?`,
+    a:`The adviser reviews the portfolio and every proposed change monthly, queries the manager directly if a change doesn't make sense before it reaches the client, and can move the client off that manager if it stops aligning with their best interest.`},
+
+  // --- Page 34: Underlying holdings ---
+  {topic:"Risk / Investment Strategy", page:34,
+    q:`Can I see what the investment manager is actually invested in?`,
+    a:`Yes — the full underlying holdings are listed for transparency, framed as the client's right to know where their money is invested.`},
+  {topic:"Risk / Investment Strategy", page:34,
+    q:`What's the difference between "platform cash" and something like an "enhanced cash" holding in the portfolio?`,
+    a:`Platform cash is pure liquid cash (a small allocation, e.g. around 2%) held specifically to pay fees and costs as they come out — minimal return. "Enhanced cash" or high-interest cash ETFs are an actual cash investment product — still defensive and fairly liquid, but earning a meaningfully better yield than sitting in plain platform cash.`},
+
+  // --- Page 39: Platform / MDA fees & comparisons ---
+  {topic:"Fees", page:39,
+    q:`Is the ongoing/management fee shown as a monthly or annual figure?`,
+    a:`It's an annual figure, but charged out monthly.`},
+  {topic:"Fees", page:39,
+    q:`Can I see a direct comparison of what I'd get under the new proposal vs. my current fund over a single year or short period, accounting for fees?`,
+    a:`Not as a formal fee-inclusive net-benefit comparison over an arbitrary short period — short-period comparisons like that are considered unreliable to present, since returns vary year to year. This is different from asking to see the historical year-by-year returns themselves — the SOA does include a straightforward performance table (model vs. benchmark, by year) the adviser can point to directly. It's specifically a bespoke "what would I have gained if…" fee-adjusted projection that won't be produced.`},
+  {topic:"Fees", page:39,
+    q:`What's my net gain once the extra insurance cost is factored in?`,
+    a:`This can't really be projected long-term — it would require guessing future insurance costs and cover changes, and insurance is reassessed and adjusted at every annual review (often reduced over time as debts are paid down), so it isn't a fixed number to net against.`},
+
+  // --- Page 46: Other strategies considered ---
+  {topic:"Risk / Investment Strategy", page:46,
+    q:`Why didn't you recommend other well-known industry or retail super funds?`,
+    a:`They typically limit investment options (a few hundred, vs. a few thousand on the recommended platform) and don't give the adviser visibility into portfolio changes, which makes best-interest monitoring difficult. A "cheap and cheerful" fee structure often comes paired with poor transparency.`},
+  {topic:"Risk / Investment Strategy", page:46,
+    q:`Would a self-managed super fund (SMSF) suit me?`,
+    a:`Not recommended unless the client actively wants it and has a sufficient balance — SMSFs carry more risk and responsibility (trustee duties, independent audit, annual tax return) and are mainly used for direct property investment (noting recent legislation restricts SMSF residential property purchases). Often not viable below a certain balance because of running costs; can be revisited at an annual review as the balance grows.`},
+  {topic:"Risk / Investment Strategy", page:46,
+    q:null, note:true,
+    a:`Use with caution — this is a talking point some staff have used, not a verified fact: some industry funds are described as closely linked to a union or employer group, with the suggestion that this may factor into why that fund gets recommended to workers. This is closer to speculation than a factual claim and shouldn't be repeated to clients as a stated fact.`},
+
+  // --- Page 48: Alternate platforms considered ---
+  {topic:"Risk / Investment Strategy", page:48,
+    q:`Why this platform over cheaper alternatives?`,
+    a:`Admin fees are close at lower balances, and at higher balances the recommended platform becomes cheapest. Fund-hopping to chase a small fee difference is avoided because of the "out of market" timing risk during each switch — and if a competitor is only marginally cheaper at the client's current balance, but the recommended platform becomes cheapest once the balance grows past a certain point anyway, switching now just means switching again later.`},
+
+  // --- Not tied to a specific SOA page ---
+  {topic:"Risk / Investment Strategy", page:null,
+    q:`Who are [the platform], [the investment manager], and [the adviser firm] — what does each actually do?`,
+    a:`The platform is just the super fund — no decision-making role. The investment manager does the research and portfolio management. The adviser firm tailors everything to the client and is the sole point of contact.`},
+  {topic:"Contributions & Legislation Updates", page:null,
+    q:`Has "Payday Super" actually come into effect? What does it require?`,
+    a:`Yes — it came into force 1 July 2026. Employers must now pay super contributions within a short window (around 3 days) of each payslip, rather than the old lagging/quarterly timing. (Cross-check against Tab 04 "Latest updates" for currency.)`},
+  {topic:"Contributions & Legislation Updates", page:null,
+    q:null, note:true,
+    a:`A "notice of intent to claim" is only relevant if the client has made after-tax (non-concessional) personal contributions they want to claim a tax deduction on — not needed if they haven't made any.`},
+  {topic:"Contributions & Legislation Updates", page:null,
+    q:`I have unused concessional cap space from previous years (the carry-forward rule) — can I use salary sacrifice to top it up, or do I need to make a personal contribution instead?`,
+    a:`Either method works. The generally recommended approach is a lump-sum personal contribution timed close to tax time (e.g. April/May) rather than ongoing salary sacrifice — because salary sacrifice risks accidentally exceeding the cap if it isn't turned off in time (whether the client forgets or the employer does), and any excess concessional contribution gets taxed at the client's marginal rate on the overage. A lump sum near end of financial year lets you confirm the exact remaining cap space first.`},
+  {topic:"Contributions & Legislation Updates", page:null,
+    q:`Am I eligible to use the carry-forward (catch-up concessional contributions) provision?`,
+    a:`Total super balance must be under $500,000 (as at the prior 30 June) to be eligible, on top of having unused cap space from the last 5 years.`},
+  {topic:"Contributions & Legislation Updates", page:null,
+    q:`How do I work out how much I can actually afford to salary sacrifice each pay?`,
+    a:`A practical technique some staff use (not a formal rule): park the intended amount in a separate/spare bank account each pay for a few months first. If it's never needed, that's a safe amount to commit to sacrificing; if it gets dipped into for bills or expenses, it's too much.`},
+  {topic:"Contributions & Legislation Updates", page:null,
+    q:`Should I sort out salary sacrifice before or after building an emergency fund?`,
+    a:`Build the "safety net" (emergency fund) first, or alongside — not instead of. A rough guideline given is anywhere from around $10,000 to 6 months of expenses, depending on comfort level; the two can be worked on at the same time, not strictly one after the other.`},
+  {topic:"Contributions & Legislation Updates", page:null,
+    q:`What is the First Home Super Saver Scheme (FHSSS)?`,
+    a:`It lets a first-home buyer contribute up to $15,000 a year (within normal contribution caps), to a $50,000 lifetime maximum, then withdraw around 85% of the associated earnings for a home deposit. Noted downside: it's administratively fiddly — the client has to notify and track it themselves via myGov, and some decide it's not worth the hassle.`},
+  {topic:"Contributions & Legislation Updates", page:null,
+    q:null, note:true,
+    a:`When a super/investment adviser is also a licensed mortgage broker, referrals for home-loan or borrowing-power conversations go to a business partner instead of the same adviser handling both, to avoid a conflict of interest.`},
+  {topic:"Client Concerns / Objections", page:null,
+    q:`I'm not sure whether to sign now — is it that I don't know this platform, or that my current fund is well-known and feels "safer"?`,
+    a:`Worth asking directly whether it's unfamiliarity with the new platform vs. familiarity with the current one driving the hesitation. A reasonable response: point to the firm's tenure and the investment committee's combined experience, encourage the client to independently research the firm/website/investment committee, and frame it as a year-to-year arrangement reviewed annually — not a lifetime lock-in. "I want you to make the decision you're comfortable with" tends to land better than pushing.`},
+  {topic:"Client Concerns / Objections", page:null,
+    q:`I want to read the whole document properly before signing, not just what you've walked me through — is that okay?`,
+    a:`Yes — no pressure to sign on the call, take the time needed. Useful reassurance: everything discussed on the call is everything relevant in the document (nothing hidden — legally required, and the adviser risks their license otherwise); the firm's longevity is evidence it operates legitimately; the business is built on long-term client relationships, not short-term gains.`},
+  {topic:"Client Concerns / Objections", page:null,
+    q:null, note:true,
+    a:`Good practice pattern: when a client wants time to decide, book a specific follow-up call/date on the spot rather than leaving it open-ended — keeps momentum without pressuring a same-day decision. Encourage the client to write down or text through any questions in the meantime.`},
+  {topic:"Client Concerns / Objections", page:null,
+    q:null, note:true,
+    a:`Good practice pattern: when suggesting independent research, name the specific entity to look up (e.g. the investment manager's actual company name), not just "look us up" — gives the client something concrete to verify.`},
+  {topic:"Retirement Access / Timing", page:null,
+    q:`What is Transition to Retirement (TTR)?`,
+    a:`A strategy allowing access to super while still working, structured in a tax-effective way — a bridge between full-time work and full retirement.`},
+  {topic:"Retirement Access / Timing", page:null,
+    q:`What's the withdrawal limit on a TTR pension?`,
+    a:`Maximum 10% of the balance per year. There's also a minimum required drawdown (around 4%) — it can't just be left untouched once in TTR phase.`},
+  {topic:"Retirement Access / Timing", page:null,
+    q:`If I keep working full-time, is TTR still tax-effective for me?`,
+    a:`Yes — that's the whole point of TTR: accessing the tax-effective treatment while still earning a full income.`},
+  {topic:"Retirement Access / Timing", page:null,
+    q:`At what point does TTR stop being worth it — i.e. when should I just fully retire instead?`,
+    a:`There's no fixed rule — this gets reassessed as an ongoing part of the adviser relationship (covered by the ongoing fee), revisited whenever the client's circumstances change or they ask. No extra fee for reassessing this at any point, including earlier than originally planned.`},
+  {topic:"Retirement Access / Timing", page:null,
+    q:`Once fully retired (in pension phase), do I pay tax on my super income?`,
+    a:`No tax on pension-phase income, unlike TTR/still-working scenarios — a useful factual point of difference when helping a client weigh up when TTR stops being worthwhile vs. going fully retired.`},
+  {topic:"Retirement Access / Timing", page:null,
+    q:`Can you show me a projection for a different retirement age than what's currently on file (e.g. 62 instead of 65)?`,
+    a:`Yes — the SOA can be amended to project a different target age. The return table's timeframe or rolling-average window shown may also change to match (e.g. showing a 3-year rather than 5-year rolling average if the new timeframe is shorter).`},
+  {topic:"Process / Timeline", page:null,
+    q:`Why is the SOA document so long?`,
+    a:`It's legally required to document the research and reasoning behind the recommendations, for the client's protection — the adviser only walks through the pages that are actually relevant on the call. It also serves as the record needed if the client ever wants to raise a complaint about the advice later.`},
+  {topic:"Process / Timeline", page:null,
+    q:`What is a Financial Services Guide (FSG)?`,
+    a:`A separate document, sent as a follow-up after the SOA, that explains the adviser's complaint-handling process — what to do if the client feels they haven't been served properly.`},
+  {topic:"Process / Timeline", page:null,
+    q:`How long is the SOA valid before it expires?`,
+    a:`30 days, per legislation — the adviser follows up before it lapses.`},
+  {topic:"Process / Timeline", page:null,
+    q:`How long does it take for my super to actually roll over to the new fund?`,
+    a:`Typically 1–2 weeks, up to 4 weeks for some retail funds. If it hasn't landed within about 2 weeks, the adviser's admin team starts chasing it up.`},
+  {topic:"Process / Timeline", page:null,
+    q:`I got an email from my old fund asking me to approve the rollover — what do I do?`,
+    a:`If asked to approve, approve it — that's normal and a good sign the funds are moving. Some funds just send a confirmation with nothing needed from the client at all.`},
+  {topic:"Process / Timeline", page:null,
+    q:`Do I need to give you permission to go through or take money from my old fund?`,
+    a:`No separate permission step is needed beyond what's already signed — the new fund/platform is set up first, and it then requests the money directly from the old fund. The client doesn't have to contact the old fund themselves.`},
+  {topic:"Process / Timeline", page:null,
+    q:`How do I find my existing income protection policy details if I've lost the paperwork?`,
+    a:`Ask payroll/HR (if it's through work) or the insurer directly for a "Certificate of Currency" — a document confirming current policy details (cover amount, waiting period, etc). If it's not available, the adviser can call the insurer directly to confirm what's in place.`},
+  {topic:"Process / Timeline", page:null,
+    q:`What is SuperStream, and why does it slow the rollover down?`,
+    a:`A government regulatory system that checks and verifies where super money is moving, as a fraud/compliance safeguard — confirming the transfer is legitimate and going somewhere properly regulated. It adds some time to the rollover but isn't optional.`},
+  {topic:"Process / Timeline", page:null,
+    q:null, note:true,
+    a:`If two people (e.g. partners/spouses) are both clients, staff need consent from both before discussing one person's account details with the other — this gets set up explicitly once both are onboarded, not assumed beforehand.`},
+  {topic:"Process / Timeline", page:null,
+    q:`Why do you leave some money (e.g. $10,000) behind in my old fund?`,
+    a:`To keep existing insurance coverage active while new cover is set up and underwritten — this avoids a gap where the client is uninsured.`},
+  {topic:"Process / Timeline", page:null,
+    q:`What actually happens after the money lands in the new fund?`,
+    a:`The upfront fee is deducted around 2–3 days later; login/portal details are sent directly by the platform; an insurance review call is booked (around 20 minutes); updated insurance quotes are provided at the client's own pace; and an employee-choice-of-fund form plus a beneficiary nomination form are sent out.`},
+  {topic:"Process / Timeline", page:null,
+    q:`I've come into a lump sum or inheritance — what should I do with it?`,
+    a:`Not answered generically on the SOA call — the adviser books a separate dedicated appointment to go through the specifics (what was received, what the client wants to do with it) rather than giving a general answer on the spot.`},
+  {topic:"Process / Timeline", page:null,
+    q:null, note:true,
+    a:`Staff ask clients to read out their tax file number over the phone rather than send it by text, for security — it's typed directly into the secure system.`},
+  {topic:"Other", page:null,
+    q:null, note:true,
+    a:`By law, an ongoing adviser service agreement runs one year at a time — client consent must be re-confirmed annually to continue. It isn't an open-ended signup.`},
+];
+
+const aqTopicOrder = [
+  "Contributions & Legislation Updates",
+  "Estate Planning / Beneficiaries",
+  "Fees",
+  "Insurance",
+  "Risk / Investment Strategy",
+  "Client Concerns / Objections",
+  "Retirement Access / Timing",
+  "Process / Timeline",
+  "Other"
+];
+
+function aqPageLabel(p){
+  return p === null ? "Not page-specific" : "Page " + p;
+}
+
+function aqSortedPages(){
+  const pages = Array.from(new Set(adviserQAData.map(item => item.page)));
+  pages.sort((a, b) => {
+    if(a === null) return 1;
+    if(b === null) return -1;
+    return a - b;
+  });
+  return pages;
+}
+
+function renderAdviserQAItem(item){
+  if(item.note || !item.q){
+    return '<div class="aq-note">' + item.a + '</div>';
+  }
+  return '<div class="aq-item"><p class="aq-q">' + item.q + '</p><p class="aq-a">' + item.a + '</p></div>';
+}
+
+function renderAdviserGroup(label, items){
+  let html = '<div class="aq-group">';
+  html += '<div class="aq-group-title">' + label + '</div>';
+  items.forEach(item => { html += renderAdviserQAItem(item); });
+  html += '</div>';
+  return html;
+}
+
+function renderAdviserByPage(filterPage){
+  let html = '';
+  const pages = filterPage === 'all' ? aqSortedPages() : [filterPage === 'none' ? null : parseInt(filterPage, 10)];
+  pages.forEach(p => {
+    const items = adviserQAData.filter(item => item.page === p);
+    if(items.length === 0) return;
+    html += renderAdviserGroup(aqPageLabel(p), items);
+  });
+  return html;
+}
+
+function renderAdviserByTopic(filterTopic){
+  let html = '';
+  const topics = filterTopic === 'all' ? aqTopicOrder : [filterTopic];
+  topics.forEach(t => {
+    const items = adviserQAData.filter(item => item.topic === t);
+    if(items.length === 0) return;
+    html += renderAdviserGroup(t, items);
+  });
+  return html;
+}
+
+function populateAdviserSelects(){
+  const pageSelect = document.getElementById('aq-page-select');
+  let opts = '<option value="all">All pages</option>';
+  aqSortedPages().forEach(p => {
+    const val = p === null ? 'none' : p;
+    opts += '<option value="' + val + '">' + aqPageLabel(p) + '</option>';
+  });
+  pageSelect.innerHTML = opts;
+
+  const topicSelect = document.getElementById('aq-topic-select');
+  let topts = '<option value="all">All topics</option>';
+  aqTopicOrder.forEach(t => {
+    if(adviserQAData.some(item => item.topic === t)){
+      topts += '<option value="' + t + '">' + t + '</option>';
+    }
+  });
+  topicSelect.innerHTML = topts;
+}
+
+function filterAdviserQA(mode, value){
+  if(mode === 'page'){
+    document.getElementById('aq-page-results').innerHTML = renderAdviserByPage(value);
+  } else {
+    document.getElementById('aq-topic-results').innerHTML = renderAdviserByTopic(value);
+  }
+}
+
+function initAdviserQA(){
+  populateAdviserSelects();
+  document.getElementById('aq-page-results').innerHTML = renderAdviserByPage('all');
+  document.getElementById('aq-topic-results').innerHTML = renderAdviserByTopic('all');
+}
+
+function showAdviserView(mode){
+  const isPage = mode === 'page';
+  document.getElementById('aq-view-page').classList.toggle('active', isPage);
+  document.getElementById('aq-view-topic').classList.toggle('active', !isPage);
+  document.getElementById('aq-btn-page').classList.toggle('active', isPage);
+  document.getElementById('aq-btn-topic').classList.toggle('active', !isPage);
+}
+
+initAdviserQA();
 const startTab = window.location.hash ? window.location.hash.substring(1) : 'home';
-showTab(crumbMap[startTab] ? startTab : 'home');
-updateCalc();
+try{ showTab(crumbMap[startTab] ? startTab : 'home'); }catch(e){ console.error('showTab failed on startup', e); }
+try{ updateCalc(); }catch(e){ console.error('updateCalc failed on startup', e); }
 </script>
 
 </body>
